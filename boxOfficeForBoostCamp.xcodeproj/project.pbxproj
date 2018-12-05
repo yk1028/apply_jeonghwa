@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		E91F2E8B21B7CC390090582B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E8A21B7CC390090582B /* AppDelegate.swift */; };
-		E91F2E8D21B7CC390090582B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E8C21B7CC390090582B /* ViewController.swift */; };
-		E91F2E9021B7CC390090582B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E91F2E8E21B7CC390090582B /* Main.storyboard */; };
+		E91F2E8D21B7CC390090582B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E8C21B7CC390090582B /* FirstViewController.swift */; };
 		E91F2E9321B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E9121B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld */; };
 		E91F2E9521B7CC3A0090582B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F2E9421B7CC3A0090582B /* Assets.xcassets */; };
 		E91F2E9821B7CC3A0090582B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */; };
+		E91F2EA021B7CDAB0090582B /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */; };
+		E91F2EA221B7CDF40090582B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2EA121B7CDF40090582B /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E91F2E8721B7CC390090582B /* boxOfficeForBoostCamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = boxOfficeForBoostCamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91F2E8A21B7CC390090582B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E91F2E8C21B7CC390090582B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E91F2E8F21B7CC390090582B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E91F2E8C21B7CC390090582B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		E91F2E9221B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = boxOfficeForBoostCamp.xcdatamodel; sourceTree = "<group>"; };
 		E91F2E9421B7CC3A0090582B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E91F2E9721B7CC3A0090582B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E91F2E9921B7CC3A0090582B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		E91F2EA121B7CDF40090582B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				E91F2E8A21B7CC390090582B /* AppDelegate.swift */,
-				E91F2E8C21B7CC390090582B /* ViewController.swift */,
-				E91F2E8E21B7CC390090582B /* Main.storyboard */,
+				E91F2E8C21B7CC390090582B /* FirstViewController.swift */,
+				E91F2EA121B7CDF40090582B /* SecondViewController.swift */,
+				E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */,
 				E91F2E9421B7CC3A0090582B /* Assets.xcassets */,
 				E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */,
 				E91F2E9921B7CC3A0090582B /* Info.plist */,
@@ -127,7 +130,6 @@
 			files = (
 				E91F2E9821B7CC3A0090582B /* LaunchScreen.storyboard in Resources */,
 				E91F2E9521B7CC3A0090582B /* Assets.xcassets in Resources */,
-				E91F2E9021B7CC390090582B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,8 +140,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E91F2EA021B7CDAB0090582B /* CustomTabBar.swift in Sources */,
 				E91F2E9321B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld in Sources */,
-				E91F2E8D21B7CC390090582B /* ViewController.swift in Sources */,
+				E91F2E8D21B7CC390090582B /* FirstViewController.swift in Sources */,
+				E91F2EA221B7CDF40090582B /* SecondViewController.swift in Sources */,
 				E91F2E8B21B7CC390090582B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +151,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E91F2E8E21B7CC390090582B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E91F2E8F21B7CC390090582B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
