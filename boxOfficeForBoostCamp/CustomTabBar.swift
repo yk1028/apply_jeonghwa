@@ -9,22 +9,53 @@
 import UIKit
 
 class CustomTabBar: UITabBarController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigation()
         
-        let firstVC = FirstViewController()
-        let secondVC = SecondViewController()
+        self.tabBar.barTintColor = .blue
+        self.tabBar.tintColor = .white
         
-        firstVC.tabBarItem.title = "First"
-        firstVC.tabBarItem.image = UIImage(named: "tabTable")
-        secondVC.tabBarItem.title = "Second"
-        secondVC.tabBarItem.image = UIImage(named: "tabCollection")
+    }
+    
+    func setupNavigation() {
+        
+        let tableTabVC = UINavigationController(rootViewController: TableTabViewController())
+        tableTabVC.tabBarItem.title = "Table"
+        tableTabVC.tabBarItem.image = UIImage(named: "tabTable")
 
         
-        viewControllers = [firstVC, secondVC]
+        let collectionTabVC = UINavigationController(rootViewController: CollectionTabViewController())
+        collectionTabVC.tabBarItem.title = "Collection"
+        collectionTabVC.tabBarItem.image = UIImage(named: "tabCollection")
+
+        viewControllers = [tableTabVC, collectionTabVC]
+
     }
     
     
+}
+
+extension UIViewController {
+    
+    func customNavigation() {
+        navigationItem.title = "예매율순"
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = .blue
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "btnSort"), for: .normal)
+        button.addTarget(self, action: #selector(btnSort), for: .touchUpInside)
+        
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    @objc func btnSort() {
+        print("sort button!!")
+    }
 }
 
 

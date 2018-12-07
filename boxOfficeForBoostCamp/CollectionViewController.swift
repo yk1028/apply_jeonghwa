@@ -8,10 +8,13 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class CollectionTabViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        customNavigation()
+        
+        view.backgroundColor = .yellow
         
 
     }
