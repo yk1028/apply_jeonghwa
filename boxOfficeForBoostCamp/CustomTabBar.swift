@@ -16,7 +16,10 @@ class CustomTabBar: UITabBarController {
         let secondVC = SecondViewController()
         
         firstVC.tabBarItem.title = "First"
+        firstVC.tabBarItem.image = UIImage(named: "table")
         secondVC.tabBarItem.title = "Second"
+        secondVC.tabBarItem.image = UIImage(named: "collection")
+
         
         viewControllers = [firstVC, secondVC]
     }
