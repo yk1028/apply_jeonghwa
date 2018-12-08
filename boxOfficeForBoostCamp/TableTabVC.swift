@@ -9,7 +9,8 @@
 import UIKit
 
 class TableTabVC: UITableViewController {
-    
+    var values: NSArray = []
+
     var dataset = [
         ("신과 함께", "평점 7.98 예매순위 : 1 예매율 35.5", "개봉일: 2017-12-20"),
         ("고고고고우 함께", "평점 7.2398 예매순위 : 1 예매율 35.5", "개봉일: 2017-12-20"),
@@ -23,16 +24,37 @@ class TableTabVC: UITableViewController {
             mvso.title = title
             mvso.thumb = subTitle
             mvso.date = releaseDate
-            
+
             datalist.append(mvso)
         }
         return datalist
     }()
     
+    
+
+    func getWithErrorHandling() {
+        guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=1") else { return }
+        
+        do {
+            let apiData = try Data(contentsOf: url)
+            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
+            NSLog("API Result=\( log )")
+
+        } catch {
+            print("데이터 요청 실패!!")
+            print("데이터 요청 실패!!")
+            print("데이터 요청 실패!!")
+
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getWithErrorHandling()
         
+    
         view.backgroundColor = .white
         customNavigation()
         tableView.register(tableTabCell.self, forCellReuseIdentifier: "cellId")
