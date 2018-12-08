@@ -31,6 +31,10 @@ class TableTabVC: UITableViewController {
     {
         return 100
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(MovieDetailVC(), animated: true)
+    }
 
 }
 
@@ -43,6 +47,7 @@ class tableTabCell: UITableViewCell {
         backgroundColor = .cyan
         self.imageView?.image = UIImage(named: "movieSample")
     }
+    
     
     
     let movieImage: UIImageView = {

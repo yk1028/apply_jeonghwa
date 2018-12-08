@@ -12,7 +12,10 @@ class MovieDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        customNavigation()
+        view.backgroundColor = .green
+        navigationItem.title = "영화제목으로변경"
+
     }
     
     
