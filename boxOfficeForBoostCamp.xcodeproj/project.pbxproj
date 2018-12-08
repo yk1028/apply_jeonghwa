@@ -8,24 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		E91F2E8B21B7CC390090582B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E8A21B7CC390090582B /* AppDelegate.swift */; };
-		E91F2E8D21B7CC390090582B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E8C21B7CC390090582B /* TableViewController.swift */; };
+		E91F2E8D21B7CC390090582B /* TableTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E8C21B7CC390090582B /* TableTabVC.swift */; };
 		E91F2E9321B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E9121B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld */; };
 		E91F2E9521B7CC3A0090582B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F2E9421B7CC3A0090582B /* Assets.xcassets */; };
 		E91F2E9821B7CC3A0090582B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */; };
 		E91F2EA021B7CDAB0090582B /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */; };
-		E91F2EA221B7CDF40090582B /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2EA121B7CDF40090582B /* CollectionViewController.swift */; };
+		E91F2EA221B7CDF40090582B /* CollectionTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */; };
+		E99BF20E21BB7A540020965D /* MovieDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF20D21BB7A540020965D /* MovieDetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E91F2E8721B7CC390090582B /* boxOfficeForBoostCamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = boxOfficeForBoostCamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91F2E8A21B7CC390090582B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E91F2E8C21B7CC390090582B /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		E91F2E8C21B7CC390090582B /* TableTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTabVC.swift; sourceTree = "<group>"; };
 		E91F2E9221B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = boxOfficeForBoostCamp.xcdatamodel; sourceTree = "<group>"; };
 		E91F2E9421B7CC3A0090582B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E91F2E9721B7CC3A0090582B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E91F2E9921B7CC3A0090582B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
-		E91F2EA121B7CDF40090582B /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTabVC.swift; sourceTree = "<group>"; };
+		E99BF20D21BB7A540020965D /* MovieDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +61,9 @@
 			isa = PBXGroup;
 			children = (
 				E91F2E8A21B7CC390090582B /* AppDelegate.swift */,
-				E91F2E8C21B7CC390090582B /* TableViewController.swift */,
-				E91F2EA121B7CDF40090582B /* CollectionViewController.swift */,
+				E91F2E8C21B7CC390090582B /* TableTabVC.swift */,
+				E99BF20D21BB7A540020965D /* MovieDetailVC.swift */,
+				E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */,
 				E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */,
 				E91F2E9421B7CC3A0090582B /* Assets.xcassets */,
 				E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */,
@@ -142,8 +145,9 @@
 			files = (
 				E91F2EA021B7CDAB0090582B /* CustomTabBar.swift in Sources */,
 				E91F2E9321B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld in Sources */,
-				E91F2E8D21B7CC390090582B /* TableViewController.swift in Sources */,
-				E91F2EA221B7CDF40090582B /* CollectionViewController.swift in Sources */,
+				E91F2E8D21B7CC390090582B /* TableTabVC.swift in Sources */,
+				E99BF20E21BB7A540020965D /* MovieDetailVC.swift in Sources */,
+				E91F2EA221B7CDF40090582B /* CollectionTabVC.swift in Sources */,
 				E91F2E8B21B7CC390090582B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

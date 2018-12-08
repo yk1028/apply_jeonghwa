@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  CollectionTabVC.swift
 //  boxOfficeForBoostCamp
 //
 //  Created by 정화 on 05/12/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionTabViewController: UIViewController {
+class CollectionTabVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

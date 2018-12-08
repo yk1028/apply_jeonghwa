@@ -1,5 +1,5 @@
 //
-//  TableViewController.swift
+//  TableTabVC.swift
 //  boxOfficeForBoostCamp
 //
 //  Created by 정화 on 05/12/2018.
@@ -8,8 +8,7 @@
 
 import UIKit
 
-class TableTabViewController: UITableViewController {
-
+class TableTabVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +16,6 @@ class TableTabViewController: UITableViewController {
         customNavigation()
         
         tableView.register(tableTabCell.self, forCellReuseIdentifier: "cellId")
-        
     }
     
     
@@ -44,7 +42,6 @@ class tableTabCell: UITableViewCell {
         setupViews()
         backgroundColor = .cyan
         self.imageView?.image = UIImage(named: "movieSample")
-
     }
     
     
@@ -82,7 +79,6 @@ class tableTabCell: UITableViewCell {
     
     
     func setupViews() {
-        
         let insetFromImage: CGFloat = 10
         
         contentView.addSubview(movieImage)

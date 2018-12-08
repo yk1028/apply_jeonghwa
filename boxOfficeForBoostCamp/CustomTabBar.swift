@@ -21,12 +21,12 @@ class CustomTabBar: UITabBarController {
     
     func setupNavigation() {
         
-        let tableTabVC = UINavigationController(rootViewController: TableTabViewController())
+        let tableTabVC = UINavigationController(rootViewController: TableTabVC())
         tableTabVC.tabBarItem.title = "Table"
         tableTabVC.tabBarItem.image = UIImage(named: "tabTable")
 
         
-        let collectionTabVC = UINavigationController(rootViewController: CollectionTabViewController())
+        let collectionTabVC = UINavigationController(rootViewController: CollectionTabVC())
         collectionTabVC.tabBarItem.title = "Collection"
         collectionTabVC.tabBarItem.image = UIImage(named: "tabCollection")
 
