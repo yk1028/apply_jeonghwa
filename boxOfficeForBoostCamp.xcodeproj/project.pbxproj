@@ -15,6 +15,7 @@
 		E91F2EA021B7CDAB0090582B /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */; };
 		E91F2EA221B7CDF40090582B /* CollectionTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */; };
 		E99BF20E21BB7A540020965D /* MovieDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF20D21BB7A540020965D /* MovieDetailVC.swift */; };
+		E99BF21021BBA66A0020965D /* MovieVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF20F21BBA66A0020965D /* MovieVO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTabVC.swift; sourceTree = "<group>"; };
 		E99BF20D21BB7A540020965D /* MovieDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVC.swift; sourceTree = "<group>"; };
+		E99BF20F21BBA66A0020965D /* MovieVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */,
 				E91F2E9921B7CC3A0090582B /* Info.plist */,
 				E91F2E9121B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld */,
+				E99BF20F21BBA66A0020965D /* MovieVO.swift */,
 			);
 			path = boxOfficeForBoostCamp;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			files = (
 				E91F2EA021B7CDAB0090582B /* CustomTabBar.swift in Sources */,
 				E91F2E9321B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld in Sources */,
+				E99BF21021BBA66A0020965D /* MovieVO.swift in Sources */,
 				E91F2E8D21B7CC390090582B /* TableTabVC.swift in Sources */,
 				E99BF20E21BB7A540020965D /* MovieDetailVC.swift in Sources */,
 				E91F2EA221B7CDF40090582B /* CollectionTabVC.swift in Sources */,
