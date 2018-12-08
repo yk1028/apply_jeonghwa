@@ -10,21 +10,48 @@ import UIKit
 
 class TableTabVC: UITableViewController {
     
+    var dataset = [
+        ("신과 함께", "평점 7.98 예매순위 : 1 예매율 35.5", "개봉일: 2017-12-20"),
+        ("고고고고우 함께", "평점 7.2398 예매순위 : 1 예매율 35.5", "개봉일: 2017-12-20"),
+        ("신과 다라다라다라", "평점 7.98 예매순위 : 1 예매율 35.5", "개봉일: 2017-12-20"),
+    ]
+    
+    lazy var list: [MoviesVO] = {
+        var datalist = [MoviesVO]()
+        for (title, subTitle, releaseDate) in self.dataset {
+            let mvso = MoviesVO()
+            mvso.title = title
+            mvso.thumb = subTitle
+            mvso.date = releaseDate
+            
+            datalist.append(mvso)
+        }
+        return datalist
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         view.backgroundColor = .white
         customNavigation()
-        
         tableView.register(tableTabCell.self, forCellReuseIdentifier: "cellId")
     }
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.list.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
+        
+        let row = self.list[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! tableTabCell
+        cell.movieTitle.text = row.title
+        cell.movieSubTitle.text = row.thumb
+        cell.movieReleaseDate.text = row.date
+
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -33,6 +60,7 @@ class TableTabVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        NSLog("선택된 행: \(indexPath.row)")
         self.navigationController?.pushViewController(MovieDetailVC(), animated: true)
     }
 
