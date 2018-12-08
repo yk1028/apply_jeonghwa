@@ -9,30 +9,15 @@
 import UIKit
 
 class TableTabVC: UITableViewController {
-    var values: NSArray = []
-
-    var dataset = [
-        ("신과 함께", "평점 7.98 예매순위 : 1 예매율 35.5", "개봉일: 2017-12-20"),
-        ("고고고고우 함께", "평점 7.2398 예매순위 : 1 예매율 35.5", "개봉일: 2017-12-20"),
-        ("신과 다라다라다라", "평점 7.98 예매순위 : 1 예매율 35.5", "개봉일: 2017-12-20"),
-    ]
     
     lazy var list: [MoviesVO] = {
         var datalist = [MoviesVO]()
-        for (title, subTitle, releaseDate) in self.dataset {
-            let mvso = MoviesVO()
-            mvso.title = title
-            mvso.thumb = subTitle
-            mvso.date = releaseDate
-
-            datalist.append(mvso)
-        }
         return datalist
     }()
     
     
 
-    func getWithErrorHandling() {
+    func getRequestSample() {
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=1") else { return }
         
         do {
@@ -40,19 +25,38 @@ class TableTabVC: UITableViewController {
             let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
             NSLog("API Result=\( log )")
 
-        } catch {
-            print("데이터 요청 실패!!")
-            print("데이터 요청 실패!!")
-            print("데이터 요청 실패!!")
+            let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! NSDictionary
+            
+            let movie = apiDictionary["movies"] as! NSArray
+            
+            for row in movie {
+                let r = row as! NSDictionary
+                let mvo = MoviesVO()
+                
+                // movie 배열의 각 데이터를 mvo 상수의 속성에 대입
+                mvo.grade = r["grade"] as? Int
+                mvo.thumb = r["thumb"] as? String
+                mvo.reservation_grade = r["reservation_grade"] as? Int
+                mvo.title = r["title"] as? String
+                mvo.reservation_rate = r["reservation_grade"] as? Double
+                mvo.user_rating = r["user_rating"] as? Double
+                mvo.date = r["date"] as? String
+                mvo.id = r["title"] as? String
+                
+                let url: URL! = URL(string: mvo.thumb!)
+                let imageData = try! Data(contentsOf: url)
+                mvo.movieImage = UIImage(data:imageData)
 
-        }
+                self.list.append(mvo)
+            }
+        }catch { NSLog("Parse Error!!")}
     }
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getWithErrorHandling()
+        getRequestSample()
         
     
         view.backgroundColor = .white
@@ -72,13 +76,15 @@ class TableTabVC: UITableViewController {
         cell.movieTitle.text = row.title
         cell.movieSubTitle.text = row.thumb
         cell.movieReleaseDate.text = row.date
+        cell.movieImage.image = row.movieImage as? UIImage
+
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 100
+        return 115
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -100,7 +106,7 @@ class tableTabCell: UITableViewCell {
     
     
     
-    let movieImage: UIImageView = {
+    var movieImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .red
         imageView.translatesAutoresizingMaskIntoConstraints = false

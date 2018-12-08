@@ -17,6 +17,7 @@ class MoviesVO {
     var user_rating: Double?    //사용자 평점
     var date: String?    //개봉일
     var id: String?    //영화 고유 ID
+    var movieImage: Any?
 }
 
 //class MovieVO {
