@@ -16,6 +16,7 @@
 		E91F2EA221B7CDF40090582B /* CollectionTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */; };
 		E99BF20E21BB7A540020965D /* MovieDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF20D21BB7A540020965D /* MovieDetailVC.swift */; };
 		E99BF21021BBA66A0020965D /* MovieVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF20F21BBA66A0020965D /* MovieVO.swift */; };
+		E99BF21221BBD65A0020965D /* TableTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21121BBD65A0020965D /* TableTabCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTabVC.swift; sourceTree = "<group>"; };
 		E99BF20D21BB7A540020965D /* MovieDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVC.swift; sourceTree = "<group>"; };
 		E99BF20F21BBA66A0020965D /* MovieVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVO.swift; sourceTree = "<group>"; };
+		E99BF21121BBD65A0020965D /* TableTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTabCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				E91F2E8A21B7CC390090582B /* AppDelegate.swift */,
 				E91F2E8C21B7CC390090582B /* TableTabVC.swift */,
+				E99BF21121BBD65A0020965D /* TableTabCell.swift */,
 				E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */,
 				E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */,
 				E99BF20D21BB7A540020965D /* MovieDetailVC.swift */,
@@ -150,6 +153,7 @@
 				E91F2E9321B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld in Sources */,
 				E99BF21021BBA66A0020965D /* MovieVO.swift in Sources */,
 				E91F2E8D21B7CC390090582B /* TableTabVC.swift in Sources */,
+				E99BF21221BBD65A0020965D /* TableTabCell.swift in Sources */,
 				E99BF20E21BB7A540020965D /* MovieDetailVC.swift in Sources */,
 				E91F2EA221B7CDF40090582B /* CollectionTabVC.swift in Sources */,
 				E91F2E8B21B7CC390090582B /* AppDelegate.swift in Sources */,
