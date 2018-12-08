@@ -13,13 +13,17 @@ class tableTabCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
-        backgroundColor = .cyan
-        self.imageView?.image = UIImage(named: "movieSample")
+        
+        if movieGrade.text == "12" {
+            movieGrade.text = "고구마"
+        } else {
+            movieGrade.text = movieGrade.text
+        }
     }
     
     
     
-    var movieImage: UIImageView = {
+    let movieImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .red
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +35,15 @@ class tableTabCell: UITableViewCell {
         let label = UILabel()
         label.text = "영화 제목"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 22)
+        return label
+    }()
+    
+    let movieGrade: UILabel = {
+        let label = UILabel()
+        label.text = "00"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 22)
         return label
     }()
     
@@ -64,21 +76,20 @@ class tableTabCell: UITableViewCell {
         contentView.addSubview(movieTitle)
         movieTitle.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: insetFromImage).isActive = true
         movieTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        //        movieTitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-        movieTitle.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        
+        contentView.addSubview(movieGrade)
+        movieGrade.leftAnchor.constraint(equalTo: movieTitle.rightAnchor, constant: 8).isActive = true
+        movieGrade.topAnchor.constraint(equalTo: movieTitle.topAnchor).isActive = true
         
         contentView.addSubview(movieSubTitle)
         movieSubTitle.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: insetFromImage).isActive = true
-        movieSubTitle.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 10).isActive = true
-        //        movieSubTitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        movieSubTitle.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 8).isActive = true
         movieSubTitle.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
         contentView.addSubview(movieReleaseDate)
         movieReleaseDate.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: insetFromImage).isActive = true
         movieReleaseDate.topAnchor.constraint(equalTo: movieSubTitle.bottomAnchor, constant: 10).isActive = true
-        //        movieReleaseDate.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
         movieReleaseDate.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

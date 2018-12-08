@@ -65,10 +65,10 @@
 			isa = PBXGroup;
 			children = (
 				E91F2E8A21B7CC390090582B /* AppDelegate.swift */,
+				E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */,
 				E91F2E8C21B7CC390090582B /* TableTabVC.swift */,
 				E99BF21121BBD65A0020965D /* TableTabCell.swift */,
 				E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */,
-				E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */,
 				E99BF20D21BB7A540020965D /* MovieDetailVC.swift */,
 				E91F2E9421B7CC3A0090582B /* Assets.xcassets */,
 				E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */,

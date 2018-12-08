@@ -61,6 +61,7 @@ class TableTabVC: UITableViewController {
         view.backgroundColor = .white
         customNavigation()
         self.tableView.register(tableTabCell.self, forCellReuseIdentifier: "cellId")
+        
     }
     
     
@@ -73,8 +74,10 @@ class TableTabVC: UITableViewController {
         let row = self.list[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! tableTabCell
         cell.movieTitle.text = row.title
-        cell.movieSubTitle.text = row.thumb
-        cell.movieReleaseDate.text = row.date
+        cell.movieGrade.text = "\(row.grade!)"
+// 옵셔널 강제 해제 말고 다른방법??
+        cell.movieSubTitle.text = "평점 : \(row.user_rating!) 예매순위 : \(row.reservation_grade!) 예매율 : \(row.reservation_rate!)"
+        cell.movieReleaseDate.text = "개봉일 : \(row.date!)"
         cell.movieImage.image = row.movieImage as? UIImage
 
 
