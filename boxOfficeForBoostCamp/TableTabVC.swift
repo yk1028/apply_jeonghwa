@@ -57,7 +57,7 @@ class TableTabVC: UITableViewController {
         getMoviesRequestSample()
         view.backgroundColor = .white
         customNavigation()
-        self.tableView.register(tableTabCell.self, forCellReuseIdentifier: "cellId")
+        self.tableView.register(TableTabCell.self, forCellReuseIdentifier: "cellId")
     }
     
     
@@ -68,7 +68,7 @@ class TableTabVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let row = self.list[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! tableTabCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! TableTabCell
         cell.movieTitle.text = row.title
         cell.movieGrade.text = "\(row.grade!)"
 // 옵셔널 강제 해제 말고 다른방법??
@@ -87,7 +87,7 @@ class TableTabVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("선택된 행: \(indexPath.row)")
-        self.navigationController?.pushViewController(MovieDetailVC(), animated: true)
+    self.navigationController?.pushViewController(MovieDetailVC(), animated: true)
     }
 
 }

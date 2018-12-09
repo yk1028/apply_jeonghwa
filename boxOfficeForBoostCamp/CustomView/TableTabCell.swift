@@ -8,14 +8,11 @@
 
 import UIKit
 
-class tableTabCell: UITableViewCell {
-    
+class TableTabCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
-    
-    
     
     let movieImage: UIImageView = {
         let imageView = UIImageView()
@@ -24,39 +21,12 @@ class tableTabCell: UITableViewCell {
         return imageView
     }()
     
-    
-    let movieTitle: UILabel = {
-        let label = UILabel()
-        label.text = "영화 제목"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 22)
-        return label
-    }()
-    
-    let movieGrade: UILabel = {
-        let label = UILabel()
-        label.text = "00"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 22)
-        return label
-    }()
-    
-    let movieSubTitle: UILabel = {
-        let label = UILabel()
-        label.text = "평점 : 10 예매순위 : 10 예매율 : 10.10"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let movieReleaseDate: UILabel = {
-        let label = UILabel()
-        label.text = "개봉일 : 2000-11-11"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
-        return label
-    }()
-    
+    let movieTitle = BOLabel(title: "영화 제목", size: 22)
+    let movieGrade = BOLabel(title: "00", size: 22)
+    let movieSubTitle = BOLabel(title: "평점 : 10 예매순위 : 10 예매율 : 10.10", size: 14)
+    let movieReleaseDate = BOLabel(title: "개봉일 : 2000-11-11", size: 12)
+
+
     
     func setupViews() {
         let insetFromImage: CGFloat = 10

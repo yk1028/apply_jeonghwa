@@ -13,7 +13,6 @@ class CustomTabBar: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
-        
         self.tabBar.barTintColor = .blue
         self.tabBar.tintColor = .white
         
