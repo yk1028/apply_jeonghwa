@@ -13,12 +13,6 @@ class tableTabCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
-        
-        if movieGrade.text == "12" {
-            movieGrade.text = "고구마"
-        } else {
-            movieGrade.text = movieGrade.text
-        }
     }
     
     

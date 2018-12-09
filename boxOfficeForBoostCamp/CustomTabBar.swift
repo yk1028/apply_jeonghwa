@@ -40,7 +40,7 @@ class CustomTabBar: UITabBarController {
 extension UIViewController {
     
     func customNavigation() {
-        navigationItem.title = "예매율순"
+        navigationItem.title = "영화목록"
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .blue
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]

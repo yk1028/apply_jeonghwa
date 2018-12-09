@@ -17,7 +17,7 @@ class TableTabVC: UITableViewController {
     
     
 
-    func getRequestSample() {
+    func getMoviesRequestSample() {
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=1") else { return }
         
         do {
@@ -37,7 +37,7 @@ class TableTabVC: UITableViewController {
                 mvo.thumb = r["thumb"] as? String
                 mvo.reservation_grade = r["reservation_grade"] as? Int
                 mvo.title = r["title"] as? String
-                mvo.reservation_rate = r["reservation_grade"] as? Double
+                mvo.reservation_rate = r["reservation_rate"] as? Double
                 mvo.user_rating = r["user_rating"] as? Double
                 mvo.date = r["date"] as? String
                 mvo.id = r["title"] as? String
@@ -55,7 +55,7 @@ class TableTabVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getRequestSample()
+        getMoviesRequestSample()
         
     
         view.backgroundColor = .white
@@ -78,7 +78,7 @@ class TableTabVC: UITableViewController {
 // 옵셔널 강제 해제 말고 다른방법??
         cell.movieSubTitle.text = "평점 : \(row.user_rating!) 예매순위 : \(row.reservation_grade!) 예매율 : \(row.reservation_rate!)"
         cell.movieReleaseDate.text = "개봉일 : \(row.date!)"
-        cell.movieImage.image = row.movieImage as? UIImage
+        cell.movieImage.image = row.movieImage
 
 
         return cell
