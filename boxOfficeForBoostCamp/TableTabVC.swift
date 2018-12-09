@@ -24,11 +24,10 @@ class TableTabVC: UITableViewController {
             let apiData = try Data(contentsOf: url)
             let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
             NSLog("API Result=\( log )")
-
             let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! NSDictionary
-            
+
             let movie = apiDictionary["movies"] as! NSArray
-            
+
             for row in movie {
                 let r = row as! NSDictionary
                 let mvo = MoviesVO()
@@ -56,12 +55,9 @@ class TableTabVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getMoviesRequestSample()
-        
-    
         view.backgroundColor = .white
         customNavigation()
         self.tableView.register(tableTabCell.self, forCellReuseIdentifier: "cellId")
-        
     }
     
     
