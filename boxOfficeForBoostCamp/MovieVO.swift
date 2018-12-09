@@ -44,6 +44,7 @@ class MovieVO {
 
 //한줄평 목록
 class CommentsVO {
+    var rating: Double?
     var timestamp: Double? //작성일시 UNIX Timestamp 값
     var writer: String? //작성자
     var movie_id: String? //영화 고유ID

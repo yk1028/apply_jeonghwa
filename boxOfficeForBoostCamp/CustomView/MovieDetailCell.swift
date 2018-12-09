@@ -22,143 +22,41 @@ class MovieDetailCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
  
-    // 섹션1 : 영화 기본정보 뷰
-    let infoView: UIView = {
-        let infoView = UIView()
-        infoView.backgroundColor = .red
-        infoView.translatesAutoresizingMaskIntoConstraints = false
-        return infoView
+    // 섹션1-1 : 영화 기본정보 뷰(포스터, 기본정보)
+    let infoView = BOView()
+    let movieTitle = BOLabel(title: "신과함께-죄와벌", size: 22)
+    let movieGrade = BOLabel(title: "12", size: 22)
+    let movieDate = BOLabel(title: "2017-12-20개봉", size: 16)
+    let movieSubTitle = BOLabel(title: "판타지, 드라마/139분", size: 16)
+    let movieImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .black
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
+
+    // 섹션1-2 : 영화 기본정보 뷰(예매율, 평점, 누적관객수)
+    let InfoViewSecond = BOView()
+    let movieReservationRateTitle = BOLabel(title: "예매율", size: 14)
+    let movieReservationRate = BOLabel(title: "1위 35.5%", size: 14)
+    let movieUserRatingTitle = BOLabel(title: "평점", size: 14)
+    let movieUserRating = BOLabel(title: "7.98", size: 14)
+    let movieAudienceTitle = BOLabel(title: "누적관객수", size: 14)
+    let movieAudience = BOLabel(title: "11,676,822", size: 14)
     
-        let movieImage: UIImageView = {
-            let imageView = UIImageView()
-            imageView.backgroundColor = .black
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
-    
-        let movieTitle: UILabel = {
-            let label = UILabel()
-            label.text = "신과함께-죄와벌"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont.systemFont(ofSize: 22)
-            return label
-        }()
-    
-        let movieGrade: UILabel = {
-            let label = UILabel()
-            label.text = "12"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont.systemFont(ofSize: 22)
-            return label
-        }()
-    
-        let movieDate: UILabel = {
-            let label = UILabel()
-            label.text = "2017-12-20개봉"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont.systemFont(ofSize: 16)
-            return label
-        }()
-    
-        let movieSubTitle: UILabel = {
-            let label = UILabel()
-            label.text = "판타지, 드라마/139분"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont.systemFont(ofSize: 16)
-            return label
-        }()
-    
-    
-        let movieReservationRateView: UIView = {
-            let movieReservationRateView = UIView()
-            movieReservationRateView.backgroundColor = .black
-            movieReservationRateView.translatesAutoresizingMaskIntoConstraints = false
-            return movieReservationRateView
-        }()
-    
-            let movieReservationRateTitle: UILabel = {
-                let label = UILabel()
-                label.text = "예매율"
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.font = UIFont.systemFont(ofSize: 14)
-                return label
-            }()
-    
-            let movieReservationRate: UILabel = {
-                let label = UILabel()
-                label.text = "1위 35.5%"
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.font = UIFont.systemFont(ofSize: 14)
-                return label
-            }()
-    
-    let movieUserRatingTitleView: UIView = {
-        let movieUserRatingTitleView = UIView()
-        movieUserRatingTitleView.backgroundColor = .black
-        movieUserRatingTitleView.translatesAutoresizingMaskIntoConstraints = false
-        return movieUserRatingTitleView
-    }()
-    
-    let movieUserRatingTitle: UILabel = {
-        let label = UILabel()
-        label.text = "평점"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let movieUserRating: UILabel = {
-        let label = UILabel()
-        label.text = "7.98"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let movieAudienceTitle: UILabel = {
-        let label = UILabel()
-        label.text = "누적관객수"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let movieAudience: UILabel = {
-        let label = UILabel()
-        label.text = "11,676,822"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
+
     
     // 섹션2 : 줄거리 뷰
-    let synopsisView: UIView = {
-        let synopsisView = UIView()
-        synopsisView.backgroundColor = .orange
-        synopsisView.translatesAutoresizingMaskIntoConstraints = false
-        return synopsisView
-    }()
+    let synopsisView = BOView()
     
     
     // 섹션3 : 줄거리 뷰
-    let actorView: UIView = {
-        let actorView = UIView()
-        actorView.backgroundColor = .yellow
-        actorView.translatesAutoresizingMaskIntoConstraints = false
-        return actorView
-    }()
-    
+    let actorView = BOView()
+
     
     // 섹션4 : 한줄평 뷰(테이블)
-    let commentsView: UIView = {
-        let commentsView = UIView()
-        commentsView.backgroundColor = .green
-        commentsView.translatesAutoresizingMaskIntoConstraints = false
-        return commentsView
-    }()
-    
+    let commentsView = BOView()
+
     
     
     func setupInfoView() {
@@ -167,7 +65,6 @@ class MovieDetailCell: UITableViewCell {
         infoView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         infoView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         infoView.heightAnchor.constraint(equalToConstant: 250).isActive = true
-        
         
         infoView.addSubview(movieImage)
         movieImage.leftAnchor.constraint(equalTo: infoView.leftAnchor , constant: 8).isActive = true

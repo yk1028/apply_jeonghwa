@@ -73,6 +73,7 @@ class MovieDetailVC: UITableViewController {
             for row in comments {
                 let r = row as! NSDictionary
                 let cvo = CommentsVO()
+                cvo.rating = r["rating"] as? Double
                 cvo.timestamp = r["timestamp"] as? Double
                 cvo.writer = r["writer"] as? String
                 cvo.movie_id = r["movie_id"] as? String
