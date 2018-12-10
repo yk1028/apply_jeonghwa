@@ -13,7 +13,14 @@ class MovieDetailVC: UIViewController {
 
     let urlId = "5a54c286e8a71d136fb5378e"
 
-    let cellId = "cellId"
+    let firstCellId = "firstCellId"
+    let secondCellId = "SecondCellId"
+    let thirdCellId = "ThirdCellId"
+    let fourthCellId = "FourthCellId"
+
+    
+    let sectionHeader = ["", "줄거리", "감독/출연", "한줄평"]
+
     
     // VIEW
     let movieDetailTable = BOTableView()
@@ -28,17 +35,16 @@ class MovieDetailVC: UIViewController {
         var datalist = [CommentsVO]()
         return datalist
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         customNavigation()
         navigationItem.title = movieTitleFromList
         movieDetailTableRegister()
         
-
-        
         getMovieVORequest()
         getCommentsVORequest()
+        
         }
     
     
@@ -83,7 +89,8 @@ class MovieDetailVC: UIViewController {
         
         movieDetailTable.delegate = self
         movieDetailTable.dataSource = self
-        movieDetailTable.register(MovieDetailCell.self, forCellReuseIdentifier: cellId)
+        movieDetailTable.register(MovieDetailCell.self, forCellReuseIdentifier: firstCellId)
+        movieDetailTable.register(MovieCommentsCell.self, forCellReuseIdentifier: secondCellId)
     }
     
     
@@ -117,15 +124,69 @@ class MovieDetailVC: UIViewController {
 
 extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
-
     
+
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        default:
+            return 0
+        }
+    }
+
+
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MovieDetailCell
-        return cell
+
+        switch (indexPath.section) {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: firstCellId, for: indexPath) as! MovieDetailCell
+                cell.selectionStyle = .none
+                return cell
+            
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: secondCellId, for: indexPath) as! MovieCommentsCell
+                cell.selectionStyle = .none
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: secondCellId, for: indexPath) as! MovieCommentsCell
+                return cell
+            }
+
+        }
+
+
+
+
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let titleForHeader = UILabel()
+
+        switch section {
+        case 0:
+            titleForHeader.text = "첫섹션"
+        case 1:
+            titleForHeader.text = "두번째 섹션"
+        default:
+            titleForHeader.text = "오오오오"
+    
+       }
+        return titleForHeader
+    }
+
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 38
     }
 
 }
+

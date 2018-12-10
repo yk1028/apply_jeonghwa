@@ -19,6 +19,7 @@ class BOLabel: UILabel {
         self.text = title
         self.textColor = color
         self.textAlignment = textAlign
+        self.font = UIFont.systemFont(ofSize: size)
         self.numberOfLines = 0
     }
     

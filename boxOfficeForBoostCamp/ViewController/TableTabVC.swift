@@ -17,6 +17,7 @@ class TableTabVC: UIViewController {
         return datalist
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customNavigation()
@@ -98,4 +99,5 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
         NSLog("선택된 행: \(indexPath.row)")
         self.navigationController?.pushViewController(MovieDetailVC(), animated: true)
     }
+    
 }
