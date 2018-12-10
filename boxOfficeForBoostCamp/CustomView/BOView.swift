@@ -18,7 +18,6 @@ class BOView: UIView {
         }
 
         backgroundColor = getRandomColor()
-
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -21,6 +21,7 @@
 		E99BF21621BCC0580020965D /* MovieDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21521BCC0580020965D /* MovieDetailCell.swift */; };
 		E99BF21921BD70A10020965D /* BOLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21821BD70A10020965D /* BOLabel.swift */; };
 		E99BF21B21BD73290020965D /* BOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21A21BD73290020965D /* BOView.swift */; };
+		E99BF21E21BD828D0020965D /* BOTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21D21BD828D0020965D /* BOTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		E99BF21521BCC0580020965D /* MovieDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailCell.swift; sourceTree = "<group>"; };
 		E99BF21821BD70A10020965D /* BOLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOLabel.swift; sourceTree = "<group>"; };
 		E99BF21A21BD73290020965D /* BOView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOView.swift; sourceTree = "<group>"; };
+		E99BF21D21BD828D0020965D /* BOTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				E99BF21821BD70A10020965D /* BOLabel.swift */,
 				E99BF21A21BD73290020965D /* BOView.swift */,
+				E99BF21D21BD828D0020965D /* BOTableView.swift */,
 				E99BF21121BBD65A0020965D /* TableTabCell.swift */,
 				E99BF21521BCC0580020965D /* MovieDetailCell.swift */,
 			);
@@ -181,6 +184,7 @@
 				E91F2E9321B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld in Sources */,
 				E99BF21021BBA66A0020965D /* MovieVO.swift in Sources */,
 				E99BF21421BC34920020965D /* extension.swift in Sources */,
+				E99BF21E21BD828D0020965D /* BOTableView.swift in Sources */,
 				E91F2E8D21B7CC390090582B /* TableTabVC.swift in Sources */,
 				E99BF21921BD70A10020965D /* BOLabel.swift in Sources */,
 				E99BF21621BCC0580020965D /* MovieDetailCell.swift in Sources */,

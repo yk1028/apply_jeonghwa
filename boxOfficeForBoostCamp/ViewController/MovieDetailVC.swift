@@ -8,12 +8,17 @@
 
 import UIKit
 
-class MovieDetailVC: UITableViewController {
-//    fileprivate let cellId = "detailId"
-    
-    let urlId = "5a54c286e8a71d136fb5378e"
+class MovieDetailVC: UIViewController {
     let movieTitleFromList = "영화제목목목목"
 
+    let urlId = "5a54c286e8a71d136fb5378e"
+
+    let cellId = "cellId"
+    
+    // VIEW
+    let movieDetailTable = BOTableView()
+
+    // MODEL
     lazy var infoFromList: MovieVO = {
         var datalist = MovieVO()
         return datalist
@@ -23,6 +28,18 @@ class MovieDetailVC: UITableViewController {
         var datalist = [CommentsVO]()
         return datalist
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        customNavigation()
+        navigationItem.title = movieTitleFromList
+        movieDetailTableRegister()
+        
+
+        
+        getMovieVORequest()
+        getCommentsVORequest()
+        }
     
     
     func getMovieVORequest() {
@@ -53,10 +70,21 @@ class MovieDetailVC: UITableViewController {
             let url: URL! = URL(string: infoFromList.image!)
             let imageData = try! Data(contentsOf: url)
             infoFromList.movieImageLarge = UIImage(data:imageData)
-
+            
         }catch { NSLog("Parse Error!!")}
     }
-
+    
+    func movieDetailTableRegister() {
+        view.addSubview(movieDetailTable)
+        movieDetailTable.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+        movieDetailTable.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        movieDetailTable.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        movieDetailTable.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+        
+        movieDetailTable.delegate = self
+        movieDetailTable.dataSource = self
+        movieDetailTable.register(MovieDetailCell.self, forCellReuseIdentifier: cellId)
+    }
     
     
     func getCommentsVORequest() {
@@ -83,45 +111,21 @@ class MovieDetailVC: UITableViewController {
         }catch { NSLog("Parse Error!!")}
     }
     
+
     
+}
+
+extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        customNavigation()
-        navigationItem.title = movieTitleFromList
-        view.backgroundColor = .gray
-        getMovieVORequest()
-        getCommentsVORequest()
-        
-        self.tableView.register(MovieDetailCell.self, forCellReuseIdentifier: "detailId")
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
-    }
-    
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-    
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "section: \(section)"
-//    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        let comments = self.comments[indexPath.row]
-//
-        let cell = tableView.dequeueReusableCell(withIdentifier: "detailId", for: indexPath) as! MovieDetailCell
-//        commentsCell.textLabel?.text = "\(comments.timestamp)"
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
-        return 350
     }
 
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MovieDetailCell
+        return cell
+    }
+
 }
