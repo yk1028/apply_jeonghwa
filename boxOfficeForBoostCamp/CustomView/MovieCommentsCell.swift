@@ -11,57 +11,62 @@ import UIKit
 class MovieCommentsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .black
-        setupSynopsisView()
+        backgroundColor = .gray
+        setupCommentsView()
         
     }
+    
+
+    
+
+    
+    // 섹션4 : 한줄평 뷰(테이블)
+    let commentsView = BOView() // SectionView
+    let commentsTitle = BOLabel(title: "한줄평", size: 20)
+    let userName = BOLabel(title: "닉네임", size: 16)
+    let commentTime = BOLabel(title: "2000-00-00 00:00:00", size: 16)
+    let commentContents = BOLabel(title: "음 이 영화는요 10점 만점에 9점을 줄 수 있겠구요. 아주 재밌게 봤습니다.", size: 16)
+    let userThumb: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .black
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    func setupCommentsView() {
+        sectionLayout(sectionView: commentsView)
+        
+        // 한줄평(섹션 헤더)을 구현해야 함...
+//        headerLayout(sectionView: commentsView, header: commentsTitle)
+        
+        commentsView.addSubview(userThumb)
+        userThumb.leftAnchor.constraint(equalTo: commentsView.leftAnchor, constant: 8).isActive = true
+        userThumb.topAnchor.constraint(equalTo: commentsView.topAnchor, constant: 30).isActive = true
+        userThumb.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        userThumb.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        
+        commentsView.addSubview(userName)
+        userName.leftAnchor.constraint(equalTo: userThumb.rightAnchor, constant: 8).isActive = true
+        userName.topAnchor.constraint(equalTo: userThumb.topAnchor).isActive = true
+        
+        commentsView.addSubview(commentTime)
+        commentTime.leftAnchor.constraint(equalTo: userName.leftAnchor).isActive = true
+        commentTime.topAnchor.constraint(equalTo: userName.bottomAnchor, constant: 8).isActive = true
+        commentTime.rightAnchor.constraint(equalTo: commentsView.rightAnchor).isActive = true
+
+        commentsView.addSubview(commentContents)
+        commentContents.leftAnchor.constraint(equalTo: userName.leftAnchor).isActive = true
+        commentContents.topAnchor.constraint(equalTo: commentTime.bottomAnchor, constant: 8).isActive = true
+        commentContents.rightAnchor.constraint(equalTo: commentsView.rightAnchor, constant: 8).isActive = true
+        commentContents.bottomAnchor.constraint(equalTo: commentsView.bottomAnchor, constant: -40).isActive = true
+
+    }
+ 
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func prepareForReuse()
-    {
-        super.prepareForReuse()
-        setupSynopsisView()
-
-    }
-    
-    // 섹션2 : 줄거리 뷰
-    let synopsisView = BOView()
-    let movieSynopsisTitle = BOLabel(title: "줄거리", size: 16)
-    let movieSynopsis = BOLabel(title: """
-저승 법에 의하면, 모든 인간은 사후 49일 동안 7번의 재판을 거쳐야만 한다. 살인, 나태, 거짓, 불의, 배신, 폭력, 천륜 7개의 지옥에서 7번의 재판을 무사히 통과한 망자만이 환생하여 새로운 삶을 시작할 수 있다.
-
-"김자홍 씨께선, 오늘 예정 대로 무사히 사망하셨습니다"
-
-화재 사고 현장에서 여자아이를 구하고 죽음을 맞이한 소방관 자홍, 그의 앞에 저승차사 해원맥과 덕춘이 나타난다.자신의 죽음이 아직 믿기지도 않는데 덕춘은 정의로운 망자이자 귀인이라며 그를 치켜세운다.
-저승으로 가는 입구, 초군문에서 그를 기다리는 또 한 명의 차사 강림, 그는 차사들의 리더이자 앞으로 자홍이 겪어야 할 7개의 재판에서 변호를 맡아줄 변호사이기도 하다.
-염라대왕에게 천년 동안 49명의 망자를 환생시키면 자신들 역시 인간으로 환생시켜 주겠다는 약속을 받은 삼차사들, 그들은 자신들이 변호하고 호위해야 하는 48번째 망자이자 19년 만에 나타난 의로운 귀인 자홍의 환생을 확신하지만, 각 지옥에서 자홍의 과거가 하나 둘씩 드러나면서 예상치 못한 고난과 맞닥뜨리는데…
-
-누구나 가지만 아무도 본 적 없는 곳, 새로운 세계의 문이 열린다!
-"""
-        , size: 16)
-    
-    
-    
-    func setupSynopsisView() {
-        contentView.addSubview(synopsisView)
-        synopsisView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        synopsisView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-        synopsisView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        synopsisView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        
-        
-        //        synopsisView.addSubview(movieSynopsis)
-        
-        synopsisView.addSubview(movieSynopsis)
-        movieSynopsis.leftAnchor.constraint(equalTo: synopsisView.leftAnchor).isActive = true
-        movieSynopsis.topAnchor.constraint(equalTo: synopsisView.topAnchor, constant: 8).isActive = true
-        movieSynopsis.rightAnchor.constraint(equalTo: synopsisView.rightAnchor).isActive = true
-        movieSynopsis.bottomAnchor.constraint(equalTo: synopsisView.bottomAnchor).isActive = true
-    }
-    
 }
 
 

@@ -23,6 +23,8 @@
 		E99BF21B21BD73290020965D /* BOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21A21BD73290020965D /* BOView.swift */; };
 		E99BF21E21BD828D0020965D /* BOTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21D21BD828D0020965D /* BOTableView.swift */; };
 		E99BF22021BE167A0020965D /* MovieCommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21F21BE167A0020965D /* MovieCommentsCell.swift */; };
+		E99BF22221BE7D160020965D /* MovieSynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF22121BE7D160020965D /* MovieSynopsisCell.swift */; };
+		E99BF22421BE7DE50020965D /* MovieActorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF22321BE7DE50020965D /* MovieActorCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		E99BF21A21BD73290020965D /* BOView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOView.swift; sourceTree = "<group>"; };
 		E99BF21D21BD828D0020965D /* BOTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOTableView.swift; sourceTree = "<group>"; };
 		E99BF21F21BE167A0020965D /* MovieCommentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCommentsCell.swift; sourceTree = "<group>"; };
+		E99BF22121BE7D160020965D /* MovieSynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSynopsisCell.swift; sourceTree = "<group>"; };
+		E99BF22321BE7DE50020965D /* MovieActorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActorCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				E99BF21D21BD828D0020965D /* BOTableView.swift */,
 				E99BF21121BBD65A0020965D /* TableTabCell.swift */,
 				E99BF21521BCC0580020965D /* MovieDetailCell.swift */,
+				E99BF22121BE7D160020965D /* MovieSynopsisCell.swift */,
+				E99BF22321BE7DE50020965D /* MovieActorCell.swift */,
 				E99BF21F21BE167A0020965D /* MovieCommentsCell.swift */,
 			);
 			path = CustomView;
@@ -190,6 +196,8 @@
 				E99BF21421BC34920020965D /* extension.swift in Sources */,
 				E99BF21E21BD828D0020965D /* BOTableView.swift in Sources */,
 				E91F2E8D21B7CC390090582B /* TableTabVC.swift in Sources */,
+				E99BF22221BE7D160020965D /* MovieSynopsisCell.swift in Sources */,
+				E99BF22421BE7DE50020965D /* MovieActorCell.swift in Sources */,
 				E99BF21921BD70A10020965D /* BOLabel.swift in Sources */,
 				E99BF21621BCC0580020965D /* MovieDetailCell.swift in Sources */,
 				E99BF21221BBD65A0020965D /* TableTabCell.swift in Sources */,

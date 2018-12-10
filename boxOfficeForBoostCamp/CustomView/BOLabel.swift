@@ -10,7 +10,7 @@ import UIKit
 
 class BOLabel: UILabel {
     
-    init(title: String = "default text", color: UIColor = .black, size: CGFloat = 22, frame: CGRect = .zero, textAlign: NSTextAlignment = .left) {
+    init(title: String = "default text", color: UIColor = .black, size: CGFloat = 16, frame: CGRect = .zero, textAlign: NSTextAlignment = .left) {
         super.init(frame: frame)
         if frame == .zero {
             self.translatesAutoresizingMaskIntoConstraints = false

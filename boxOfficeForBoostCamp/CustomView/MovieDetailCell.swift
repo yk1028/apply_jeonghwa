@@ -9,34 +9,14 @@
 import UIKit
 
 class MovieDetailCell: UITableViewCell {
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .gray
-        
-        // 시놉시스와 정보뷰 순서 주의 - 시놉시스뷰는 길이에 따라 동적으로 변해야 함
-//        setupSynopsisView()
         setupInfoView()
-
-//        setupActorView()
-//        setupCommentsView()
     }
-    
-    
-    override func prepareForReuse()
-    {
-        super.prepareForReuse()
-        setupInfoView()
-
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
- 
     
     let screenWidth = UIScreen.main.bounds.width
-    
     // 섹션1-1 : 영화 기본정보 뷰(포스터, 기본정보)
     let infoView = BOView()
     let movieTitle = BOLabel(title: "신과함께-죄와벌", size: 22)
@@ -57,20 +37,14 @@ class MovieDetailCell: UITableViewCell {
 
     let sizeIVBTitle = 14
     let sizeIVBContent = 14
-    let movieReservationRateTitle = BOLabel(title: "예매율", size: 12, textAlign: .center)
-    let movieReservationRate = BOLabel(title: "1위 35.5%", size: 10, textAlign: .center)
-    let movieUserRatingTitle = BOLabel(title: "평점", size: 12, textAlign: .center)
-    let movieUserRating = BOLabel(title: "7.98", size: 7, textAlign: .center)
+    let movieReservationRateTitle = BOLabel(title: "예매율", size: 14, textAlign: .center)
+    let movieReservationRate = BOLabel(title: "1위 35.5%", size: 12, textAlign: .center)
+    let movieUserRatingTitle = BOLabel(title: "평점", size: 14, textAlign: .center)
+    let movieUserRating = BOLabel(title: "7.98", size: 12, textAlign: .center)
     let movieUserRatingStar = BOLabel(title: "⭑⭑⭑⭑⭑", size: 12, textAlign: .center)
-    let movieAudienceTitle = BOLabel(title: "누적관객수", size: 12, textAlign: .center)
-    let movieAudience = BOLabel(title: "11,676,822", size: 10, textAlign: .center)
+    let movieAudienceTitle = BOLabel(title: "누적관객수", size: 14, textAlign: .center)
+    let movieAudience = BOLabel(title: "11,676,822", size: 12, textAlign: .center)
     
-    // 섹션3 : 줄거리 뷰
-    let actorView = BOView()
-
-    
-    // 섹션4 : 한줄평 뷰(테이블)
-    let commentsView = BOView()
 
 
     
@@ -168,20 +142,9 @@ class MovieDetailCell: UITableViewCell {
     }
     
 
-    func setupActorView() {
-        contentView.addSubview(actorView)
-        actorView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        actorView.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8).isActive = true
-        actorView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        actorView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-    }
     
-    func setupCommentsView() {
-        contentView.addSubview(commentsView)
-        commentsView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        commentsView.topAnchor.constraint(equalTo: actorView.bottomAnchor, constant: 8).isActive = true
-        commentsView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        commentsView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

@@ -13,10 +13,10 @@ class MovieDetailVC: UIViewController {
 
     let urlId = "5a54c286e8a71d136fb5378e"
 
-    let firstCellId = "firstCellId"
-    let secondCellId = "SecondCellId"
-    let thirdCellId = "ThirdCellId"
-    let fourthCellId = "FourthCellId"
+    let detailCellId = "detailCellId"
+    let synopsisCellId = "synopsisCellId"
+    let actorCellId = "actorCellId"
+    let commentsCellId = "commentsCellId"
 
     
     let sectionHeader = ["", "줄거리", "감독/출연", "한줄평"]
@@ -38,6 +38,8 @@ class MovieDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+
         customNavigation()
         navigationItem.title = movieTitleFromList
         movieDetailTableRegister()
@@ -89,8 +91,11 @@ class MovieDetailVC: UIViewController {
         
         movieDetailTable.delegate = self
         movieDetailTable.dataSource = self
-        movieDetailTable.register(MovieDetailCell.self, forCellReuseIdentifier: firstCellId)
-        movieDetailTable.register(MovieCommentsCell.self, forCellReuseIdentifier: secondCellId)
+        movieDetailTable.register(MovieDetailCell.self, forCellReuseIdentifier: detailCellId)
+        movieDetailTable.register(MovieSynopsisCell.self, forCellReuseIdentifier: synopsisCellId)
+        movieDetailTable.register(MovieActorCell.self, forCellReuseIdentifier: actorCellId)
+        movieDetailTable.register(MovieCommentsCell.self, forCellReuseIdentifier: commentsCellId)
+
     }
     
     
@@ -125,7 +130,7 @@ class MovieDetailVC: UIViewController {
 extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
 
@@ -137,6 +142,10 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
             return 1
         case 1:
             return 1
+        case 2:
+            return 1
+        case 3:
+            return 4
         default:
             return 0
         }
@@ -148,45 +157,56 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
 
         switch (indexPath.section) {
             case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: firstCellId, for: indexPath) as! MovieDetailCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: detailCellId, for: indexPath) as! MovieDetailCell
                 cell.selectionStyle = .none
                 return cell
             
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: secondCellId, for: indexPath) as! MovieCommentsCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: synopsisCellId, for: indexPath) as! MovieSynopsisCell
                 cell.selectionStyle = .none
                 return cell
+            case 2:
+                let cell = tableView.dequeueReusableCell(withIdentifier: actorCellId, for: indexPath) as! MovieActorCell
+                cell.selectionStyle = .none
+                return cell
+            case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: commentsCellId, for: indexPath) as! MovieCommentsCell
+                cell.selectionStyle = .none
+
+            return cell
+            
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: secondCellId, for: indexPath) as! MovieCommentsCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: commentsCellId, for: indexPath) as! MovieCommentsCell
                 return cell
             }
 
         }
 
-
-
-
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        let titleForHeader = UILabel()
-
-        switch section {
-        case 0:
-            titleForHeader.text = "첫섹션"
-        case 1:
-            titleForHeader.text = "두번째 섹션"
-        default:
-            titleForHeader.text = "오오오오"
-    
-       }
-        return titleForHeader
-    }
-
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 38
-    }
+//
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//
+//        let titleForHeader = UILabel()
+//
+//        switch section {
+//        case 0:
+//            titleForHeader.text = "첫번째 섹션"
+//        case 1:
+//            titleForHeader.text = "두번째 섹션"
+//        case 2:
+//            titleForHeader.text = "세번째 섹션"
+//        case 3:
+//            titleForHeader.text = "네번째 섹션"
+//        default:
+//            titleForHeader.text = "섹션"
+//
+//       }
+//        return titleForHeader
+//    }
+//
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 50
+//    }
 
 }
 
