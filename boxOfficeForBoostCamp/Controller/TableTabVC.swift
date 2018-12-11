@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class TableTabVC: UIViewController {
     let tableTabTable = BOTableView()
     let cellId = "cellId"
@@ -21,7 +22,7 @@ class TableTabVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customNavigation()
-
+        customNavigationRightBarButton()
         view.addSubview(tableTabTable)
         tableTabTable.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
         tableTabTable.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true

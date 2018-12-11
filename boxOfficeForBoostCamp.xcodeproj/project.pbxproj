@@ -25,6 +25,7 @@
 		E99BF22021BE167A0020965D /* MovieCommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21F21BE167A0020965D /* MovieCommentsCell.swift */; };
 		E99BF22221BE7D160020965D /* MovieSynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF22121BE7D160020965D /* MovieSynopsisCell.swift */; };
 		E99BF22421BE7DE50020965D /* MovieActorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF22321BE7DE50020965D /* MovieActorCell.swift */; };
+		E99BF22821C005790020965D /* note in Resources */ = {isa = PBXBuildFile; fileRef = E99BF22721C005790020965D /* note */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		E99BF21F21BE167A0020965D /* MovieCommentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCommentsCell.swift; sourceTree = "<group>"; };
 		E99BF22121BE7D160020965D /* MovieSynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSynopsisCell.swift; sourceTree = "<group>"; };
 		E99BF22321BE7DE50020965D /* MovieActorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActorCell.swift; sourceTree = "<group>"; };
+		E99BF22721C005790020965D /* note */ = {isa = PBXFileReference; lastKnownFileType = text; path = note; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,43 +82,60 @@
 		E91F2E8921B7CC390090582B /* boxOfficeForBoostCamp */ = {
 			isa = PBXGroup;
 			children = (
-				E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */,
-				E99BF21721BD70190020965D /* CustomView */,
-				E99BF21C21BD78590020965D /* ViewController */,
+				E99BF22721C005790020965D /* note */,
+				E99BF22621C005220020965D /* Model */,
+				E99BF21721BD70190020965D /* View */,
+				E99BF21C21BD78590020965D /* Controller */,
 				E91F2E8A21B7CC390090582B /* AppDelegate.swift */,
 				E91F2E9421B7CC3A0090582B /* Assets.xcassets */,
 				E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */,
 				E91F2E9921B7CC3A0090582B /* Info.plist */,
 				E91F2E9121B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld */,
-				E99BF20F21BBA66A0020965D /* MovieVO.swift */,
 				E99BF21321BC34920020965D /* extension.swift */,
 			);
 			path = boxOfficeForBoostCamp;
 			sourceTree = "<group>";
 		};
-		E99BF21721BD70190020965D /* CustomView */ = {
+		E99BF21721BD70190020965D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E99BF22521BFF9760020965D /* Cells */,
 				E99BF21821BD70A10020965D /* BOLabel.swift */,
 				E99BF21A21BD73290020965D /* BOView.swift */,
 				E99BF21D21BD828D0020965D /* BOTableView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E99BF21C21BD78590020965D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E91F2E8C21B7CC390090582B /* TableTabVC.swift */,
+				E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */,
+				E99BF20D21BB7A540020965D /* MovieDetailVC.swift */,
+				E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E99BF22521BFF9760020965D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
 				E99BF21121BBD65A0020965D /* TableTabCell.swift */,
 				E99BF21521BCC0580020965D /* MovieDetailCell.swift */,
 				E99BF22121BE7D160020965D /* MovieSynopsisCell.swift */,
 				E99BF22321BE7DE50020965D /* MovieActorCell.swift */,
 				E99BF21F21BE167A0020965D /* MovieCommentsCell.swift */,
 			);
-			path = CustomView;
+			path = Cells;
 			sourceTree = "<group>";
 		};
-		E99BF21C21BD78590020965D /* ViewController */ = {
+		E99BF22621C005220020965D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E91F2E8C21B7CC390090582B /* TableTabVC.swift */,
-				E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */,
-				E99BF20D21BB7A540020965D /* MovieDetailVC.swift */,
+				E99BF20F21BBA66A0020965D /* MovieVO.swift */,
 			);
-			path = ViewController;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +198,7 @@
 			files = (
 				E91F2E9821B7CC3A0090582B /* LaunchScreen.storyboard in Resources */,
 				E91F2E9521B7CC3A0090582B /* Assets.xcassets in Resources */,
+				E99BF22821C005790020965D /* note in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

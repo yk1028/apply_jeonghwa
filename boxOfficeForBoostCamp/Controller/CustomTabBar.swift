@@ -43,7 +43,10 @@ extension UIViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .blue
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+    }
+    
 
+    func customNavigationRightBarButton() {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "btnSort"), for: .normal)
         button.addTarget(self, action: #selector(btnSort), for: .touchUpInside)
@@ -51,6 +54,8 @@ extension UIViewController {
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
     }
+
+    
     
     @objc func btnSort() {
         print("sort button!!")

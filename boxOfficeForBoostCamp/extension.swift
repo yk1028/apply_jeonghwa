@@ -24,3 +24,4 @@ extension UITableViewCell {
         header.rightAnchor.constraint(equalTo: sectionView.rightAnchor).isActive = true
     }
 }
+ 

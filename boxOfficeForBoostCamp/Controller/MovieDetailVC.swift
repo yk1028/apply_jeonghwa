@@ -78,7 +78,12 @@ class MovieDetailVC: UIViewController {
             let url: URL! = URL(string: infoFromList.image!)
             let imageData = try! Data(contentsOf: url)
             infoFromList.movieImageLarge = UIImage(data:imageData)
-            
+            print("나온다")
+            print("나온다")
+            print("나온다")
+            print("나온다")
+
+            print("이것이 결과다 \(infoFromList)")
         }catch { NSLog("Parse Error!!")}
     }
     
