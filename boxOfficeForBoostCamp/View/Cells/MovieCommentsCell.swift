@@ -24,6 +24,7 @@ class MovieCommentsCell: UITableViewCell {
     let commentsView = BOView() // SectionView
     let commentsTitle = BOLabel(title: "한줄평", size: 20)
     let userName = BOLabel(title: "닉네임", size: 16)
+    let userRatingStar = StarView(starSize: 16, userRating: 7.98)
     let commentTime = BOLabel(title: "2000-00-00 00:00:00", size: 16)
     let commentContents = BOLabel(title: "음 이 영화는요 10점 만점에 9점을 줄 수 있겠구요. 아주 재밌게 봤습니다.", size: 16)
     let userThumb: UIImageView = {
@@ -48,6 +49,10 @@ class MovieCommentsCell: UITableViewCell {
         commentsView.addSubview(userName)
         userName.leftAnchor.constraint(equalTo: userThumb.rightAnchor, constant: 8).isActive = true
         userName.topAnchor.constraint(equalTo: userThumb.topAnchor).isActive = true
+       
+        commentsView.addSubview(userRatingStar)
+        userRatingStar.leftAnchor.constraint(equalTo: userName.rightAnchor, constant: 8).isActive = true
+        userRatingStar.topAnchor.constraint(equalTo: userThumb.topAnchor).isActive = true
         
         commentsView.addSubview(commentTime)
         commentTime.leftAnchor.constraint(equalTo: userName.leftAnchor).isActive = true

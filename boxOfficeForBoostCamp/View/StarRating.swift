@@ -25,7 +25,7 @@ class StarView: UIView {
         var i = 0
         fiveStar = [star1 ,star2, star3, star4, star5]
         
-
+        backgroundColor = .cyan
         // 노란색 별을 그린다
         for star in fiveStar[0 ..< fullLocation] {
             starImageView(imageView: star, location: starSize * CGFloat(i), starSize)
@@ -43,6 +43,7 @@ class StarView: UIView {
         // 반쪽 별을 그 위에 그린다
         starHalfImageView(halfLocation, starSize)
         addSubview(starHalf)
+        
     }
     
     

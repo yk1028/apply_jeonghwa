@@ -13,10 +13,12 @@ class MovieDetailCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .gray
+
         setupInfoView()
     }
     
     let screenWidth = UIScreen.main.bounds.width
+    
     // 섹션1-1 : 영화 기본정보 뷰(포스터, 기본정보)
     let infoView = BOView()
     let movieTitle = BOLabel(title: "신과함께-죄와벌", size: 22)
@@ -41,7 +43,8 @@ class MovieDetailCell: UITableViewCell {
     let movieReservationRate = BOLabel(title: "1위 35.5%", size: 12, textAlign: .center)
     let movieUserRatingTitle = BOLabel(title: "평점", size: 14, textAlign: .center)
     let movieUserRating = BOLabel(title: "7.98", size: 12, textAlign: .center)
-    let movieUserRatingStar = BOLabel(title: "⭑⭑⭑⭑⭑", size: 12, textAlign: .center)
+    let movieUserRatingStar = StarView(starSize: 16, userRating: 7.98)
+    
     let movieAudienceTitle = BOLabel(title: "누적관객수", size: 14, textAlign: .center)
     let movieAudience = BOLabel(title: "11,676,822", size: 12, textAlign: .center)
     
@@ -116,29 +119,26 @@ class MovieDetailCell: UITableViewCell {
         movieUserRating.rightAnchor.constraint(equalTo: InfoViewBottom2.rightAnchor).isActive = true
         
         InfoViewBottom2.addSubview(movieUserRatingStar)
-        movieUserRatingStar.leftAnchor.constraint(equalTo: InfoViewBottom2.leftAnchor).isActive = true
         movieUserRatingStar.topAnchor.constraint(equalTo: movieUserRating.bottomAnchor, constant: 2).isActive = true
-        movieUserRatingStar.rightAnchor.constraint(equalTo: InfoViewBottom2.rightAnchor).isActive = true
         movieUserRatingStar.bottomAnchor.constraint(equalTo: InfoViewBottom2.bottomAnchor, constant: -6).isActive = true
-        
+        movieUserRatingStar.centerXAnchor.constraint(equalTo: InfoViewBottom2.centerXAnchor, constant: -40).isActive = true //constant = starSize * 2.5
         
         infoView.addSubview(InfoViewBottom3)
         InfoViewBottom3.leftAnchor.constraint(equalTo: InfoViewBottom2.rightAnchor).isActive = true
         InfoViewBottom3.topAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: 8).isActive = true
         InfoViewBottom3.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
         InfoViewBottom3.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        InfoViewBottom3.addSubview(movieAudienceTitle)
         
+        InfoViewBottom3.addSubview(movieAudienceTitle)
         movieAudienceTitle.leftAnchor.constraint(equalTo: InfoViewBottom3.leftAnchor).isActive = true
         movieAudienceTitle.topAnchor.constraint(equalTo: InfoViewBottom3.topAnchor, constant: 14).isActive = true
         movieAudienceTitle.rightAnchor.constraint(equalTo: InfoViewBottom3.rightAnchor).isActive = true
+        
         InfoViewBottom3.addSubview(movieAudience)
         movieAudience.leftAnchor.constraint(equalTo: InfoViewBottom3.leftAnchor).isActive = true
         movieAudience.topAnchor.constraint(equalTo: movieAudienceTitle.bottomAnchor, constant: 8).isActive = true
         movieAudience.rightAnchor.constraint(equalTo: InfoViewBottom3.rightAnchor).isActive = true
         movieAudience.bottomAnchor.constraint(equalTo: InfoViewBottom3.bottomAnchor, constant: -14).isActive = true
-        
-        
     }
     
 

@@ -86,7 +86,6 @@
 			children = (
 				E91F2E8A21B7CC390090582B /* AppDelegate.swift */,
 				E99BF22721C005790020965D /* note */,
-				E99BF23121C125380020965D /* StarRating.swift */,
 				E99BF22621C005220020965D /* Model */,
 				E99BF21721BD70190020965D /* View */,
 				E99BF21C21BD78590020965D /* Controller */,
@@ -102,10 +101,11 @@
 		E99BF21721BD70190020965D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E99BF22521BFF9760020965D /* Cells */,
+				E99BF23121C125380020965D /* StarRating.swift */,
 				E99BF21821BD70A10020965D /* BOLabel.swift */,
 				E99BF21A21BD73290020965D /* BOView.swift */,
 				E99BF21D21BD828D0020965D /* BOTableView.swift */,
+				E99BF22521BFF9760020965D /* Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";
