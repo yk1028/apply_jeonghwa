@@ -26,6 +26,7 @@
 		E99BF22221BE7D160020965D /* MovieSynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF22121BE7D160020965D /* MovieSynopsisCell.swift */; };
 		E99BF22421BE7DE50020965D /* MovieActorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF22321BE7DE50020965D /* MovieActorCell.swift */; };
 		E99BF22821C005790020965D /* note in Resources */ = {isa = PBXBuildFile; fileRef = E99BF22721C005790020965D /* note */; };
+		E99BF23321C125380020965D /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF23121C125380020965D /* StarRating.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		E99BF22121BE7D160020965D /* MovieSynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSynopsisCell.swift; sourceTree = "<group>"; };
 		E99BF22321BE7DE50020965D /* MovieActorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActorCell.swift; sourceTree = "<group>"; };
 		E99BF22721C005790020965D /* note */ = {isa = PBXFileReference; lastKnownFileType = text; path = note; sourceTree = "<group>"; };
+		E99BF23121C125380020965D /* StarRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRating.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,11 +84,12 @@
 		E91F2E8921B7CC390090582B /* boxOfficeForBoostCamp */ = {
 			isa = PBXGroup;
 			children = (
+				E91F2E8A21B7CC390090582B /* AppDelegate.swift */,
 				E99BF22721C005790020965D /* note */,
+				E99BF23121C125380020965D /* StarRating.swift */,
 				E99BF22621C005220020965D /* Model */,
 				E99BF21721BD70190020965D /* View */,
 				E99BF21C21BD78590020965D /* Controller */,
-				E91F2E8A21B7CC390090582B /* AppDelegate.swift */,
 				E91F2E9421B7CC3A0090582B /* Assets.xcassets */,
 				E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */,
 				E91F2E9921B7CC3A0090582B /* Info.plist */,
@@ -211,6 +214,7 @@
 			files = (
 				E99BF22021BE167A0020965D /* MovieCommentsCell.swift in Sources */,
 				E91F2EA021B7CDAB0090582B /* CustomTabBar.swift in Sources */,
+				E99BF23321C125380020965D /* StarRating.swift in Sources */,
 				E91F2E9321B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld in Sources */,
 				E99BF21021BBA66A0020965D /* MovieVO.swift in Sources */,
 				E99BF21421BC34920020965D /* extension.swift in Sources */,

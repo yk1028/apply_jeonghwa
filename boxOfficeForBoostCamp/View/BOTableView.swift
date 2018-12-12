@@ -13,10 +13,7 @@ class BOTableView: UITableView {
     
     override init(frame: CGRect , style: UITableView.Style) {
         super.init(frame: .zero, style: style)
-        
-        if frame == .zero {
-            translatesAutoresizingMaskIntoConstraints = false
-        }
+        checkAutoLayout()
         
         backgroundColor = .white
         

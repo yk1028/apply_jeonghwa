@@ -34,7 +34,7 @@ class TableTabVC: UIViewController {
         tableTabTable.register(TableTabCell.self, forCellReuseIdentifier: cellId)
 
         getMoviesRequestSample()
-    }
+        }
     
     func getMoviesRequestSample() {
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=1") else { return }
@@ -68,7 +68,6 @@ class TableTabVC: UIViewController {
             }
         }catch { NSLog("Parse Error!!")}
     }
-
 
 }
 

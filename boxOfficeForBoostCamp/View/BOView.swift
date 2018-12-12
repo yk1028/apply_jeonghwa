@@ -12,10 +12,7 @@ class BOView: UIView {
 
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
-        
-        if frame == .zero {
-            translatesAutoresizingMaskIntoConstraints = false
-        }
+        checkAutoLayout()
 
         backgroundColor = getRandomColor()
 

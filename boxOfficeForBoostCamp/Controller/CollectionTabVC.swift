@@ -20,7 +20,6 @@ class CollectionTabVC: UIViewController {
         view.backgroundColor = .yellow
         
     }
-    
-    
 }
+
 
