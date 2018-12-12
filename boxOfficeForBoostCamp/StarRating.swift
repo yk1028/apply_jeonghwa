@@ -9,54 +9,55 @@
 import UIKit
 
 class StarView: UIView {
-    
-    let starYellow: UIColor = UIColor.init(red: 240, green: 155, blue: 64)
-    let starGray: UIColor = UIColor.init(red: 234, green: 234, blue: 234)
-    
-    let fiveStar : [UIImageView] = []
     let star1 = UIImageView()
     let star2 = UIImageView()
     let star3 = UIImageView()
     let star4 = UIImageView()
     let star5 = UIImageView()
+    var fiveStar : [UIImageView] = []
     let starHalf = UIImageView()
 
-    init(frame: CGRect = .zero, starSize: CGFloat = 50, halfLocation: CGFloat = 3, userRating: Float = 7.43){
+    init(frame: CGRect = .zero, starSize: CGFloat = 50, userRating: Double = 0){
         super.init(frame: frame)
-        checkAutoLayout()
+        checkAutoLayout() // translatesAutoresizingMaskIntoConstraints = false
+        let halfLocation: CGFloat = CGFloat(ceil(floor(userRating) / 2)) // 반쪽별이 그려질 위치
+        let fullLocation: Int = Int(floor(userRating / 2)) // 노란 별이 그려지는 개수
+        var i = 0
+        fiveStar = [star1 ,star2, star3, star4, star5]
         
-        if userRating < 8 {
-            
-        } else {
-            
+
+        // 노란색 별을 그린다
+        for star in fiveStar[0 ..< fullLocation] {
+            starImageView(imageView: star, location: starSize * CGFloat(i), starSize)
+            addSubview(star)
+            i += 1
         }
         
-        starImageView(imageView: star1, location: starSize * CGFloat(0), starSize)
-        starImageView(imageView: star2, location: starSize * CGFloat(1), starSize)
-        starImageView(imageView: star3, location: starSize * CGFloat(2), starSize)
-        starImageView(imageView: star4, location: starSize * CGFloat(3), starSize)
-        starImageView(imageView: star5, location: starSize * CGFloat(4), starSize)
-        addSubview(star1)
-        addSubview(star2)
-        addSubview(star3)
-        addSubview(star4)
-        addSubview(star5)
+        // 다음 위치부터 회색별을 그린다
+        for star in fiveStar[i ..< 5] {
+            starImageView(imageView: star, location: starSize * CGFloat(i), starSize, color: .starGray)
+            addSubview(star)
+            i += 1
+        }
+        
+        // 반쪽 별을 그 위에 그린다
         starHalfImageView(halfLocation, starSize)
         addSubview(starHalf)
-        
     }
     
     
-    func starImageView(imageView: UIImageView, location x: CGFloat = 0, _ starSize: CGFloat = 30) {
+    // 별 이미지뷰
+    func starImageView(imageView: UIImageView, location x: CGFloat = 0, _ starSize: CGFloat = 30, color: UIColor = .starYellow) {
         imageView.image = UIImage(named: "star")
-        imageView.setImageColor(color: starGray)
+        imageView.setImageColor(color: color)
         imageView.contentMode = .scaleAspectFit
         imageView.frame = CGRect(x: x, y: 0, width: starSize, height: starSize)
     }
 
+    // 반쪽 별 이미지뷰
     func starHalfImageView(_ location: CGFloat = 0, _ starSize: CGFloat = 30) {
         // 이미지가 들어가는 자리를 검사한다
-        starHalf.isHidden = location < 0 || location > 4 ?  true : false
+        starHalf.isHidden = location <= 0 || location > 4 ?  true : false
         
         let starToCrop : UIImage = UIImage(named: "star")!
         let width: CGFloat = starToCrop.size.width / 2
@@ -67,12 +68,11 @@ class StarView: UIView {
         let halfStar: UIImage = UIImage(cgImage: croppedStar)
         
         starHalf.image = halfStar
-        starHalf.setImageColor(color: starYellow)
+        starHalf.setImageColor(color: .starYellow)
         starHalf.contentMode = .scaleAspectFit
         let halfStarOffset: CGFloat = -starSize / 4
         let halfStarLocation: CGFloat = starSize * (location - 1)
         starHalf.frame = CGRect(x: halfStarOffset + halfStarLocation, y: 0, width: starSize, height: starSize)
-        
     }
     
     
@@ -83,28 +83,23 @@ class StarView: UIView {
 }
 
 
-
-
-
-
-
-
-class StarRating: UIViewController {
-    
-    let sstt = StarView()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-
-        view.addSubview(sstt)
-        sstt.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
-        sstt.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
-        sstt.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        sstt.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-    
-
-    
-}
-
+//
+//class StarRating: UIViewController {
+//
+//    let sstt = StarView()
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        view.backgroundColor = .white
+//
+//        view.addSubview(sstt)
+//        sstt.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+//        sstt.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
+//        sstt.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        sstt.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//    }
+//
+//
+//
+//}
+//

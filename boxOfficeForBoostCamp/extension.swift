@@ -47,8 +47,9 @@ extension UIImageView {
 
 
 extension UIColor {
-//    static var starYellow: UIColor { return UIColor.init(red: 240, green: 155, blue: 64)}
-//    static var starGray: UIColor { return UIColor.init(red: 234, green: 234, blue: 234)}
+    
+    static var starYellow: UIColor { return UIColor.init(red: 240, green: 155, blue: 64)}
+    static var starGray: UIColor { return UIColor.init(red: 234, green: 234, blue: 234)}
     
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
