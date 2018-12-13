@@ -10,7 +10,7 @@ import UIKit
 
 
 class TableTabVC: UIViewController {
-    let tableTabTable = BOTableView()
+    let tabTableView = UITableView()
     let cellId = "cellId"
     
     lazy var list: [MoviesVO] = {
@@ -23,17 +23,20 @@ class TableTabVC: UIViewController {
         super.viewDidLoad()
         customNavigation()
         customNavigationRightBarButton()
-        view.addSubview(tableTabTable)
-        tableTabTable.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
-        tableTabTable.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        tableTabTable.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        tableTabTable.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
         
-        tableTabTable.delegate = self
-        tableTabTable.dataSource = self
-        tableTabTable.register(TableTabCell.self, forCellReuseIdentifier: cellId)
+        view.addSubview(tabTableView)
+        tabTableView.translatesAutoresizingMaskIntoConstraints = false
+        tabTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+        tabTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        tabTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        tabTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+        
+        tabTableView.delegate = self
+        tabTableView.dataSource = self
+        tabTableView.register(TableTabCell.self, forCellReuseIdentifier: cellId)
 
         getMoviesRequestSample()
+        
         
         }
     

@@ -20,10 +20,12 @@ class StarView: UIView {
     init(frame: CGRect = .zero, starSize: CGFloat = 50, userRating: Double = 0){
         super.init(frame: frame)
         checkAutoLayout() // translatesAutoresizingMaskIntoConstraints = false
+        
+        fiveStar = [star1 ,star2, star3, star4, star5]
+
         let halfLocation: CGFloat = CGFloat(ceil(floor(userRating) / 2)) // 반쪽 별이 그려질 위치
         let fullLocation: Int = Int(floor(userRating / 2)) // 노란 별이 그려지는 개수
         var i = 0
-        fiveStar = [star1 ,star2, star3, star4, star5]
         
         backgroundColor = .cyan
         // 노란색 별을 그린다

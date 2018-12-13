@@ -19,7 +19,7 @@ class MovieDetailCell: UITableViewCell {
     
     let screenWidth = UIScreen.main.bounds.width
     
-    // 섹션1-1 : 영화 기본정보 뷰(포스터, 기본정보)
+    // 1-1 : 영화 기본정보 뷰(포스터, 기본정보)
     let infoView = BOView()
     let movieTitle = BOLabel(title: "신과함께-죄와벌", size: 22)
     let movieGrade = BOLabel(title: "12", size: 22)
@@ -32,7 +32,7 @@ class MovieDetailCell: UITableViewCell {
         return imageView
     }()
 
-    // 섹션1-2 : 영화 기본정보 뷰(예매율, 평점, 누적관객수)
+    // 1-2 : 영화 기본정보 뷰(예매율, 평점, 누적관객수)
     let InfoViewBottom1 = BOView()
     let InfoViewBottom2 = BOView()
     let InfoViewBottom3 = BOView()
@@ -52,7 +52,7 @@ class MovieDetailCell: UITableViewCell {
 
     
     func setupInfoView() {
-        // 섹션1-1 : 영화 기본정보 뷰(포스터, 기본정보)
+        // 1-1 : 영화 기본정보 뷰(포스터, 기본정보)
         contentView.addSubview(infoView)
         infoView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         infoView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -82,7 +82,7 @@ class MovieDetailCell: UITableViewCell {
         movieSubTitle.leftAnchor.constraint(equalTo: movieImage.rightAnchor , constant: 8).isActive = true
         movieSubTitle.topAnchor.constraint(equalTo: movieDate.bottomAnchor , constant: 8).isActive = true
         
-        // 섹션1-2 : 영화 기본정보 뷰(예매율, 평점, 누적관객수)
+        // 1-2 : 영화 기본정보 뷰(예매율, 평점, 누적관객수)
         infoView.addSubview(InfoViewBottom1)
         InfoViewBottom1.leftAnchor.constraint(equalTo: infoView.leftAnchor).isActive = true
         InfoViewBottom1.topAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: 8).isActive = true

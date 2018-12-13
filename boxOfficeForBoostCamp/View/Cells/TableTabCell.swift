@@ -11,9 +11,9 @@ import UIKit
 class TableTabCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupViews()
     }
+
     
     let movieImage: UIImageView = {
         let imageView = UIImageView()
@@ -23,13 +23,10 @@ class TableTabCell: UITableViewCell {
     }()
     
     let movieTitle = BOLabel(title: "영화 제목", size: 22)
-    
     let movieGrade = BOLabel(title: "00", size: 22)
     let movieSubTitle = BOLabel(title: "평점 : 10 예매순위 : 10 예매율 : 10.10", size: 14)
     let movieReleaseDate = BOLabel(title: "개봉일 : 2000-11-11", size: 12)
 
-
-    
     func setupViews() {
         let insetFromImage: CGFloat = 10
         contentView.addSubview(movieImage)
@@ -47,7 +44,6 @@ class TableTabCell: UITableViewCell {
         movieGrade.leftAnchor.constraint(equalTo: movieTitle.rightAnchor, constant: 8).isActive = true
         movieGrade.topAnchor.constraint(equalTo: movieTitle.topAnchor).isActive = true
 
-        
         contentView.addSubview(movieSubTitle)
         movieSubTitle.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: insetFromImage).isActive = true
         movieSubTitle.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 8).isActive = true

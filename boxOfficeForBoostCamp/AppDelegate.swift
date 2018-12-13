@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let customTabBar = CustomTabBar()
         window?.rootViewController = customTabBar
         
+        
         return true
 
     }

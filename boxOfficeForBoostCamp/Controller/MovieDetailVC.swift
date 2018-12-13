@@ -23,7 +23,7 @@ class MovieDetailVC: UIViewController {
 
     
     // VIEW
-    let movieDetailTable = BOTableView()
+    let movieDetailTable = UITableView()
 
     // MODEL
     lazy var infoFromList: MovieVO = {
@@ -39,10 +39,11 @@ class MovieDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        movieDetailTable.translatesAutoresizingMaskIntoConstraints = false
+        
         customNavigation()
         navigationItem.title = movieTitleFromList
-        movieDetailTableRegister()
+        configureMovieDetailTable()
         
         getMovieVORequest()
         getCommentsVORequest()
@@ -89,7 +90,7 @@ class MovieDetailVC: UIViewController {
         
     }
     
-    func movieDetailTableRegister() {
+    func configureMovieDetailTable() {
         view.addSubview(movieDetailTable)
         movieDetailTable.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
         movieDetailTable.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
