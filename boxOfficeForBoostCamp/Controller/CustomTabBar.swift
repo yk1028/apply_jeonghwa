@@ -15,7 +15,6 @@ class CustomTabBar: UITabBarController {
         setupNavigation()
         self.tabBar.barTintColor = .blue
         self.tabBar.tintColor = .white
-        
     }
     
     func setupNavigation() {
@@ -32,8 +31,8 @@ class CustomTabBar: UITabBarController {
         viewControllers = [tableTabVC, collectionTabVC]
 
     }
-    
-    
+
+
     
 }
 

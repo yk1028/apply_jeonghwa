@@ -85,6 +85,8 @@ class MovieDetailVC: UIViewController {
 
             print("이것이 결과다 \(infoFromList)")
         }catch { NSLog("Parse Error!!")}
+        
+        
     }
     
     func movieDetailTableRegister() {

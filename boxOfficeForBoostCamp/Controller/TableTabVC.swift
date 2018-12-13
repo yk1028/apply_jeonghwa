@@ -34,6 +34,7 @@ class TableTabVC: UIViewController {
         tableTabTable.register(TableTabCell.self, forCellReuseIdentifier: cellId)
 
         getMoviesRequestSample()
+        
         }
     
     func getMoviesRequestSample() {
@@ -68,6 +69,7 @@ class TableTabVC: UIViewController {
             }
         }catch { NSLog("Parse Error!!")}
     }
+
 
 }
 

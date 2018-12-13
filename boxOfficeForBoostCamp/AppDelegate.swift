@@ -17,12 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        UIApplication.shared.statusBarStyle = .lightContent
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         let customTabBar = CustomTabBar()
         window?.rootViewController = customTabBar
-//        window?.rootViewController = StarRating()
+        
         return true
+
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
