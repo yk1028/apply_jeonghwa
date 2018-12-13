@@ -78,9 +78,11 @@ class TabCollectionCell: UICollectionViewCell {
         var imageView = UIImageView()
         imageView.backgroundColor = .clear
         imageView.image = UIImage(named: "age0")!
-        imageView.layer.cornerRadius = 15
         imageView.clipsToBounds = true
-        imageView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        imageView.contentMode = .scaleAspectFit
+        let size: CGFloat = 30
+        imageView.frame = CGRect(x: 0, y: 0, width: size, height: size)
+        imageView.layer.cornerRadius = size / 2
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

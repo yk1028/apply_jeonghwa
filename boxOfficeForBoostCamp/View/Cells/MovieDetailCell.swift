@@ -12,8 +12,7 @@ class MovieDetailCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .gray
-
+        backgroundColor = .white
         setupInfoView()
     }
     
@@ -21,7 +20,8 @@ class MovieDetailCell: UITableViewCell {
     
     // 1-1 : 영화 기본정보 뷰(포스터, 기본정보)
     let infoView = BOView()
-    let movieTitle = BOLabel(title: "신과함께-죄와벌", size: 22)
+    let infoViewHeader = BOLabel(title: "고구마", size: 22)
+    let movieTitle = BOLabel(title: "신과함께-죄와벌 sdfadsfdssfasfasfasdfsadf", size: 22)
     let movieGrade = BOLabel(title: "12", size: 22)
     let movieDate = BOLabel(title: "2017-12-20개봉", size: 16)
     let movieSubTitle = BOLabel(title: "판타지, 드라마/139분", size: 16)
@@ -35,6 +35,7 @@ class MovieDetailCell: UITableViewCell {
     // 1-2 : 영화 기본정보 뷰(예매율, 평점, 누적관객수)
     let InfoViewBottom1 = BOView()
     let InfoViewBottom2 = BOView()
+    
     let InfoViewBottom3 = BOView()
 
     let sizeIVBTitle = 14
@@ -52,7 +53,7 @@ class MovieDetailCell: UITableViewCell {
 
     
     func setupInfoView() {
-        // 1-1 : 영화 기본정보 뷰(포스터, 기본정보)
+//         1-1 : 영화 기본정보 뷰(포스터, 기본정보)
         contentView.addSubview(infoView)
         infoView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         infoView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -65,21 +66,20 @@ class MovieDetailCell: UITableViewCell {
         movieImage.widthAnchor.constraint(equalToConstant: 110).isActive = true
         movieImage.heightAnchor.constraint(equalToConstant: 155).isActive = true
         
-        let insetFromInfoView = 60
         infoView.addSubview(movieTitle)
         movieTitle.leftAnchor.constraint(equalTo: movieImage.rightAnchor , constant: 8).isActive = true
-        movieTitle.topAnchor.constraint(equalTo: infoView.topAnchor , constant: CGFloat(insetFromInfoView)).isActive = true
+        movieTitle.topAnchor.constraint(equalTo: infoView.topAnchor , constant: 60).isActive = true
         
         infoView.addSubview(movieGrade)
         movieGrade.leftAnchor.constraint(equalTo: movieTitle.rightAnchor , constant: 8).isActive = true
-        movieGrade.topAnchor.constraint(equalTo: infoView.topAnchor , constant: CGFloat(insetFromInfoView)).isActive = true
-        
+        movieGrade.topAnchor.constraint(equalTo: movieTitle.topAnchor).isActive = true
+
         infoView.addSubview(movieDate)
-        movieDate.leftAnchor.constraint(equalTo: movieImage.rightAnchor , constant: 8).isActive = true
+        movieDate.leftAnchor.constraint(equalTo: movieTitle.leftAnchor).isActive = true
         movieDate.topAnchor.constraint(equalTo: movieTitle.bottomAnchor , constant: 8).isActive = true
         
         infoView.addSubview(movieSubTitle)
-        movieSubTitle.leftAnchor.constraint(equalTo: movieImage.rightAnchor , constant: 8).isActive = true
+        movieSubTitle.leftAnchor.constraint(equalTo: movieTitle.leftAnchor).isActive = true
         movieSubTitle.topAnchor.constraint(equalTo: movieDate.bottomAnchor , constant: 8).isActive = true
         
         // 1-2 : 영화 기본정보 뷰(예매율, 평점, 누적관객수)
@@ -88,7 +88,6 @@ class MovieDetailCell: UITableViewCell {
         InfoViewBottom1.topAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: 8).isActive = true
         InfoViewBottom1.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         InfoViewBottom1.widthAnchor.constraint(equalToConstant: screenWidth / 3).isActive = true
-        
         
         InfoViewBottom1.addSubview(movieReservationRateTitle)
         movieReservationRateTitle.leftAnchor.constraint(equalTo: InfoViewBottom1.leftAnchor).isActive = true
@@ -107,11 +106,12 @@ class MovieDetailCell: UITableViewCell {
         InfoViewBottom2.topAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: 8).isActive = true
         InfoViewBottom2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         InfoViewBottom2.widthAnchor.constraint(equalToConstant: screenWidth / 3).isActive = true
-        
+
         InfoViewBottom2.addSubview(movieUserRatingTitle)
         movieUserRatingTitle.leftAnchor.constraint(equalTo: InfoViewBottom2.leftAnchor).isActive = true
         movieUserRatingTitle.topAnchor.constraint(equalTo: InfoViewBottom2.topAnchor, constant: 10).isActive = true
         movieUserRatingTitle.rightAnchor.constraint(equalTo: InfoViewBottom2.rightAnchor).isActive = true
+        
         
         InfoViewBottom2.addSubview(movieUserRating)
         movieUserRating.leftAnchor.constraint(equalTo: InfoViewBottom2.leftAnchor).isActive = true
@@ -147,5 +147,6 @@ class MovieDetailCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 
 

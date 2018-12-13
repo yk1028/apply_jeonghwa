@@ -26,6 +26,7 @@ class TableTabVC: UIViewController {
         
         view.addSubview(tabTableView)
         tabTableView.translatesAutoresizingMaskIntoConstraints = false
+
         tabTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
         tabTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         tabTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
@@ -86,8 +87,9 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
         let row = self.list[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TableTabCell
         cell.movieTitle.text = row.title
-        cell.movieGrade.text = "\(row.grade!)"
-        // 옵셔널 강제 해제 말고 다른방법??
+        
+        let age = "age" + String(row.grade!)
+        cell.movieGrade.image = UIImage(named: age)
         cell.movieSubTitle.text = "평점 : \(row.user_rating!) 예매순위 : \(row.reservation_grade!) 예매율 : \(row.reservation_rate!)"
         cell.movieReleaseDate.text = "개봉일 : \(row.date!)"
         cell.movieImage.image = row.movieImage

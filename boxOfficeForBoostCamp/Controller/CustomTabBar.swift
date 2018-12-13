@@ -13,8 +13,9 @@ class CustomTabBar: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
-        self.tabBar.barTintColor = .blue
-        self.tabBar.tintColor = .white        
+        self.tabBar.barTintColor = .barBlue
+        self.tabBar.tintColor = .white
+        self.tabBar.isTranslucent = false
     }
 
     func setupNavigation() {
@@ -41,7 +42,8 @@ extension UIViewController {
     func customNavigation() {
         navigationItem.title = "영화목록"
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = .blue
+        navigationController?.navigationBar.barTintColor = .barBlue
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     

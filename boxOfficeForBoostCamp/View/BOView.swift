@@ -13,8 +13,8 @@ class BOView: UIView {
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         checkAutoLayout()
-
-        backgroundColor = getRandomColor()
+        backgroundColor = .white
+//        backgroundColor = getRandomColor()
 
     }
 

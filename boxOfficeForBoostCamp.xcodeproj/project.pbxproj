@@ -83,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				E91F2E8A21B7CC390090582B /* AppDelegate.swift */,
+				E99BF21321BC34920020965D /* extension.swift */,
 				E99BF22721C005790020965D /* note */,
 				E99BF22621C005220020965D /* Model */,
 				E99BF21721BD70190020965D /* View */,
@@ -91,7 +92,6 @@
 				E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */,
 				E91F2E9921B7CC3A0090582B /* Info.plist */,
 				E91F2E9121B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld */,
-				E99BF21321BC34920020965D /* extension.swift */,
 			);
 			path = boxOfficeForBoostCamp;
 			sourceTree = "<group>";

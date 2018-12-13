@@ -11,14 +11,12 @@ import UIKit
 class MovieSynopsisCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .gray
+        backgroundColor = .white
         setupSynopsisView()
         
     }
     
     // 섹션2 : 줄거리 뷰
-    let synopsisView = BOView()
-    let movieSynopsisTitle = BOLabel(title: "줄거리", size: 20)
     let movieSynopsis = BOLabel(title: """
 저승 법에 의하면, 모든 인간은 사후 49일 동안 7번의 재판을 거쳐야만 한다. 살인, 나태, 거짓, 불의, 배신, 폭력, 천륜 7개의 지옥에서 7번의 재판을 무사히 통과한 망자만이 환생하여 새로운 삶을 시작할 수 있다.
 
@@ -35,14 +33,11 @@ class MovieSynopsisCell: UITableViewCell {
     
     
     func setupSynopsisView() {
-        sectionLayout(sectionView: synopsisView)
-        headerLayout(sectionView: synopsisView, header: movieSynopsisTitle)
-        
-        synopsisView.addSubview(movieSynopsis)
-        movieSynopsis.leftAnchor.constraint(equalTo: synopsisView.leftAnchor, constant: 8).isActive = true
-        movieSynopsis.topAnchor.constraint(equalTo: movieSynopsisTitle.bottomAnchor, constant: 2).isActive = true
-        movieSynopsis.rightAnchor.constraint(equalTo: synopsisView.rightAnchor).isActive = true
-        movieSynopsis.bottomAnchor.constraint(equalTo: synopsisView.bottomAnchor).isActive = true
+        contentView.addSubview(movieSynopsis)
+        movieSynopsis.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8).isActive = true
+        movieSynopsis.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        movieSynopsis.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8).isActive = true
+        movieSynopsis.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     
     

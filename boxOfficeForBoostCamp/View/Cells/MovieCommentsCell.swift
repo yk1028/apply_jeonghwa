@@ -11,7 +11,7 @@ import UIKit
 class MovieCommentsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .gray
+        backgroundColor = .white
         setupCommentsView()
         
     }
@@ -29,14 +29,17 @@ class MovieCommentsCell: UITableViewCell {
     let commentContents = BOLabel(title: "음 이 영화는요 10점 만점에 9점을 줄 수 있겠구요. 아주 재밌게 봤습니다.", size: 16)
     let userThumb: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .black
+        imageView.image = UIImage(named: "userProfile")
+        imageView.setImageColor(color: .userProfile)
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     func setupCommentsView() {
         sectionLayout(sectionView: commentsView)
-        
+//        headerLayout(sectionView: commentsView, header: commentsTitle)
+
         // 한줄평(섹션 헤더)을 구현해야 함...
 //        headerLayout(sectionView: commentsView, header: commentsTitle)
         

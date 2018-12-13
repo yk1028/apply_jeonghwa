@@ -13,9 +13,9 @@ extension UITableViewCell {
     func sectionLayout(sectionView: UIView) {
         contentView.addSubview(sectionView)
         sectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        sectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        sectionView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         sectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        sectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        sectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
     }
     func headerLayout(sectionView: UIView, header: UIView){
         sectionView.addSubview(header)
@@ -48,9 +48,15 @@ extension UIImageView {
 
 extension UIColor {
     
+    
     static var starYellow: UIColor { return UIColor.init(red: 240, green: 155, blue: 64)}
     static var starGray: UIColor { return UIColor.init(red: 234, green: 234, blue: 234)}
     
+    static var barBlue: UIColor { return UIColor.init(red: 90, green: 108, blue: 190)}
+    
+    static var detailCellBackground: UIColor { return UIColor.init(red: 205, green: 205, blue: 205)}
+    static var userProfile: UIColor { return UIColor.init(red: 193, green: 193, blue: 193)}
+
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")
@@ -67,4 +73,8 @@ extension UIColor {
         )
     }
 }
+
+
+
+
 

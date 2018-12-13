@@ -11,7 +11,7 @@ import UIKit
 class MovieActorCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .gray
+        backgroundColor = .detailCellBackground
         setupActorView()
     }
     

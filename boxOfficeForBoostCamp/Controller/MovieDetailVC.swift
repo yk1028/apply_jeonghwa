@@ -40,7 +40,8 @@ class MovieDetailVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         movieDetailTable.translatesAutoresizingMaskIntoConstraints = false
-        
+        movieDetailTable.separatorStyle = UITableViewCell.SeparatorStyle.none
+
         customNavigation()
         navigationItem.title = movieTitleFromList
         configureMovieDetailTable()
