@@ -22,17 +22,12 @@ class TableTabVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("TableTabVC : viewDidLoad")
         customNavigation()
         customNavigationRightBarButton()
         setTableView()
         getMoviesRequestSample()
         
-        print("나온다")
-        print("나온다")
-
-        
-        print("테이블뷰 \(list)")
-
         }
     
     
@@ -72,7 +67,7 @@ class TableTabVC: UIViewController {
                 mvo.reservation_rate = r["reservation_rate"] as? Double
                 mvo.user_rating = r["user_rating"] as? Double
                 mvo.date = r["date"] as? String
-                mvo.id = r["title"] as? String
+                mvo.id = r["id"] as? String
                 
                 let url: URL! = URL(string: mvo.thumb!)
                 let imageData = try! Data(contentsOf: url)
@@ -112,6 +107,9 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("선택된 행: \(indexPath.row)")
         self.navigationController?.pushViewController(MovieDetailVC(), animated: true)
+        
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        ad?.movieId = list[indexPath.row].id
     }
     
 }

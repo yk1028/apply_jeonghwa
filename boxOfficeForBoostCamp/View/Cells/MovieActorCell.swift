@@ -36,7 +36,7 @@ class MovieActorCell: UITableViewCell {
         actorView.addSubview(movieDirectorlist)
         movieDirectorlist.leftAnchor.constraint(equalTo: movieDirector.rightAnchor, constant: 8).isActive = true
         movieDirectorlist.topAnchor.constraint(equalTo: movieDirector.topAnchor).isActive = true
-        movieDirectorlist.rightAnchor.constraint(equalTo: actorView.rightAnchor).isActive = true
+        movieDirectorlist.rightAnchor.constraint(equalTo: actorView.rightAnchor, constant: -8).isActive = true
         
         actorView.addSubview(movieActor)
         movieActor.leftAnchor.constraint(equalTo: movieDirector.leftAnchor).isActive = true
@@ -46,7 +46,7 @@ class MovieActorCell: UITableViewCell {
         actorView.addSubview(movieActorlist)
         movieActorlist.leftAnchor.constraint(equalTo: movieDirectorlist.leftAnchor).isActive = true
         movieActorlist.topAnchor.constraint(equalTo: movieActor.topAnchor).isActive = true
-        movieActorlist.rightAnchor.constraint(equalTo: actorView.rightAnchor).isActive = true
+        movieActorlist.rightAnchor.constraint(equalTo: movieDirectorlist.rightAnchor).isActive = true
         movieActorlist.bottomAnchor.constraint(equalTo: actorView.bottomAnchor, constant: -8).isActive = true
 
     }

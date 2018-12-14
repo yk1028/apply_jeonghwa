@@ -9,18 +9,15 @@
 import UIKit
 
 class MovieDetailVC: UIViewController {
-    let movieTitleFromList = "영화제목목목목"
-
-    let urlId = "5a54c286e8a71d136fb5378e"
+    var urlId = "5a54c286e8a71d136fb5378e"
 
     let detailCellId = "detailCellId"
     let synopsisCellId = "synopsisCellId"
     let actorCellId = "actorCellId"
     let commentsCellId = "commentsCellId"
-
     
-    let sectionHeader = ["", "줄거리", "감독/출연", "한줄평"]
 
+   
     
     // VIEW
     let movieDetailTable = UITableView()
@@ -43,14 +40,21 @@ class MovieDetailVC: UIViewController {
         movieDetailTable.separatorStyle = UITableViewCell.SeparatorStyle.none
 
         customNavigation()
-        navigationItem.title = movieTitleFromList
         configureMovieDetailTable()
         
+        getMovieIdFromAppDelegate()
         getMovieVORequest()
         getCommentsVORequest()
+        navigationItem.title = infoFromList.title
         }
     
     
+    func getMovieIdFromAppDelegate() {
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        if let id = ad?.movieId {
+            urlId = id
+        }
+    }
     
     func configureMovieDetailTable() {
         view.addSubview(movieDetailTable)
@@ -136,13 +140,8 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
         switch section {
-        case 0:
-            return 1
-        case 1:
-            return 1
-        case 2:
+        case 0, 1, 2:
             return 1
         case 3:
             return 4
@@ -165,7 +164,7 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.movieSubTitle.text = "\(infoFromList.genre!)/\(infoFromList.duration!)분"
                 cell.movieUserRating.text = "\(infoFromList.user_rating!)"
                 cell.movieReservationRate.text = "\(infoFromList.reservation_grade!)위 \(infoFromList.reservation_rate!)%"
-//                cell.movieUserRatingStar.userRating = 10
+//                cell.movieUserRatingStar. = StarView(starSize: 20, userRating: 7 )
                 cell.movieAudience.text = "\(infoFromList.audience!)"
                 return cell
             

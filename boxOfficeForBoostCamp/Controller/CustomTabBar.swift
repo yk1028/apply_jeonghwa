@@ -18,7 +18,7 @@ class CustomTabBar: UITabBarController {
         self.tabBar.barTintColor = .barBlue
         self.tabBar.tintColor = .white
         self.tabBar.isTranslucent = false
-
+        print("네비게이션 탭바 생성")
 
 
     }
