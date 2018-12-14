@@ -19,14 +19,27 @@ class TableTabVC: UIViewController {
     }()
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customNavigation()
         customNavigationRightBarButton()
+        setTableView()
+        getMoviesRequestSample()
         
+        print("나온다")
+        print("나온다")
+
+        
+        print("테이블뷰 \(list)")
+
+        }
+    
+    
+    func setTableView() {
         view.addSubview(tabTableView)
         tabTableView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         tabTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
         tabTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         tabTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
@@ -35,12 +48,8 @@ class TableTabVC: UIViewController {
         tabTableView.delegate = self
         tabTableView.dataSource = self
         tabTableView.register(TableTabCell.self, forCellReuseIdentifier: cellId)
+    }
 
-        getMoviesRequestSample()
-        
-        
-        }
-    
     func getMoviesRequestSample() {
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=1") else { return }
         
@@ -73,8 +82,6 @@ class TableTabVC: UIViewController {
             }
         }catch { NSLog("Parse Error!!")}
     }
-
-
 }
 
 extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
@@ -89,7 +96,7 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
         cell.movieTitle.text = row.title
         
         let age = "age" + String(row.grade!)
-        cell.movieGrade.image = UIImage(named: age)
+            cell.movieGrade.image = UIImage(named: age)
         cell.movieSubTitle.text = "평점 : \(row.user_rating!) 예매순위 : \(row.reservation_grade!) 예매율 : \(row.reservation_rate!)"
         cell.movieReleaseDate.text = "개봉일 : \(row.date!)"
         cell.movieImage.image = row.movieImage

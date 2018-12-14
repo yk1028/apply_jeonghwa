@@ -48,10 +48,26 @@ class MovieDetailVC: UIViewController {
         
         getMovieVORequest()
         getCommentsVORequest()
-        
         }
     
     
+    
+    func configureMovieDetailTable() {
+        view.addSubview(movieDetailTable)
+        movieDetailTable.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+        movieDetailTable.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        movieDetailTable.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        movieDetailTable.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+        
+        movieDetailTable.delegate = self
+        movieDetailTable.dataSource = self
+        movieDetailTable.register(MovieDetailCell.self, forCellReuseIdentifier: detailCellId)
+        movieDetailTable.register(MovieSynopsisCell.self, forCellReuseIdentifier: synopsisCellId)
+        movieDetailTable.register(MovieActorCell.self, forCellReuseIdentifier: actorCellId)
+        movieDetailTable.register(MovieCommentsCell.self, forCellReuseIdentifier: commentsCellId)
+
+    }
+
     func getMovieVORequest() {
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movie?id=\(urlId)") else { return }
         
@@ -80,34 +96,12 @@ class MovieDetailVC: UIViewController {
             let url: URL! = URL(string: infoFromList.image!)
             let imageData = try! Data(contentsOf: url)
             infoFromList.movieImageLarge = UIImage(data:imageData)
-            print("나온다")
-            print("나온다")
-            print("나온다")
-            print("나온다")
 
-            print("이것이 결과다 \(infoFromList)")
         }catch { NSLog("Parse Error!!")}
         
         
     }
-    
-    func configureMovieDetailTable() {
-        view.addSubview(movieDetailTable)
-        movieDetailTable.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
-        movieDetailTable.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        movieDetailTable.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        movieDetailTable.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
-        
-        movieDetailTable.delegate = self
-        movieDetailTable.dataSource = self
-        movieDetailTable.register(MovieDetailCell.self, forCellReuseIdentifier: detailCellId)
-        movieDetailTable.register(MovieSynopsisCell.self, forCellReuseIdentifier: synopsisCellId)
-        movieDetailTable.register(MovieActorCell.self, forCellReuseIdentifier: actorCellId)
-        movieDetailTable.register(MovieCommentsCell.self, forCellReuseIdentifier: commentsCellId)
 
-    }
-    
-    
     func getCommentsVORequest() {
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/comments?movie_id=\(urlId)") else { return }
         
@@ -131,9 +125,6 @@ class MovieDetailVC: UIViewController {
             }
         }catch { NSLog("Parse Error!!")}
     }
-    
-
-    
 }
 
 extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
@@ -163,24 +154,42 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         switch (indexPath.section) {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: detailCellId, for: indexPath) as! MovieDetailCell
                 cell.selectionStyle = .none
+                cell.movieImage.image = infoFromList.movieImageLarge
+                cell.movieTitle.text = infoFromList.title
+                cell.movieGrade.text = String(infoFromList.grade!)
+                cell.movieDate.text = "\(infoFromList.date!)개봉"
+                cell.movieSubTitle.text = "\(infoFromList.genre!)/\(infoFromList.duration!)분"
+                cell.movieUserRating.text = "\(infoFromList.user_rating!)"
+                cell.movieReservationRate.text = "\(infoFromList.reservation_grade!)위 \(infoFromList.reservation_rate!)%"
+//                cell.movieUserRatingStar.userRating = 10
+                cell.movieAudience.text = "\(infoFromList.audience!)"
                 return cell
             
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: synopsisCellId, for: indexPath) as! MovieSynopsisCell
                 cell.selectionStyle = .none
+                cell.movieSynopsis.text = infoFromList.synopsis
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: actorCellId, for: indexPath) as! MovieActorCell
                 cell.selectionStyle = .none
+                cell.movieDirectorlist.text = infoFromList.director
+                cell.movieActorlist.text = infoFromList.actor
                 return cell
             case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: commentsCellId, for: indexPath) as! MovieCommentsCell
+                let row = self.comments[indexPath.row]
+                let cell = tableView.dequeueReusableCell(withIdentifier: commentsCellId, for: indexPath) as! MovieCommentsCell
                 cell.selectionStyle = .none
+
+                cell.userName.text = row.writer
+//                cell.userRatingStar.text = row.writer
+                cell.commentTime.text = "\(row.timestamp!)"
+                cell.commentContents.text = row.contents
+
 
             return cell
             
@@ -191,30 +200,28 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
 
         }
 
-//
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//        let titleForHeader = UILabel()
-//
-//        switch section {
-//        case 0:
-//            titleForHeader.text = "첫번째 섹션"
-//        case 1:
-//            titleForHeader.text = "두번째 섹션"
-//        case 2:
-//            titleForHeader.text = "세번째 섹션"
-//        case 3:
-//            titleForHeader.text = "네번째 섹션"
-//        default:
-//            titleForHeader.text = "섹션"
-//
-//       }
-//        return titleForHeader
-//    }
-//
-//
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let titleForHeader = UILabel()
+        titleForHeader.font = UIFont.systemFont(ofSize: 22)
+        
+        switch section {
+        case 1:
+            titleForHeader.text = "줄거리"
+        case 2:
+            titleForHeader.text = "감독/출연"
+        case 3:
+            titleForHeader.text = "한줄평"
+        default:
+            break
+
+       }
+        return titleForHeader
+    }
+
+
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 50
+//        return 30
 //    }
 
 }

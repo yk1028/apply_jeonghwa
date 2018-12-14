@@ -16,13 +16,14 @@ class StarView: UIView {
     let star5 = UIImageView()
     var fiveStar : [UIImageView] = []
     let starHalf = UIImageView()
+    var userRating: Double = 0
+
 
     init(frame: CGRect = .zero, starSize: CGFloat = 50, userRating: Double = 0){
         super.init(frame: frame)
         checkAutoLayout() // translatesAutoresizingMaskIntoConstraints = false
-        
         fiveStar = [star1 ,star2, star3, star4, star5]
-
+        self.userRating = userRating
         let halfLocation: CGFloat = CGFloat(ceil(floor(userRating) / 2)) // 반쪽 별이 그려질 위치
         let fullLocation: Int = Int(floor(userRating / 2)) // 노란 별이 그려지는 개수
         var i = 0

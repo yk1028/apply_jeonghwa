@@ -19,24 +19,22 @@ class MovieActorCell: UITableViewCell {
     
     
     let actorView = BOView() // SectionView
-    let movieActorTitle = BOLabel(title: "감독/출연", size: 20)
-    let movieDirector = BOLabel(title: "감독", size: 16, textAlign: .right)
-    let movieDirectorlist = BOLabel(title: "강감독", size: 16)
-    let movieActor = BOLabel(title: "출연", size: 16, textAlign: .right)
-    let movieActorlist = BOLabel(title: "마배우, 윤배우", size: 16)
+    let movieDirector = BOLabel(title: "감독", size: 16, textAlign: .left)
+    let movieDirectorlist = BOLabel(size: 16)
+    let movieActor = BOLabel(title: "출연", size: 16, textAlign: .left)
+    let movieActorlist = BOLabel(size: 16)
 
 
     func setupActorView() {
         sectionLayout(sectionView: actorView)
-        headerLayout(sectionView: actorView, header: movieActorTitle)
         
         actorView.addSubview(movieDirector)
-        movieDirector.leftAnchor.constraint(equalTo: actorView.leftAnchor, constant: 16).isActive = true
-        movieDirector.topAnchor.constraint(equalTo: movieActorTitle.bottomAnchor, constant: 8).isActive = true
-        movieDirector.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        movieDirector.leftAnchor.constraint(equalTo: actorView.leftAnchor, constant: 22).isActive = true
+        movieDirector.topAnchor.constraint(equalTo: actorView.topAnchor, constant: 8).isActive = true
+        movieDirector.widthAnchor.constraint(equalToConstant: 30).isActive = true
         
         actorView.addSubview(movieDirectorlist)
-        movieDirectorlist.leftAnchor.constraint(equalTo: movieDirector.rightAnchor, constant: 16).isActive = true
+        movieDirectorlist.leftAnchor.constraint(equalTo: movieDirector.rightAnchor, constant: 8).isActive = true
         movieDirectorlist.topAnchor.constraint(equalTo: movieDirector.topAnchor).isActive = true
         movieDirectorlist.rightAnchor.constraint(equalTo: actorView.rightAnchor).isActive = true
         
@@ -44,13 +42,12 @@ class MovieActorCell: UITableViewCell {
         movieActor.leftAnchor.constraint(equalTo: movieDirector.leftAnchor).isActive = true
         movieActor.topAnchor.constraint(equalTo: movieDirector.bottomAnchor, constant: 8).isActive = true
         movieActor.rightAnchor.constraint(equalTo: movieDirector.rightAnchor).isActive = true
-        movieActor.bottomAnchor.constraint(equalTo: actorView.bottomAnchor, constant: -8).isActive = true
         
         actorView.addSubview(movieActorlist)
         movieActorlist.leftAnchor.constraint(equalTo: movieDirectorlist.leftAnchor).isActive = true
         movieActorlist.topAnchor.constraint(equalTo: movieActor.topAnchor).isActive = true
         movieActorlist.rightAnchor.constraint(equalTo: actorView.rightAnchor).isActive = true
-        movieActorlist.bottomAnchor.constraint(equalTo: movieActor.bottomAnchor).isActive = true
+        movieActorlist.bottomAnchor.constraint(equalTo: actorView.bottomAnchor, constant: -8).isActive = true
 
     }
     

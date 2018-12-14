@@ -23,10 +23,10 @@ class MovieCommentsCell: UITableViewCell {
     // 섹션4 : 한줄평 뷰(테이블)
     let commentsView = BOView() // SectionView
     let commentsTitle = BOLabel(title: "한줄평", size: 20)
-    let userName = BOLabel(title: "닉네임", size: 16)
+    let userName = BOLabel(size: 16)
     let userRatingStar = StarView(starSize: 16, userRating: 7.98)
-    let commentTime = BOLabel(title: "2000-00-00 00:00:00", size: 16)
-    let commentContents = BOLabel(title: "음 이 영화는요 10점 만점에 9점을 줄 수 있겠구요. 아주 재밌게 봤습니다.", size: 16)
+    let commentTime = BOLabel(size: 16)
+    let commentContents = BOLabel(size: 16)
     let userThumb: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "userProfile")
@@ -38,10 +38,6 @@ class MovieCommentsCell: UITableViewCell {
     
     func setupCommentsView() {
         sectionLayout(sectionView: commentsView)
-//        headerLayout(sectionView: commentsView, header: commentsTitle)
-
-        // 한줄평(섹션 헤더)을 구현해야 함...
-//        headerLayout(sectionView: commentsView, header: commentsTitle)
         
         commentsView.addSubview(userThumb)
         userThumb.leftAnchor.constraint(equalTo: commentsView.leftAnchor, constant: 8).isActive = true
@@ -67,7 +63,6 @@ class MovieCommentsCell: UITableViewCell {
         commentContents.topAnchor.constraint(equalTo: commentTime.bottomAnchor, constant: 8).isActive = true
         commentContents.rightAnchor.constraint(equalTo: commentsView.rightAnchor, constant: 8).isActive = true
         commentContents.bottomAnchor.constraint(equalTo: commentsView.bottomAnchor, constant: -40).isActive = true
-
     }
  
     

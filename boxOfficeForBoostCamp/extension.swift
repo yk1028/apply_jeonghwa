@@ -10,18 +10,13 @@ import UIKit
 
 
 extension UITableViewCell {
+    // 섹션 끝나는 하단에 수평 바 생성
     func sectionLayout(sectionView: UIView) {
         contentView.addSubview(sectionView)
         sectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         sectionView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         sectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         sectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
-    }
-    func headerLayout(sectionView: UIView, header: UIView){
-        sectionView.addSubview(header)
-        header.leftAnchor.constraint(equalTo: sectionView.leftAnchor, constant: 4).isActive = true
-        header.topAnchor.constraint(equalTo: sectionView.topAnchor, constant: 8).isActive = true
-        header.rightAnchor.constraint(equalTo: sectionView.rightAnchor).isActive = true
     }
 }
 
@@ -47,8 +42,6 @@ extension UIImageView {
 
 
 extension UIColor {
-    
-    
     static var starYellow: UIColor { return UIColor.init(red: 240, green: 155, blue: 64)}
     static var starGray: UIColor { return UIColor.init(red: 234, green: 234, blue: 234)}
     
@@ -73,8 +66,3 @@ extension UIColor {
         )
     }
 }
-
-
-
-
-
