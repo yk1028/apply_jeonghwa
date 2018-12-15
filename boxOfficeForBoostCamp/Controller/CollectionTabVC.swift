@@ -10,6 +10,12 @@ import UIKit
 
 class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    var orderType : Int = 0
+
+    lazy var list: [MoviesVO] = {
+        var datalist = [MoviesVO]()
+        return datalist
+    }()
     
 lazy var tabCollectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
@@ -23,11 +29,52 @@ lazy var tabCollectionView: UICollectionView = {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("CollectionTabVC : viewDidLoad")
         customNavigation()
         customNavigationRightBarButton()
         configureTabCollectionView()
+        getMoviesRequestSample()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("CollectionTabVC : viewWillAppear")
+        tabCollectionView.reloadData()
+    }
+    
+    func getMoviesRequestSample() {
+        
+        guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=\(orderType)") else { return }
+        do {
+            let apiData = try Data(contentsOf: url)
+            //            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
+            //            NSLog("API Result=\( log )")
+            let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! NSDictionary
+            
+            let movie = apiDictionary["movies"] as! NSArray
+            
+            for row in movie {
+                let r = row as! NSDictionary
+                let mvo = MoviesVO()
+                
+                mvo.grade = r["grade"] as? Int
+                mvo.thumb = r["thumb"] as? String
+                mvo.reservation_grade = r["reservation_grade"] as? Int
+                mvo.title = r["title"] as? String
+                mvo.reservation_rate = r["reservation_rate"] as? Double
+                mvo.user_rating = r["user_rating"] as? Double
+                mvo.date = r["date"] as? String
+                mvo.id = r["id"] as? String
+                
+                let url: URL! = URL(string: mvo.thumb!)
+                let imageData = try! Data(contentsOf: url)
+                mvo.movieImage = UIImage(data:imageData)
+                
+                self.list.append(mvo)
+                
+            }
+        }catch { NSLog("Parse Error!!")}
+    }
+
     
     private func configureTabCollectionView() {
         view.addSubview(tabCollectionView)
@@ -44,16 +91,33 @@ extension CollectionTabVC {
     
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return self.list.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let row = self.list[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! TabCollectionCell
+        cell.movieTitle.text = row.title
+        let age = "age" + String(row.grade!)
+        cell.movieGrade.image = UIImage(named: age)
+        cell.movieSubTitle.text  = "\(row.reservation_grade!)위(\(row.user_rating!)) / \(row.reservation_rate!)%"
+        cell.movieImage.image = row.movieImage
+        cell.movieReleaseDate.text = "\(row.date!)"
+
+
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width / 2 - 10, height: UIScreen.main.bounds.height / 2)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.navigationController?.pushViewController(MovieDetailVC(), animated: true)
+        
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        ad?.movieId = list[indexPath.row].id
     }
 
 }

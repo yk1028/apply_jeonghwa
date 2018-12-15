@@ -12,13 +12,29 @@ import UIKit
 class TableTabVC: UIViewController {
     let tabTableView = UITableView()
     let cellId = "cellId"
-    
+    var orderType : Int = 0 {
+        didSet {
+            getMoviesRequestSample()
+            print("리스트 출력")
+            print("오더타입 \(orderType)")
+            print("리스트 출력")
+
+            print(list[0].title!)
+        }
+        
+    }
     lazy var list: [MoviesVO] = {
         var datalist = [MoviesVO]()
         return datalist
     }()
     
-    
+    func getMovieOrderTypeFromAppDelegate() {
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        if let type = ad?.movieOrderType {
+            orderType = type
+        }
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +42,26 @@ class TableTabVC: UIViewController {
         customNavigation()
         customNavigationRightBarButton()
         setTableView()
-        getMoviesRequestSample()
-        
+        getMoviesRequestSample()        
         }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("TableTabVC : viewWillAppear")
+        print("orderType is \(orderType)")
+
+        tabTableView.reloadData()
+        print(list[0].title!)
+
+
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("TableTabVC : viewDidAppear")
+
+    }
+    
+
+
     func setTableView() {
         view.addSubview(tabTableView)
         tabTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,12 +77,12 @@ class TableTabVC: UIViewController {
     }
 
     func getMoviesRequestSample() {
-        guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=1") else { return }
-        
+
+        guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=\(orderType)") else { return }
         do {
             let apiData = try Data(contentsOf: url)
-            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
-            NSLog("API Result=\( log )")
+//            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
+//            NSLog("API Result=\( log )")
             let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! NSDictionary
             
             let movie = apiDictionary["movies"] as! NSArray
@@ -74,10 +105,11 @@ class TableTabVC: UIViewController {
                 mvo.movieImage = UIImage(data:imageData)
                 
                 self.list.append(mvo)
+
             }
         }catch { NSLog("Parse Error!!")}
     }
-}
+    }
 
 extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,16 +119,21 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let row = self.list[indexPath.row]
+
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TableTabCell
         cell.movieTitle.text = row.title
-        
         let age = "age" + String(row.grade!)
-            cell.movieGrade.image = UIImage(named: age)
+        cell.movieGrade.image = UIImage(named: age)
         cell.movieSubTitle.text = "평점 : \(row.user_rating!) 예매순위 : \(row.reservation_grade!) 예매율 : \(row.reservation_rate!)"
         cell.movieReleaseDate.text = "개봉일 : \(row.date!)"
         cell.movieImage.image = row.movieImage
-        
+        print("cellForRowAt이 작동한다")
         return cell
+        
+        
+        
+        
+        
     }
     
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -112,4 +149,9 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
         ad?.movieId = list[indexPath.row].id
     }
     
+}
+
+
+extension UIViewController {
+
 }

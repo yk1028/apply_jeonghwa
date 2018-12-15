@@ -24,7 +24,7 @@ class MovieCommentsCell: UITableViewCell {
     let commentsView = BOView() // SectionView
     let commentsTitle = BOLabel(title: "한줄평", size: 20)
     let userName = BOLabel(size: 16)
-    let userRatingStar = StarView(starSize: 16, userRating: 7.98)
+    let userRatingStar = UIView()
     let commentTime = BOLabel(size: 16)
     let commentContents = BOLabel(size: 16)
     let userThumb: UIImageView = {
@@ -50,6 +50,7 @@ class MovieCommentsCell: UITableViewCell {
         userName.topAnchor.constraint(equalTo: userThumb.topAnchor).isActive = true
        
         commentsView.addSubview(userRatingStar)
+        userRatingStar.translatesAutoresizingMaskIntoConstraints = false
         userRatingStar.leftAnchor.constraint(equalTo: userName.rightAnchor, constant: 8).isActive = true
         userRatingStar.topAnchor.constraint(equalTo: userThumb.topAnchor).isActive = true
         

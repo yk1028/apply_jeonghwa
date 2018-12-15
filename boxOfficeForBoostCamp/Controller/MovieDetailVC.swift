@@ -48,7 +48,6 @@ class MovieDetailVC: UIViewController {
         navigationItem.title = infoFromList.title
         }
     
-    
     func getMovieIdFromAppDelegate() {
         let ad = UIApplication.shared.delegate as? AppDelegate
         if let id = ad?.movieId {
@@ -77,8 +76,8 @@ class MovieDetailVC: UIViewController {
         
         do {
             let apiData = try Data(contentsOf: url)
-            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
-            NSLog("API Result=\( log )")
+//            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
+//            NSLog("API Result=\( log )")
             
             let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! [String : Any]
             
@@ -111,8 +110,8 @@ class MovieDetailVC: UIViewController {
         
         do {
             let apiData = try Data(contentsOf: url)
-            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
-            NSLog("API Result=\( log )")
+//            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
+//            NSLog("API Result=\( log )")
             
             let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! NSDictionary
             let comments = apiDictionary["comments"] as! NSArray
@@ -162,9 +161,11 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.movieGrade.text = String(infoFromList.grade!)
                 cell.movieDate.text = "\(infoFromList.date!)개봉"
                 cell.movieSubTitle.text = "\(infoFromList.genre!)/\(infoFromList.duration!)분"
-                cell.movieUserRating.text = "\(infoFromList.user_rating!)"
                 cell.movieReservationRate.text = "\(infoFromList.reservation_grade!)위 \(infoFromList.reservation_rate!)%"
-//                cell.movieUserRatingStar. = StarView(starSize: 20, userRating: 7 )
+                cell.movieUserRating.text = "\(infoFromList.user_rating!)"
+                cell.movieUserRatingStar.addSubview(StarView(starSize: 13, userRating: infoFromList.user_rating!))
+                print("유저레이팅")
+                print(cell.movieUserRatingStar)
                 cell.movieAudience.text = "\(infoFromList.audience!)"
                 return cell
             
@@ -186,6 +187,8 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
 
                 cell.userName.text = row.writer
 //                cell.userRatingStar.text = row.writer
+                cell.userRatingStar.addSubview(StarView(starSize: 13, userRating: row.rating!))
+
                 cell.commentTime.text = "\(row.timestamp!)"
                 cell.commentContents.text = row.contents
 

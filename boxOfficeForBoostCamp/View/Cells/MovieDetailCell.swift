@@ -43,7 +43,7 @@ class MovieDetailCell: UITableViewCell {
     let movieReservationRate = BOLabel(size: 12, textAlign: .center)
     let movieUserRatingTitle = BOLabel(title: "평점", size: 14, textAlign: .center)
     let movieUserRating = BOLabel(size: 12, textAlign: .center)
-    var movieUserRatingStar = StarView(starSize: 16, userRating: 3)
+    var movieUserRatingStar = UIView()
     let movieAudienceTitle = BOLabel(title: "누적관객수", size: 14, textAlign: .center)
     let movieAudience = BOLabel(size: 12, textAlign: .center)
     
@@ -111,6 +111,7 @@ class MovieDetailCell: UITableViewCell {
         movieUserRating.rightAnchor.constraint(equalTo: InfoViewBottom2.rightAnchor).isActive = true
         
         InfoViewBottom2.addSubview(movieUserRatingStar)
+        movieUserRatingStar.translatesAutoresizingMaskIntoConstraints = false
         movieUserRatingStar.topAnchor.constraint(equalTo: movieUserRating.bottomAnchor, constant: 2).isActive = true
         movieUserRatingStar.bottomAnchor.constraint(equalTo: InfoViewBottom2.bottomAnchor, constant: -6).isActive = true
         movieUserRatingStar.centerXAnchor.constraint(equalTo: InfoViewBottom2.centerXAnchor, constant: -40).isActive = true //constant = starSize * 2.5
