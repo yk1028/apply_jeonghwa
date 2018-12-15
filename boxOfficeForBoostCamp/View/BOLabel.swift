@@ -10,7 +10,7 @@ import UIKit
 
 class BOLabel: UILabel {
     
-    init(title: String = "default text", color: UIColor = .black, size: CGFloat = 16, frame: CGRect = .zero, textAlign: NSTextAlignment = .left) {
+    init(title: String = "default text", color: UIColor = .black, size: CGFloat = 16, frame: CGRect = .zero, textAlign: NSTextAlignment = .left, lines: Int = 0) {
         super.init(frame: frame)
         checkAutoLayout()
         
@@ -18,7 +18,7 @@ class BOLabel: UILabel {
         self.textColor = color
         self.textAlignment = textAlign
         self.font = UIFont.systemFont(ofSize: size)
-        self.numberOfLines = 0
+        self.numberOfLines = lines
     }
     
     required init?(coder aDecoder: NSCoder) {

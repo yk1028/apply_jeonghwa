@@ -164,9 +164,7 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.movieReservationRate.text = "\(infoFromList.reservation_grade!)위 \(infoFromList.reservation_rate!)%"
                 cell.movieUserRating.text = "\(infoFromList.user_rating!)"
                 cell.movieUserRatingStar.addSubview(StarView(starSize: 13, userRating: infoFromList.user_rating!))
-                print("유저레이팅")
-                print(cell.movieUserRatingStar)
-                cell.movieAudience.text = "\(infoFromList.audience!)"
+                cell.movieAudience.text = "\(infoFromList.audience!.withComma)"
                 return cell
             
             case 1:
@@ -181,15 +179,12 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.movieActorlist.text = infoFromList.actor
                 return cell
             case 3:
-                let row = self.comments[indexPath.row]
                 let cell = tableView.dequeueReusableCell(withIdentifier: commentsCellId, for: indexPath) as! MovieCommentsCell
                 cell.selectionStyle = .none
-
+                let row = self.comments[indexPath.row]
                 cell.userName.text = row.writer
-//                cell.userRatingStar.text = row.writer
                 cell.userRatingStar.addSubview(StarView(starSize: 13, userRating: row.rating!))
-
-                cell.commentTime.text = "\(row.timestamp!)"
+                cell.commentTime.text = convertFromUnix(timeStamp: row.timestamp!)
                 cell.commentContents.text = row.contents
 
 

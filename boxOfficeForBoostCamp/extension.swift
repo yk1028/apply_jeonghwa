@@ -66,3 +66,26 @@ extension UIColor {
         )
     }
 }
+
+
+extension Int {
+    var withComma: String {
+        let decimalFormatter = NumberFormatter()
+        decimalFormatter.numberStyle = NumberFormatter.Style.decimal
+        decimalFormatter.groupingSeparator = ","
+        decimalFormatter.groupingSize = 3
+        
+        return decimalFormatter.string(from: self as NSNumber)!
+    }
+}
+
+extension UIViewController {
+    func convertFromUnix(timeStamp : Double) -> String {
+        let date = Date(timeIntervalSince1970: timeStamp)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let strDate = dateFormatter.string(from: date)
+        return strDate
+    }
+}
+

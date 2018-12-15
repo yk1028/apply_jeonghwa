@@ -109,7 +109,7 @@ extension CollectionTabVC {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width / 2 - 10, height: UIScreen.main.bounds.height / 2)
+        return CGSize(width: UIScreen.main.bounds.width / 2 - 10, height: UIScreen.main.bounds.height / 2 + 24)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -152,7 +152,7 @@ class TabCollectionCell: UICollectionViewCell {
     }()
 
     
-    let movieTitle = BOLabel(title: "영화 제목", size: 22, textAlign: .center)
+    let movieTitle = BOLabel(title: "영화 제목", size: 22, textAlign: .center, lines: 2)
     let movieSubTitle = BOLabel(title: "0위(00.00) / 00.0%", size: 14, textAlign: .center)
     let movieReleaseDate = BOLabel(title: "2000-11-11", size: 12, textAlign: .center)
     
@@ -186,6 +186,8 @@ class TabCollectionCell: UICollectionViewCell {
         movieReleaseDate.leftAnchor.constraint(equalTo: movieImage.leftAnchor).isActive = true
         movieReleaseDate.topAnchor.constraint(equalTo: movieSubTitle.bottomAnchor, constant: 8).isActive = true
         movieReleaseDate.rightAnchor.constraint(equalTo: movieImage.rightAnchor).isActive = true
+//        movieReleaseDate.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+
     }
     
     
