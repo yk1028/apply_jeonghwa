@@ -9,8 +9,8 @@
 import UIKit
 
 class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    var orderType : Int = 0
+
+    let vc = TabAndCollection()
 
     lazy var tabCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -22,75 +22,20 @@ class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UIC
         return collectionView
     }()
     
-    lazy var list: [MoviesVO] = {
-        var datalist = [MoviesVO]()
-        return datalist
-    }()
-    
-    lazy var refresher: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .gray
-        refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
-        return refreshControl
-    }()
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         print("CollectionTabVC : viewDidLoad")
         customNavigation()
         configureTabCollectionView()
-        tabCollectionView.refreshControl = refresher
+        tabCollectionView.refreshControl = vc.refresher
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("CollectionTabVC : viewWillAppear")
-        getMoviesRequestSample()
+        vc.getMoviesRequestSample()
+        self.tabCollectionView.reloadData()
     }
-   
-    
-    func getMoviesRequestSample() {
-        list = []
-        let ad = UIApplication.shared.delegate as? AppDelegate
-        if let type = ad?.movieOrderType {
-            orderType = type
-        }
-        
-        guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=\(orderType)") else { return }
-        do {
-            let apiData = try Data(contentsOf: url)
-            //            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
-            //            NSLog("API Result=\( log )")
-            let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! NSDictionary
-            
-            let movie = apiDictionary["movies"] as! NSArray
-            
-            for row in movie {
-                let r = row as! NSDictionary
-                let mvo = MoviesVO()
-                
-                mvo.grade = r["grade"] as? Int
-                mvo.thumb = r["thumb"] as? String
-                mvo.reservation_grade = r["reservation_grade"] as? Int
-                mvo.title = r["title"] as? String
-                mvo.reservation_rate = r["reservation_rate"] as? Double
-                mvo.user_rating = r["user_rating"] as? Double
-                mvo.date = r["date"] as? String
-                mvo.id = r["id"] as? String
-                
-                let url: URL! = URL(string: mvo.thumb!)
-                let imageData = try! Data(contentsOf: url)
-                mvo.movieImage = UIImage(data:imageData)
-                
-                self.list.append(mvo)
-                self.tabCollectionView.reloadData()
-            }
-        }catch {
-            NSLog("Parse Error!!")
-            networkAlert()
-        }
-    }
-
+  
     private func configureTabCollectionView() {
         view.addSubview(tabCollectionView)
         tabCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -100,37 +45,35 @@ class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UIC
         tabCollectionView.register(TabCollectionCell.self, forCellWithReuseIdentifier: "cellID")
     }
     
-    @objc func requestData() {
-        print("requesting data")
-        getMoviesRequestSample()
-        refresher.endRefreshing()
-    }
-    
     @objc override func btnSort() {
         let movieOrder = UIAlertController(title: "정렬방식 선택", message: "영화를 어떤 순서로 정렬할까요?", preferredStyle: .actionSheet)
         let ad = UIApplication.shared.delegate as? AppDelegate
-        
+
         let typeZero = UIAlertAction(title: "예매율", style: .default) { (_) in
             ad?.movieOrderType = 0
             self.navigationItem.title = "예매율순"
-            self.getMoviesRequestSample()
+            self.vc.getMoviesRequestSample()
+            self.tabCollectionView.reloadData()
+
         }
-        
+
         let typeOne = UIAlertAction(title: "큐레이션", style: .default){ (_) in
             ad?.movieOrderType = 1
             self.navigationItem.title = "큐레이션순"
-            self.getMoviesRequestSample()
-            
+            self.vc.getMoviesRequestSample()
+            self.tabCollectionView.reloadData()
+
         }
-        
+
         let typeTwo = UIAlertAction(title: "개봉일", style: .default){ (_) in
             ad?.movieOrderType = 2
             self.navigationItem.title = "개봉일순"
-            self.getMoviesRequestSample()
+            self.vc.getMoviesRequestSample()
+            self.tabCollectionView.reloadData()
         }
-        
+
         let cancel = UIAlertAction(title: "취소", style: .cancel)
-        
+
         movieOrder.addAction(typeZero)
         movieOrder.addAction(typeOne)
         movieOrder.addAction(typeTwo)
@@ -143,10 +86,10 @@ class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UIC
 
 extension CollectionTabVC {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.list.count
+        return vc.list.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let row = self.list[indexPath.row]
+        let row = vc.list[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! TabCollectionCell
         cell.movieTitle.text = row.title
         let age = "age" + String(row.grade!)
@@ -166,7 +109,7 @@ extension CollectionTabVC {
         self.navigationController?.pushViewController(MovieDetailVC(), animated: true)
         
         let ad = UIApplication.shared.delegate as? AppDelegate
-        ad?.movieId = list[indexPath.row].id
+        ad?.movieId = vc.list[indexPath.row].id
     }
 
 }
@@ -236,8 +179,6 @@ class TabCollectionCell: UICollectionViewCell {
         movieReleaseDate.leftAnchor.constraint(equalTo: movieImage.leftAnchor).isActive = true
         movieReleaseDate.topAnchor.constraint(equalTo: movieSubTitle.bottomAnchor, constant: 8).isActive = true
         movieReleaseDate.rightAnchor.constraint(equalTo: movieImage.rightAnchor).isActive = true
-//        movieReleaseDate.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-
     }
     
     

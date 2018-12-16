@@ -9,7 +9,6 @@
 import UIKit
 
 class CustomTabBar: UITabBarController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigation()
