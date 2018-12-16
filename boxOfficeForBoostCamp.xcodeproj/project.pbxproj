@@ -15,6 +15,7 @@
 		E91F2EA021B7CDAB0090582B /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */; };
 		E91F2EA221B7CDF40090582B /* CollectionTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */; };
 		E98774DE21C66D8600ED0A30 /* TabAndCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98774DD21C66D8600ED0A30 /* TabAndCollection.swift */; };
+		E98774E221C6736B00ED0A30 /* CollectionTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98774E121C6736B00ED0A30 /* CollectionTabCell.swift */; };
 		E99BF20E21BB7A540020965D /* MovieDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF20D21BB7A540020965D /* MovieDetailVC.swift */; };
 		E99BF21021BBA66A0020965D /* MovieVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF20F21BBA66A0020965D /* MovieVO.swift */; };
 		E99BF21221BBD65A0020965D /* TableTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21121BBD65A0020965D /* TableTabCell.swift */; };
@@ -40,6 +41,7 @@
 		E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTabVC.swift; sourceTree = "<group>"; };
 		E98774DD21C66D8600ED0A30 /* TabAndCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabAndCollection.swift; sourceTree = "<group>"; };
+		E98774E121C6736B00ED0A30 /* CollectionTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTabCell.swift; sourceTree = "<group>"; };
 		E99BF20D21BB7A540020965D /* MovieDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVC.swift; sourceTree = "<group>"; };
 		E99BF20F21BBA66A0020965D /* MovieVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVO.swift; sourceTree = "<group>"; };
 		E99BF21121BBD65A0020965D /* TableTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTabCell.swift; sourceTree = "<group>"; };
@@ -94,7 +96,6 @@
 				E91F2E9621B7CC3A0090582B /* LaunchScreen.storyboard */,
 				E91F2E9921B7CC3A0090582B /* Info.plist */,
 				E91F2E9121B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld */,
-				E98774DD21C66D8600ED0A30 /* TabAndCollection.swift */,
 			);
 			path = boxOfficeForBoostCamp;
 			sourceTree = "<group>";
@@ -117,6 +118,7 @@
 				E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */,
 				E99BF20D21BB7A540020965D /* MovieDetailVC.swift */,
 				E91F2E9F21B7CDAB0090582B /* CustomTabBar.swift */,
+				E98774DD21C66D8600ED0A30 /* TabAndCollection.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				E99BF21121BBD65A0020965D /* TableTabCell.swift */,
+				E98774E121C6736B00ED0A30 /* CollectionTabCell.swift */,
 				E99BF21521BCC0580020965D /* MovieDetailCell.swift */,
 				E99BF22121BE7D160020965D /* MovieSynopsisCell.swift */,
 				E99BF22321BE7DE50020965D /* MovieActorCell.swift */,
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E99BF22021BE167A0020965D /* MovieCommentsCell.swift in Sources */,
+				E98774E221C6736B00ED0A30 /* CollectionTabCell.swift in Sources */,
 				E91F2EA021B7CDAB0090582B /* CustomTabBar.swift in Sources */,
 				E99BF23321C125380020965D /* StarRating.swift in Sources */,
 				E91F2E9321B7CC390090582B /* boxOfficeForBoostCamp.xcdatamodeld in Sources */,

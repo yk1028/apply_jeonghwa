@@ -11,7 +11,7 @@ import UIKit
 class TableTabCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews()
+        configureViews()
     }
 
     let movieGradeSize: CGFloat = 20
@@ -41,7 +41,7 @@ class TableTabCell: UITableViewCell {
     let movieSubTitle = BOLabel(title: "평점 : 10 예매순위 : 10 예매율 : 10.10", size: 14)
     let movieReleaseDate = BOLabel(title: "개봉일 : 2000-11-11", size: 12)
 
-    func setupViews() {
+    func configureViews() {
         addSubview(movieImage)
         movieImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
         movieImage.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
