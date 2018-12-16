@@ -10,6 +10,20 @@ import UIKit
 
 class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    lazy var refresher: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .gray
+        refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
+        
+        return refreshControl
+    }()
+    
+    @objc func requestData() {
+        print("requesting data")
+        getMoviesRequestSample()
+        refresher.endRefreshing()
+    }
+    
     var orderType : Int = 0
 
     lazy var list: [MoviesVO] = {
@@ -31,17 +45,21 @@ lazy var tabCollectionView: UICollectionView = {
         super.viewDidLoad()
         print("CollectionTabVC : viewDidLoad")
         customNavigation()
-        customNavigationRightBarButton()
         configureTabCollectionView()
-        getMoviesRequestSample()
+        tabCollectionView.refreshControl = refresher
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("CollectionTabVC : viewWillAppear")
-        tabCollectionView.reloadData()
+        getMoviesRequestSample()
     }
     
     func getMoviesRequestSample() {
+        list = []
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        if let type = ad?.movieOrderType {
+            orderType = type
+        }
         
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=\(orderType)") else { return }
         do {
@@ -70,9 +88,12 @@ lazy var tabCollectionView: UICollectionView = {
                 mvo.movieImage = UIImage(data:imageData)
                 
                 self.list.append(mvo)
-                
+                self.tabCollectionView.reloadData()
             }
-        }catch { NSLog("Parse Error!!")}
+        }catch {
+            NSLog("Parse Error!!")
+            networkAlert()
+        }
     }
 
     
@@ -156,6 +177,7 @@ class TabCollectionCell: UICollectionViewCell {
     let movieSubTitle = BOLabel(title: "0위(00.00) / 00.0%", size: 14, textAlign: .center)
     let movieReleaseDate = BOLabel(title: "2000-11-11", size: 12, textAlign: .center)
     
+    let imageWidth = UIScreen.main.bounds.width / 2 - 40
     
     
     
@@ -164,7 +186,7 @@ class TabCollectionCell: UICollectionViewCell {
         movieImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         movieImage.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         movieImage.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
-        movieImage.heightAnchor.constraint(equalToConstant: 240).isActive = true
+        movieImage.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width / 2 - 32) * CGFloat(2.squareRoot())).isActive = true
         
         addSubview(movieGrade)
         movieGrade.topAnchor.constraint(equalTo: movieImage.topAnchor, constant: 3).isActive = true

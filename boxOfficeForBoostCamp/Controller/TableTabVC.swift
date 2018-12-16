@@ -10,60 +10,51 @@ import UIKit
 
 
 class TableTabVC: UIViewController {
+
+    lazy var refresher: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .gray
+        refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
+
+        return refreshControl
+    }()
+
+    
     let tabTableView = UITableView()
     let cellId = "cellId"
-    var orderType : Int = 0 {
-        didSet {
-            getMoviesRequestSample()
-            print("리스트 출력")
-            print("오더타입 \(orderType)")
-            print("리스트 출력")
-
-            print(list[0].title!)
-        }
-        
-    }
+    var orderType : Int = 0
+    
     lazy var list: [MoviesVO] = {
         var datalist = [MoviesVO]()
         return datalist
     }()
     
-    func getMovieOrderTypeFromAppDelegate() {
-        let ad = UIApplication.shared.delegate as? AppDelegate
-        if let type = ad?.movieOrderType {
-            orderType = type
-        }
-    }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("TableTabVC : viewDidLoad")
         customNavigation()
-        customNavigationRightBarButton()
-        setTableView()
-        getMoviesRequestSample()        
+        configureTableView()
+        tabTableView.refreshControl = refresher
         }
+    
+    @objc func requestData() {
+        print("requesting data")
+        getMoviesRequestSample()
+        refresher.endRefreshing()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         print("TableTabVC : viewWillAppear")
+        getMoviesRequestSample()
         print("orderType is \(orderType)")
-
-        tabTableView.reloadData()
-        print(list[0].title!)
-
-
+        print("viewWillAppear:리스트 개수: \(list.count)")
+        print("viewWillAppear:영화 제목: \(list[0].title)")
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print("TableTabVC : viewDidAppear")
 
-    }
-    
-
-
-    func setTableView() {
+    func configureTableView() {
         view.addSubview(tabTableView)
+        view.backgroundColor = .white
         tabTableView.translatesAutoresizingMaskIntoConstraints = false
         
         tabTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
@@ -76,8 +67,17 @@ class TableTabVC: UIViewController {
         tabTableView.register(TableTabCell.self, forCellReuseIdentifier: cellId)
     }
 
-    func getMoviesRequestSample() {
 
+    func getMoviesRequestSample() {
+//        list 초기화
+        list = []
+        
+//        AppDelegate에서 orderType를 불러온다
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        if let type = ad?.movieOrderType {
+            orderType = type
+        }
+        
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=\(orderType)") else { return }
         do {
             let apiData = try Data(contentsOf: url)
@@ -105,10 +105,14 @@ class TableTabVC: UIViewController {
                 mvo.movieImage = UIImage(data:imageData)
                 
                 self.list.append(mvo)
-
+                self.tabTableView.reloadData()
             }
-        }catch { NSLog("Parse Error!!")}
+        }catch {
+            NSLog("Parse Error!!")
+            networkAlert()
+        }
     }
+    
     }
 
 extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
@@ -126,8 +130,11 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
         cell.movieGrade.image = UIImage(named: age)
         cell.movieSubTitle.text = "평점 : \(row.user_rating!) 예매순위 : \(row.reservation_grade!) 예매율 : \(row.reservation_rate!)"
         cell.movieReleaseDate.text = "개봉일 : \(row.date!)"
-        cell.movieImage.image = row.movieImage
-        print("cellForRowAt이 작동한다")
+//        cell.movieImage.image = row.movieImage
+        DispatchQueue.main.async(execute: {
+            cell.movieImage.image = self.getMovieImage(indexPath.row)
+            })
+
         return cell
         
         
@@ -149,9 +156,27 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
         ad?.movieId = list[indexPath.row].id
     }
     
+    
+    func getMovieImage(_ index: Int) -> UIImage {
+        let img = self.list[index]
+        if let savedImage = img.movieImage {
+            return savedImage
+        } else {
+            let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=\(orderType)")
+            let imgData = try! Data(contentsOf: url!)
+            img.movieImage = UIImage(data: imgData)
+            return img.movieImage!
+        }
+    }
+    
 }
 
 
 extension UIViewController {
 
+    func networkAlert() {
+        let alert = UIAlertController(title: "네트워크 수신 실패", message: "네트워크 상태를 확인해주세요", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

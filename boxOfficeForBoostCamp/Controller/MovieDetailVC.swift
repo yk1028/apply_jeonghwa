@@ -35,18 +35,21 @@ class MovieDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        movieDetailTable.translatesAutoresizingMaskIntoConstraints = false
-        movieDetailTable.separatorStyle = UITableViewCell.SeparatorStyle.none
-
         customNavigation()
+        self.navigationItem.setRightBarButton(nil, animated: true)
+
         configureMovieDetailTable()
-        
+        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("MovieDetailVC : viewWillAppear")
+        navigationItem.title = infoFromList.title
         getMovieIdFromAppDelegate()
         getMovieVORequest()
         getCommentsVORequest()
-        navigationItem.title = infoFromList.title
-        }
+        
+
+    }
     
     func getMovieIdFromAppDelegate() {
         let ad = UIApplication.shared.delegate as? AppDelegate
@@ -56,11 +59,18 @@ class MovieDetailVC: UIViewController {
     }
     
     func configureMovieDetailTable() {
+        view.backgroundColor = .white
+
         view.addSubview(movieDetailTable)
+        movieDetailTable.translatesAutoresizingMaskIntoConstraints = false
+        movieDetailTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         movieDetailTable.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
         movieDetailTable.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         movieDetailTable.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         movieDetailTable.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+        
+        movieDetailTable.translatesAutoresizingMaskIntoConstraints = false
+        movieDetailTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         movieDetailTable.delegate = self
         movieDetailTable.dataSource = self
@@ -96,13 +106,19 @@ class MovieDetailVC: UIViewController {
             infoFromList.user_rating = r["user_rating"] as? Double
             infoFromList.date = r["date"] as? String
             infoFromList.id = r["id"] as? String
-            let url: URL! = URL(string: infoFromList.image!)
-            let imageData = try! Data(contentsOf: url)
-            infoFromList.movieImageLarge = UIImage(data:imageData)
+//            let url: URL! = URL(string: infoFromList.image!)
+//            let imageData = try! Data(contentsOf: url)
+//            infoFromList.movieImageLarge = UIImage(data:imageData)
+        }catch {
+            NSLog("Parse Error!!")
+            networkAlert()
+        }
+//        DispatchQueue.main.async(execute: {
+            self.getMovieImageLarge()
+            self.movieDetailTable.reloadData()
+            
+//        })
 
-        }catch { NSLog("Parse Error!!")}
-        
-        
     }
 
     func getCommentsVORequest() {
@@ -126,11 +142,30 @@ class MovieDetailVC: UIViewController {
                 cvo.contents = r["contents"] as? String
                 self.comments.append(cvo)
             }
-        }catch { NSLog("Parse Error!!")}
+        }catch {
+            NSLog("Parse Error!!")
+            networkAlert()
+        }
     }
 }
 
 extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
+    
+    func getMovieImageLarge() -> UIImage? {
+        var img = self.infoFromList.movieImageLarge
+        if let savedImage = img {
+            return savedImage
+        } else {
+            let url = URL(string: "http://connect-boxoffice.run.goorm.io/movie?id=\(urlId)")
+            let imgData = try! Data(contentsOf: url!)
+//            print("imgData 출력")
+//            print(imgData)
+            img = UIImage(data: imgData)
+//            print(img)
+
+            return img
+        }
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
@@ -156,9 +191,9 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: detailCellId, for: indexPath) as! MovieDetailCell
                 cell.selectionStyle = .none
-                cell.movieImage.image = infoFromList.movieImageLarge
+                cell.movieImage.image = self.getMovieImageLarge()
                 cell.movieTitle.text = infoFromList.title
-                cell.movieGrade.text = String(infoFromList.grade!)
+                cell.movieGrade.text = "\(infoFromList.grade!)"
                 cell.movieDate.text = "\(infoFromList.date!)개봉"
                 cell.movieSubTitle.text = "\(infoFromList.genre!)/\(infoFromList.duration!)분"
                 cell.movieReservationRate.text = "\(infoFromList.reservation_grade!)위 \(infoFromList.reservation_rate!)%"
