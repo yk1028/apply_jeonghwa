@@ -22,9 +22,27 @@ class MovieDetailCell: UITableViewCell {
     let infoView = BOView()
     let infoViewHeader = BOLabel(size: 22)
     let movieTitle = BOLabel(size: 22)
-    let movieGrade = BOLabel(size: 22)
+    let movieGrade: UIImageView = {
+        var imageView = UIImageView()
+        imageView.backgroundColor = .clear
+        imageView.image = UIImage(named: "age0")!
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .left
+        let size: CGFloat = 20
+        imageView.frame = CGRect(x: 0, y: 0, width: size, height: size)
+        imageView.layer.cornerRadius = size / 2
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     let movieDate = BOLabel(size: 16)
     let movieSubTitle = BOLabel(title: "판타지, 드라마/139분", size: 16)
+    let movieImageFull: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .clear
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     let movieImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .clear
@@ -53,28 +71,40 @@ class MovieDetailCell: UITableViewCell {
     func setupInfoView() {
         // 1 : 영화 기본정보 뷰(포스터, 기본정보)
         sectionLayout(sectionView: infoView)
+        infoView.addSubview(movieImageFull)
+        movieImageFull.leftAnchor.constraint(equalTo: infoView.leftAnchor , constant: 8).isActive = true
+        movieImageFull.topAnchor.constraint(equalTo: infoView.topAnchor , constant: 8).isActive = true
+        movieImageFull.widthAnchor.constraint(equalToConstant: 110).isActive = true
+        movieImageFull.heightAnchor.constraint(equalToConstant: 155).isActive = true
+        
+        movieImageFull.addSubview(movieImage)
+        movieImage.leftAnchor.constraint(equalTo: movieImageFull.leftAnchor).isActive = true
+        movieImage.topAnchor.constraint(equalTo: movieImageFull.topAnchor).isActive = true
+        movieImage.rightAnchor.constraint(equalTo: movieImageFull.rightAnchor).isActive = true
+        movieImage.bottomAnchor.constraint(equalTo: movieImageFull.bottomAnchor).isActive = true
 
-        infoView.addSubview(movieImage)
-        movieImage.leftAnchor.constraint(equalTo: infoView.leftAnchor , constant: 8).isActive = true
-        movieImage.topAnchor.constraint(equalTo: infoView.topAnchor , constant: 8).isActive = true
-        movieImage.widthAnchor.constraint(equalToConstant: 110).isActive = true
-        movieImage.heightAnchor.constraint(equalToConstant: 155).isActive = true
         
         infoView.addSubview(movieTitle)
-        movieTitle.leftAnchor.constraint(equalTo: movieImage.rightAnchor , constant: 8).isActive = true
-        movieTitle.topAnchor.constraint(equalTo: infoView.topAnchor , constant: 60).isActive = true
-        
+        movieTitle.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: 8).isActive = true
+        movieTitle.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 30).isActive = true
+        movieTitle.rightAnchor.constraint(equalTo: infoView.rightAnchor, constant: -30).isActive = true
+
         infoView.addSubview(movieGrade)
-        movieGrade.leftAnchor.constraint(equalTo: movieTitle.rightAnchor , constant: 8).isActive = true
+        movieGrade.leftAnchor.constraint(equalTo: movieTitle.rightAnchor).isActive = true
         movieGrade.topAnchor.constraint(equalTo: movieTitle.topAnchor).isActive = true
+
+
 
         infoView.addSubview(movieDate)
         movieDate.leftAnchor.constraint(equalTo: movieTitle.leftAnchor).isActive = true
         movieDate.topAnchor.constraint(equalTo: movieTitle.bottomAnchor , constant: 8).isActive = true
-        
+        movieDate.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
+
         infoView.addSubview(movieSubTitle)
         movieSubTitle.leftAnchor.constraint(equalTo: movieTitle.leftAnchor).isActive = true
         movieSubTitle.topAnchor.constraint(equalTo: movieDate.bottomAnchor , constant: 8).isActive = true
+        movieSubTitle.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
+
         
         // 2 : 영화 기본정보 뷰(예매율, 평점, 누적관객수)
         infoView.addSubview(InfoViewBottom1)

@@ -16,6 +16,7 @@
 		E91F2EA221B7CDF40090582B /* CollectionTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */; };
 		E98774DE21C66D8600ED0A30 /* TabAndCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98774DD21C66D8600ED0A30 /* TabAndCollection.swift */; };
 		E98774E221C6736B00ED0A30 /* CollectionTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98774E121C6736B00ED0A30 /* CollectionTabCell.swift */; };
+		E98774E621C6F99500ED0A30 /* AsignImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98774E521C6F99500ED0A30 /* AsignImageView.swift */; };
 		E99BF20E21BB7A540020965D /* MovieDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF20D21BB7A540020965D /* MovieDetailVC.swift */; };
 		E99BF21021BBA66A0020965D /* MovieVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF20F21BBA66A0020965D /* MovieVO.swift */; };
 		E99BF21221BBD65A0020965D /* TableTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99BF21121BBD65A0020965D /* TableTabCell.swift */; };
@@ -42,6 +43,7 @@
 		E91F2EA121B7CDF40090582B /* CollectionTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTabVC.swift; sourceTree = "<group>"; };
 		E98774DD21C66D8600ED0A30 /* TabAndCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabAndCollection.swift; sourceTree = "<group>"; };
 		E98774E121C6736B00ED0A30 /* CollectionTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTabCell.swift; sourceTree = "<group>"; };
+		E98774E521C6F99500ED0A30 /* AsignImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsignImageView.swift; sourceTree = "<group>"; };
 		E99BF20D21BB7A540020965D /* MovieDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVC.swift; sourceTree = "<group>"; };
 		E99BF20F21BBA66A0020965D /* MovieVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVO.swift; sourceTree = "<group>"; };
 		E99BF21121BBD65A0020965D /* TableTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTabCell.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		E99BF21721BD70190020965D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E98774E521C6F99500ED0A30 /* AsignImageView.swift */,
 				E99BF23121C125380020965D /* StarRating.swift */,
 				E99BF21821BD70A10020965D /* BOLabel.swift */,
 				E99BF21A21BD73290020965D /* BOView.swift */,
@@ -227,6 +230,7 @@
 				E99BF22221BE7D160020965D /* MovieSynopsisCell.swift in Sources */,
 				E99BF22421BE7DE50020965D /* MovieActorCell.swift in Sources */,
 				E99BF21921BD70A10020965D /* BOLabel.swift in Sources */,
+				E98774E621C6F99500ED0A30 /* AsignImageView.swift in Sources */,
 				E99BF21621BCC0580020965D /* MovieDetailCell.swift in Sources */,
 				E99BF21221BBD65A0020965D /* TableTabCell.swift in Sources */,
 				E99BF20E21BB7A540020965D /* MovieDetailVC.swift in Sources */,

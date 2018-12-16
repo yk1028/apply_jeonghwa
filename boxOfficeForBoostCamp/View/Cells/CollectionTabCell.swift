@@ -15,8 +15,8 @@ class TabCollectionCell: UICollectionViewCell {
         configureViews()
     }
     
-    let movieImage: UIImageView = {
-        let imageView = UIImageView()
+    var movieImage: UIImageView = {
+        var imageView = UIImageView()
         imageView.backgroundColor = .clear
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -36,12 +36,19 @@ class TabCollectionCell: UICollectionViewCell {
     }()
     
     
-    let movieTitle = BOLabel(title: "영화 제목", size: 22, textAlign: .center, lines: 2)
+    let movieTitle = BOLabel(title: "영화 제목", size: 20, textAlign: .center, lines: 2)
     let movieSubTitle = BOLabel(title: "0위(00.00) / 00.0%", size: 14, textAlign: .center)
     let movieReleaseDate = BOLabel(title: "2000-11-11", size: 12, textAlign: .center)
     
-    let imageWidth = UIScreen.main.bounds.width / 2 - 40
+
     
+func orientation() -> CGFloat {
+    if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
+        return UIScreen.main.bounds.width / 2
+    } else {
+        return UIScreen.main.bounds.height / 2
+    }
+}
     
     
     func configureViews() {
@@ -49,7 +56,7 @@ class TabCollectionCell: UICollectionViewCell {
         movieImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         movieImage.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         movieImage.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
-        movieImage.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width / 2 - 32) * CGFloat(2.squareRoot())).isActive = true
+        movieImage.heightAnchor.constraint(equalToConstant: (orientation() - CGFloat(32)) * CGFloat(2.squareRoot())).isActive = true
         
         addSubview(movieGrade)
         movieGrade.topAnchor.constraint(equalTo: movieImage.topAnchor, constant: 3).isActive = true
@@ -64,12 +71,12 @@ class TabCollectionCell: UICollectionViewCell {
         
         addSubview(movieSubTitle)
         movieSubTitle.leftAnchor.constraint(equalTo: movieImage.leftAnchor).isActive = true
-        movieSubTitle.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 8).isActive = true
+        movieSubTitle.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 6).isActive = true
         movieSubTitle.rightAnchor.constraint(equalTo: movieImage.rightAnchor).isActive = true
         
         addSubview(movieReleaseDate)
         movieReleaseDate.leftAnchor.constraint(equalTo: movieImage.leftAnchor).isActive = true
-        movieReleaseDate.topAnchor.constraint(equalTo: movieSubTitle.bottomAnchor, constant: 8).isActive = true
+        movieReleaseDate.topAnchor.constraint(equalTo: movieSubTitle.bottomAnchor, constant: 4).isActive = true
         movieReleaseDate.rightAnchor.constraint(equalTo: movieImage.rightAnchor).isActive = true
     }
     

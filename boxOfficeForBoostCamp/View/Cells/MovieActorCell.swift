@@ -19,9 +19,19 @@ class MovieActorCell: UITableViewCell {
     
     
     let actorView = BOView() // SectionView
-    let movieDirector = BOLabel(title: "감독", size: 16, textAlign: .left)
+    let movieDirector: BOLabel = {
+        let label = BOLabel(title: "감독", textAlign: .left)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }()
+    
+    
     let movieDirectorlist = BOLabel(size: 16)
-    let movieActor = BOLabel(title: "출연", size: 16, textAlign: .left)
+    let movieActor: BOLabel = {
+        let label = BOLabel(title: "출연", size: 16, textAlign: .left)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }()
     let movieActorlist = BOLabel(size: 16)
 
 

@@ -16,8 +16,8 @@ class TableTabCell: UITableViewCell {
 
     let movieGradeSize: CGFloat = 20
     
-    let movieImage: UIImageView = {
-        let imageView = UIImageView()
+    let movieImage: AsyncImageView = {
+        let imageView = AsyncImageView()
         imageView.backgroundColor = .clear
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -46,10 +46,10 @@ class TableTabCell: UITableViewCell {
         movieImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
         movieImage.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
         movieImage.heightAnchor.constraint(equalToConstant: 90).isActive = true
-        movieImage.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        movieImage.widthAnchor.constraint(equalToConstant: 64).isActive = true
         
         addSubview(movieTitle)
-        movieTitle.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: 10).isActive = true
+        movieTitle.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: 16).isActive = true
         movieTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         
         addSubview(movieGrade)

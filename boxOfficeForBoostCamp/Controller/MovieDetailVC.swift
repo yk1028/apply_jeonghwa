@@ -9,17 +9,11 @@
 import UIKit
 
 class MovieDetailVC: UIViewController {
-    var urlId = ""
 
-    let detailCellId = "detailCellId"
-    let synopsisCellId = "synopsisCellId"
-    let actorCellId = "actorCellId"
-    let commentsCellId = "commentsCellId"
-    
-    // VIEW
+    var urlId = ""
+    var fullImageView = UIImageView()
     let movieDetailTable = UITableView()
 
-    // MODEL
     lazy var infoFromList: MovieVO = {
         var datalist = MovieVO()
         return datalist
@@ -34,20 +28,20 @@ class MovieDetailVC: UIViewController {
         super.viewDidLoad()
         customNavigation()
         self.navigationItem.setRightBarButton(nil, animated: true)
-
-        configureMovieDetailTable()
-        }
+        self.configureMovieDetailTable()
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         print("MovieDetailVC : viewWillAppear")
         navigationItem.title = infoFromList.title
         getMovieIdFromAppDelegate()
-        getMovieVORequest()
-        getCommentsVORequest()
-        
+            self.getMovieVORequest()
+            self.getCommentsVORequest()
 
     }
     
+
     func getMovieIdFromAppDelegate() {
         let ad = UIApplication.shared.delegate as? AppDelegate
         if let id = ad?.movieId {
@@ -57,7 +51,7 @@ class MovieDetailVC: UIViewController {
     
     func configureMovieDetailTable() {
         view.backgroundColor = .white
-        
+
         view.addSubview(movieDetailTable)
         movieDetailTable.translatesAutoresizingMaskIntoConstraints = false
         movieDetailTable.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -79,13 +73,11 @@ class MovieDetailVC: UIViewController {
     }
 
     func getMovieVORequest() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movie?id=\(urlId)") else { return }
         
         do {
             let apiData = try Data(contentsOf: url)
-//            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
-//            NSLog("API Result=\( log )")
-            
             let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! [String : Any]
             
             let r = apiDictionary
@@ -103,28 +95,21 @@ class MovieDetailVC: UIViewController {
             infoFromList.user_rating = r["user_rating"] as? Double
             infoFromList.date = r["date"] as? String
             infoFromList.id = r["id"] as? String
-            DispatchQueue.main.async(execute: {
-                let url: URL! = URL(string: self.infoFromList.image!)
-                let imageData = try! Data(contentsOf: url)
-                self.infoFromList.movieImageLarge = UIImage(data:imageData)
-                self.movieDetailTable.reloadData()
-                
-            })
         }catch {
             NSLog("Parse Error!!")
             networkAlert()
         }
-
-
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 
     func getCommentsVORequest() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/comments?movie_id=\(urlId)") else { return }
         
         do {
             let apiData = try Data(contentsOf: url)
-//            let log = NSString(data: apiData, encoding: String.Encoding.utf8.rawValue) ?? ""
-//            NSLog("API Result=\( log )")
+
             
             let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! NSDictionary
             let comments = apiDictionary["comments"] as! NSArray
@@ -143,33 +128,24 @@ class MovieDetailVC: UIViewController {
             NSLog("Parse Error!!")
             networkAlert()
         }
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
+    
 }
 
 extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
     
-    func getMovieImageLarge() -> UIImage? {
-        var img = self.infoFromList.movieImageLarge
-//        if let savedImage = img {
-//            return savedImage
-//        } else {
-//            let url = URL(string: "http://connect-boxoffice.run.goorm.io/movie?id=\(urlId)")
-//            let imgData = try! Data(contentsOf: url!)
-//            img = UIImage(data: imgData)
-//            return img
-            
-//            DispatchQueue.main.async(execute: {
-//                let url: URL! = URL(string: self.infoFromList.image!)
-//                let imageData = try! Data(contentsOf: url)
-////                self.infoFromList.movieImageLarge = UIImage(data:imageData)
-//                img = UIImage(data: imageData)
-//
-//                self.movieDetailTable.reloadData()
-//
-//            })
-            return img
+    func getImage() -> UIImageView {
+        if fullImageView.image != nil {
+            fullImageView.frame = CGRect(x: 0, y: 0, width: 110, height: 155)
 
-//        }
+            return fullImageView
+        } else {
+            let asyncImageView = AsyncImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 155))
+            asyncImageView.loadImage(urlString: "\(self.infoFromList.image!)")
+            fullImageView = asyncImageView
+            return fullImageView
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -196,30 +172,36 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "detailCellId", for: indexPath) as! MovieDetailCell
                 cell.selectionStyle = .none
-                cell.movieImage.image = infoFromList.movieImageLarge
+
+                
                 cell.movieTitle.text = infoFromList.title
-                cell.movieGrade.text = "\(infoFromList.grade!)"
+                let age = "age" + String(infoFromList.grade!)
+                cell.movieGrade.image = UIImage(named: age)
                 cell.movieDate.text = "\(infoFromList.date!)개봉"
                 cell.movieSubTitle.text = "\(infoFromList.genre!)/\(infoFromList.duration!)분"
                 cell.movieReservationRate.text = "\(infoFromList.reservation_grade!)위 \(infoFromList.reservation_rate!)%"
                 cell.movieUserRating.text = "\(infoFromList.user_rating!)"
                 cell.movieUserRatingStar.addSubview(StarView(starSize: 13, userRating: infoFromList.user_rating!))
                 cell.movieAudience.text = "\(infoFromList.audience!.withComma)"
+                cell.movieImage.addSubview(getImage())
+                cell.movieImageFull.addTarget(self, action: #selector(expandImage), for: .touchUpInside)
                 return cell
             
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "synopsisCellId", for: indexPath) as! MovieSynopsisCell
                 cell.selectionStyle = .none
                 cell.movieSynopsis.text = infoFromList.synopsis
+
                 return cell
-            
+
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "actorCellId", for: indexPath) as! MovieActorCell
                 cell.selectionStyle = .none
                 cell.movieDirectorlist.text = infoFromList.director
                 cell.movieActorlist.text = infoFromList.actor
+
                 return cell
-            
+
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "commentsCellId", for: indexPath) as! MovieCommentsCell
                 cell.selectionStyle = .none
@@ -228,6 +210,7 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.userRatingStar.addSubview(StarView(starSize: 13, userRating: row.rating!))
                 cell.commentTime.text = convertFromUnix(timeStamp: row.timestamp!)
                 cell.commentContents.text = row.contents
+
                 return cell
             
             default:
@@ -236,7 +219,6 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
             }
 
         }
-
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let titleForHeader = UILabel()
@@ -257,9 +239,29 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
     }
 
 
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 30
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    @objc func expandImage() {
+        let newImageView = fullImageView
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = .white
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissImage))
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    @objc func dismissImage(_ sender: UITapGestureRecognizer) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
+        self.movieDetailTable.reloadData()
+    
+    }
 
 }
-

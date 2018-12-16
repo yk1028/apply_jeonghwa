@@ -9,7 +9,13 @@
 import UIKit
 
 class TableTabVC: UIViewController {
-
+    lazy var refresher: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .gray
+        refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
+        return refreshControl
+    }()
+    
     let vc = TabAndCollection()
  
     let tabTableView = UITableView()
@@ -20,16 +26,21 @@ class TableTabVC: UIViewController {
         print("TableTabVC : viewDidLoad")
         customNavigation()
         configureTableView()
-        tabTableView.refreshControl = vc.refresher
+        tabTableView.refreshControl = refresher
         }
     
     override func viewWillAppear(_ animated: Bool) {
         print("TableTabVC : viewWillAppear")
-        vc.getMoviesRequestSample(tabTableView)
-
+        vc.getMoviesRequestSample()
         self.tabTableView.reloadData()
     }
-
+    
+    @objc func requestData() {
+        print("requesting data")
+        vc.getMoviesRequestSample()
+        refresher.endRefreshing()
+        self.tabTableView.reloadData()
+    }
     
     func configureTableView() {
         view.addSubview(tabTableView)
@@ -53,21 +64,21 @@ class TableTabVC: UIViewController {
         let typeZero = UIAlertAction(title: "예매율", style: .default) { (_) in
             ad?.movieOrderType = 0
             self.navigationItem.title = "예매율순"
-            self.vc.getMoviesRequestSample(self.tabTableView)
+            self.vc.getMoviesRequestSample()
             self.tabTableView.reloadData()
         }
         
         let typeOne = UIAlertAction(title: "큐레이션", style: .default){ (_) in
             ad?.movieOrderType = 1
             self.navigationItem.title = "큐레이션순"
-            self.vc.getMoviesRequestSample(self.tabTableView)
+            self.vc.getMoviesRequestSample()
             self.tabTableView.reloadData()
         }
         
         let typeTwo = UIAlertAction(title: "개봉일", style: .default){ (_) in
             ad?.movieOrderType = 2
             self.navigationItem.title = "개봉일순"
-            self.vc.getMoviesRequestSample(self.tabTableView)
+            self.vc.getMoviesRequestSample()
             self.tabTableView.reloadData()
         }
         
@@ -93,6 +104,11 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
         let row = vc.list[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TableTabCell
+        
+        let asyncImageView = AsyncImageView(frame: CGRect(x: 0, y: 0, width: 70, height: 95))
+        asyncImageView.loadImage(urlString: "\(row.thumb!)")
+        cell.movieImage.addSubview(asyncImageView)
+        
         cell.movieTitle.text = row.title
         let age = "age" + String(row.grade!)
         cell.movieGrade.image = UIImage(named: age)
@@ -126,11 +142,3 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension UIViewController {
-
-    func networkAlert() {
-        let alert = UIAlertController(title: "네트워크 수신 실패", message: "네트워크 상태를 확인해주세요", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-}

@@ -80,6 +80,23 @@ extension Int {
 }
 
 extension UIViewController {
+    
+    func topMostController() -> UIViewController {
+        var topController: UIViewController = UIApplication.shared.keyWindow!.rootViewController!
+        while (topController.presentedViewController != nil) {
+            topController = topController.presentedViewController!
+        }
+        return topController
+    }
+    
+    func networkAlert() {
+        let alert = UIAlertController(title: "네트워크 수신 실패", message: "네트워크 상태를 확인해주세요", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        topMostController().present(alert, animated: true, completion: nil)
+        print("네트워크 얼트창")
+        
+    }
+    
     func convertFromUnix(timeStamp : Double) -> String {
         let date = Date(timeIntervalSince1970: timeStamp)
         let dateFormatter = DateFormatter()
