@@ -27,7 +27,7 @@ class MovieDetailCell: UITableViewCell {
     let movieSubTitle = BOLabel(title: "판타지, 드라마/139분", size: 16)
     let movieImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .black
+        imageView.backgroundColor = .clear
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

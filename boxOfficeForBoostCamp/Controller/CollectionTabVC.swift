@@ -32,7 +32,7 @@ class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UIC
     
     override func viewWillAppear(_ animated: Bool) {
         print("CollectionTabVC : viewWillAppear")
-        vc.getMoviesRequestSample()
+        vc.getMoviesRequestSample(tabCollectionView)
         self.tabCollectionView.reloadData()
     }
   
@@ -52,7 +52,7 @@ class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UIC
         let typeZero = UIAlertAction(title: "예매율", style: .default) { (_) in
             ad?.movieOrderType = 0
             self.navigationItem.title = "예매율순"
-            self.vc.getMoviesRequestSample()
+            self.vc.getMoviesRequestSample(self.tabCollectionView)
             self.tabCollectionView.reloadData()
 
         }
@@ -60,7 +60,7 @@ class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UIC
         let typeOne = UIAlertAction(title: "큐레이션", style: .default){ (_) in
             ad?.movieOrderType = 1
             self.navigationItem.title = "큐레이션순"
-            self.vc.getMoviesRequestSample()
+            self.vc.getMoviesRequestSample(self.tabCollectionView)
             self.tabCollectionView.reloadData()
 
         }
@@ -68,7 +68,7 @@ class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UIC
         let typeTwo = UIAlertAction(title: "개봉일", style: .default){ (_) in
             ad?.movieOrderType = 2
             self.navigationItem.title = "개봉일순"
-            self.vc.getMoviesRequestSample()
+            self.vc.getMoviesRequestSample(self.tabCollectionView)
             self.tabCollectionView.reloadData()
         }
 

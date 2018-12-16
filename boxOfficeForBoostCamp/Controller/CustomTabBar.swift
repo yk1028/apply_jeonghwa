@@ -55,33 +55,34 @@ extension UIViewController {
     @objc func btnSort() {
         let movieOrder = UIAlertController(title: "정렬방식 선택", message: "영화를 어떤 순서로 정렬할까요?", preferredStyle: .actionSheet)
         let ad = UIApplication.shared.delegate as? AppDelegate
-        
+
         let typeZero = UIAlertAction(title: "예매율", style: .default) { (_) in
             ad?.movieOrderType = 0
             self.navigationItem.title = "예매율순"
+            
         }
-        
+
         let typeOne = UIAlertAction(title: "큐레이션", style: .default){ (_) in
             ad?.movieOrderType = 1
             self.navigationItem.title = "큐레이션순"
         }
-        
+
         let typeTwo = UIAlertAction(title: "개봉일", style: .default){ (_) in
             ad?.movieOrderType = 2
             self.navigationItem.title = "개봉일순"
         }
-        
+
         let cancel = UIAlertAction(title: "취소", style: .cancel)
-        
+
         movieOrder.addAction(typeZero)
         movieOrder.addAction(typeOne)
         movieOrder.addAction(typeTwo)
         movieOrder.addAction(cancel)
         self.present(movieOrder, animated: false)
     }
-    
-    
-    
+
+
+
 }
 
 

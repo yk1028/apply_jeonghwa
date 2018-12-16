@@ -16,9 +16,6 @@ class MovieDetailVC: UIViewController {
     let actorCellId = "actorCellId"
     let commentsCellId = "commentsCellId"
     
-
-   
-    
     // VIEW
     let movieDetailTable = UITableView()
 
@@ -74,10 +71,10 @@ class MovieDetailVC: UIViewController {
         
         movieDetailTable.delegate = self
         movieDetailTable.dataSource = self
-        movieDetailTable.register(MovieDetailCell.self, forCellReuseIdentifier: detailCellId)
-        movieDetailTable.register(MovieSynopsisCell.self, forCellReuseIdentifier: synopsisCellId)
-        movieDetailTable.register(MovieActorCell.self, forCellReuseIdentifier: actorCellId)
-        movieDetailTable.register(MovieCommentsCell.self, forCellReuseIdentifier: commentsCellId)
+        movieDetailTable.register(MovieDetailCell.self, forCellReuseIdentifier: "detailCellId")
+        movieDetailTable.register(MovieSynopsisCell.self, forCellReuseIdentifier: "synopsisCellId")
+        movieDetailTable.register(MovieActorCell.self, forCellReuseIdentifier: "actorCellId")
+        movieDetailTable.register(MovieCommentsCell.self, forCellReuseIdentifier: "commentsCellId")
 
     }
 
@@ -106,18 +103,18 @@ class MovieDetailVC: UIViewController {
             infoFromList.user_rating = r["user_rating"] as? Double
             infoFromList.date = r["date"] as? String
             infoFromList.id = r["id"] as? String
-            let url: URL! = URL(string: infoFromList.image!)
-            let imageData = try! Data(contentsOf: url)
-            infoFromList.movieImageLarge = UIImage(data:imageData)
+            DispatchQueue.main.async(execute: {
+                let url: URL! = URL(string: self.infoFromList.image!)
+                let imageData = try! Data(contentsOf: url)
+                self.infoFromList.movieImageLarge = UIImage(data:imageData)
+                self.movieDetailTable.reloadData()
+                
+            })
         }catch {
             NSLog("Parse Error!!")
             networkAlert()
         }
-//        DispatchQueue.main.async(execute: {
-//            self.getMovieImageLarge()
-//            self.movieDetailTable.reloadData()
-        
-//        })
+
 
     }
 
@@ -153,18 +150,26 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
     
     func getMovieImageLarge() -> UIImage? {
         var img = self.infoFromList.movieImageLarge
-        if let savedImage = img {
-            return savedImage
-        } else {
-            let url = URL(string: "http://connect-boxoffice.run.goorm.io/movie?id=\(urlId)")
-            let imgData = try! Data(contentsOf: url!)
-//            print("imgData 출력")
-//            print(imgData)
-            img = UIImage(data: imgData)
-//            print(img)
-
+//        if let savedImage = img {
+//            return savedImage
+//        } else {
+//            let url = URL(string: "http://connect-boxoffice.run.goorm.io/movie?id=\(urlId)")
+//            let imgData = try! Data(contentsOf: url!)
+//            img = UIImage(data: imgData)
+//            return img
+            
+//            DispatchQueue.main.async(execute: {
+//                let url: URL! = URL(string: self.infoFromList.image!)
+//                let imageData = try! Data(contentsOf: url)
+////                self.infoFromList.movieImageLarge = UIImage(data:imageData)
+//                img = UIImage(data: imageData)
+//
+//                self.movieDetailTable.reloadData()
+//
+//            })
             return img
-        }
+
+//        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -189,9 +194,9 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch (indexPath.section) {
             case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: detailCellId, for: indexPath) as! MovieDetailCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "detailCellId", for: indexPath) as! MovieDetailCell
                 cell.selectionStyle = .none
-                cell.movieImage.image = self.getMovieImageLarge()
+                cell.movieImage.image = infoFromList.movieImageLarge
                 cell.movieTitle.text = infoFromList.title
                 cell.movieGrade.text = "\(infoFromList.grade!)"
                 cell.movieDate.text = "\(infoFromList.date!)개봉"
@@ -203,31 +208,31 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
                 return cell
             
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: synopsisCellId, for: indexPath) as! MovieSynopsisCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "synopsisCellId", for: indexPath) as! MovieSynopsisCell
                 cell.selectionStyle = .none
                 cell.movieSynopsis.text = infoFromList.synopsis
                 return cell
+            
             case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: actorCellId, for: indexPath) as! MovieActorCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "actorCellId", for: indexPath) as! MovieActorCell
                 cell.selectionStyle = .none
                 cell.movieDirectorlist.text = infoFromList.director
                 cell.movieActorlist.text = infoFromList.actor
                 return cell
+            
             case 3:
-                let cell = tableView.dequeueReusableCell(withIdentifier: commentsCellId, for: indexPath) as! MovieCommentsCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "commentsCellId", for: indexPath) as! MovieCommentsCell
                 cell.selectionStyle = .none
                 let row = self.comments[indexPath.row]
                 cell.userName.text = row.writer
                 cell.userRatingStar.addSubview(StarView(starSize: 13, userRating: row.rating!))
                 cell.commentTime.text = convertFromUnix(timeStamp: row.timestamp!)
                 cell.commentContents.text = row.contents
-
-
-            return cell
+                return cell
             
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: commentsCellId, for: indexPath) as! MovieCommentsCell
-                return cell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "commentsCellId", for: indexPath) as! MovieCommentsCell
+                    return cell
             }
 
         }

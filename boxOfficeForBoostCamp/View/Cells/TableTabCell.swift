@@ -18,7 +18,7 @@ class TableTabCell: UITableViewCell {
     
     let movieImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .red
+        imageView.backgroundColor = .clear
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

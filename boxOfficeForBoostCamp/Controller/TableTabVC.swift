@@ -25,13 +25,12 @@ class TableTabVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         print("TableTabVC : viewWillAppear")
-        vc.getMoviesRequestSample()
-        self.tabTableView.reloadData()
+        vc.getMoviesRequestSample(tabTableView)
 
-        print("orderType is \(vc.orderType)")
-        print("viewWillAppear:리스트 개수: \(vc.list.count)")
+        self.tabTableView.reloadData()
     }
 
+    
     func configureTableView() {
         view.addSubview(tabTableView)
         view.backgroundColor = .white
@@ -54,21 +53,21 @@ class TableTabVC: UIViewController {
         let typeZero = UIAlertAction(title: "예매율", style: .default) { (_) in
             ad?.movieOrderType = 0
             self.navigationItem.title = "예매율순"
-            self.vc.getMoviesRequestSample()
+            self.vc.getMoviesRequestSample(self.tabTableView)
             self.tabTableView.reloadData()
         }
         
         let typeOne = UIAlertAction(title: "큐레이션", style: .default){ (_) in
             ad?.movieOrderType = 1
             self.navigationItem.title = "큐레이션순"
-            self.vc.getMoviesRequestSample()
+            self.vc.getMoviesRequestSample(self.tabTableView)
             self.tabTableView.reloadData()
         }
         
         let typeTwo = UIAlertAction(title: "개봉일", style: .default){ (_) in
             ad?.movieOrderType = 2
             self.navigationItem.title = "개봉일순"
-            self.vc.getMoviesRequestSample()
+            self.vc.getMoviesRequestSample(self.tabTableView)
             self.tabTableView.reloadData()
         }
         
@@ -100,9 +99,6 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
         cell.movieSubTitle.text = "평점 : \(row.user_rating!) 예매순위 : \(row.reservation_grade!) 예매율 : \(row.reservation_rate!)"
         cell.movieReleaseDate.text = "개봉일 : \(row.date!)"
         cell.movieImage.image = row.movieImage
-//        DispatchQueue.main.async(execute: {
-//            cell.movieImage.image = self.getMovieImage(indexPath.row)
-//            })
 
         return cell
         
@@ -126,17 +122,6 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     
-//    func getMovieImage(_ index: Int) -> UIImage {
-//        let img = vc.list[index]
-//        if let savedImage = img.movieImage {
-//            return savedImage
-//        } else {
-//            let url = URL(string: "http://connect-boxoffice.run.goorm.io/movies?order_type=\(orderType)")
-//            let imgData = try! Data(contentsOf: url!)
-//            img.movieImage = UIImage(data: imgData)
-//            return img.movieImage!
-//        }
-//    }
     
 }
 
