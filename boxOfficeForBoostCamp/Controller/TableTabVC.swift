@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class TableTabVC: UIViewController {
 
     lazy var refresher: UIRefreshControl = {
@@ -38,35 +37,13 @@ class TableTabVC: UIViewController {
         tabTableView.refreshControl = refresher
         }
     
-    @objc func requestData() {
-        print("requesting data")
-        getMoviesRequestSample()
-        refresher.endRefreshing()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         print("TableTabVC : viewWillAppear")
         getMoviesRequestSample()
         print("orderType is \(orderType)")
         print("viewWillAppear:리스트 개수: \(list.count)")
-        print("viewWillAppear:영화 제목: \(list[0].title)")
+        print("viewWillAppear:영화 제목: \(list[0].title!)")
     }
-
-    func configureTableView() {
-        view.addSubview(tabTableView)
-        view.backgroundColor = .white
-        tabTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        tabTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
-        tabTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        tabTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        tabTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
-        
-        tabTableView.delegate = self
-        tabTableView.dataSource = self
-        tabTableView.register(TableTabCell.self, forCellReuseIdentifier: cellId)
-    }
-
 
     func getMoviesRequestSample() {
 //        list 초기화
@@ -113,7 +90,61 @@ class TableTabVC: UIViewController {
         }
     }
     
+    func configureTableView() {
+        view.addSubview(tabTableView)
+        view.backgroundColor = .white
+        tabTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tabTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+        tabTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        tabTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        tabTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+        
+        tabTableView.delegate = self
+        tabTableView.dataSource = self
+        tabTableView.register(TableTabCell.self, forCellReuseIdentifier: cellId)
     }
+    
+    @objc func requestData() {
+        print("requesting data")
+        getMoviesRequestSample()
+        refresher.endRefreshing()
+    }
+    
+    @objc override func btnSort() {
+        let movieOrder = UIAlertController(title: "정렬방식 선택", message: "영화를 어떤 순서로 정렬할까요?", preferredStyle: .actionSheet)
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        
+        let typeZero = UIAlertAction(title: "예매율", style: .default) { (_) in
+            ad?.movieOrderType = 0
+            self.navigationItem.title = "예매율순"
+            self.getMoviesRequestSample()
+        }
+        
+        let typeOne = UIAlertAction(title: "큐레이션", style: .default){ (_) in
+            ad?.movieOrderType = 1
+            self.navigationItem.title = "큐레이션순"
+            self.getMoviesRequestSample()
+            
+        }
+        
+        let typeTwo = UIAlertAction(title: "개봉일", style: .default){ (_) in
+            ad?.movieOrderType = 2
+            self.navigationItem.title = "개봉일순"
+            self.getMoviesRequestSample()
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        movieOrder.addAction(typeZero)
+        movieOrder.addAction(typeOne)
+        movieOrder.addAction(typeTwo)
+        movieOrder.addAction(cancel)
+        self.present(movieOrder, animated: false)
+    }
+
+    
+}
 
 extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

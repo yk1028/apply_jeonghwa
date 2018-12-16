@@ -10,36 +10,30 @@ import UIKit
 
 class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    lazy var refresher: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .gray
-        refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
-        
-        return refreshControl
-    }()
-    
-    @objc func requestData() {
-        print("requesting data")
-        getMoviesRequestSample()
-        refresher.endRefreshing()
-    }
-    
     var orderType : Int = 0
 
+    lazy var tabCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
     lazy var list: [MoviesVO] = {
         var datalist = [MoviesVO]()
         return datalist
     }()
     
-lazy var tabCollectionView: UICollectionView = {
-    let flowLayout = UICollectionViewFlowLayout()
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-    collectionView.backgroundColor = .white
-    collectionView.delegate = self
-    collectionView.dataSource = self
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
-    return collectionView
-}()
+    lazy var refresher: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .gray
+        refreshControl.addTarget(self, action: #selector(requestData), for: .valueChanged)
+        return refreshControl
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +47,7 @@ lazy var tabCollectionView: UICollectionView = {
         print("CollectionTabVC : viewWillAppear")
         getMoviesRequestSample()
     }
+   
     
     func getMoviesRequestSample() {
         list = []
@@ -96,7 +91,6 @@ lazy var tabCollectionView: UICollectionView = {
         }
     }
 
-    
     private func configureTabCollectionView() {
         view.addSubview(tabCollectionView)
         tabCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -105,16 +99,52 @@ lazy var tabCollectionView: UICollectionView = {
         tabCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tabCollectionView.register(TabCollectionCell.self, forCellWithReuseIdentifier: "cellID")
     }
+    
+    @objc func requestData() {
+        print("requesting data")
+        getMoviesRequestSample()
+        refresher.endRefreshing()
+    }
+    
+    @objc override func btnSort() {
+        let movieOrder = UIAlertController(title: "정렬방식 선택", message: "영화를 어떤 순서로 정렬할까요?", preferredStyle: .actionSheet)
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        
+        let typeZero = UIAlertAction(title: "예매율", style: .default) { (_) in
+            ad?.movieOrderType = 0
+            self.navigationItem.title = "예매율순"
+            self.getMoviesRequestSample()
+        }
+        
+        let typeOne = UIAlertAction(title: "큐레이션", style: .default){ (_) in
+            ad?.movieOrderType = 1
+            self.navigationItem.title = "큐레이션순"
+            self.getMoviesRequestSample()
+            
+        }
+        
+        let typeTwo = UIAlertAction(title: "개봉일", style: .default){ (_) in
+            ad?.movieOrderType = 2
+            self.navigationItem.title = "개봉일순"
+            self.getMoviesRequestSample()
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        movieOrder.addAction(typeZero)
+        movieOrder.addAction(typeOne)
+        movieOrder.addAction(typeTwo)
+        movieOrder.addAction(cancel)
+        self.present(movieOrder, animated: false)
+    }
+
 }
 
 
 extension CollectionTabVC {
-    
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.list.count
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let row = self.list[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! TabCollectionCell
@@ -124,8 +154,6 @@ extension CollectionTabVC {
         cell.movieSubTitle.text  = "\(row.reservation_grade!)위(\(row.user_rating!)) / \(row.reservation_rate!)%"
         cell.movieImage.image = row.movieImage
         cell.movieReleaseDate.text = "\(row.date!)"
-
-
         return cell
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieDetailVC: UIViewController {
-    var urlId = "5a54c286e8a71d136fb5378e"
+    var urlId = ""
 
     let detailCellId = "detailCellId"
     let synopsisCellId = "synopsisCellId"
@@ -60,7 +60,7 @@ class MovieDetailVC: UIViewController {
     
     func configureMovieDetailTable() {
         view.backgroundColor = .white
-
+        
         view.addSubview(movieDetailTable)
         movieDetailTable.translatesAutoresizingMaskIntoConstraints = false
         movieDetailTable.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -106,17 +106,17 @@ class MovieDetailVC: UIViewController {
             infoFromList.user_rating = r["user_rating"] as? Double
             infoFromList.date = r["date"] as? String
             infoFromList.id = r["id"] as? String
-//            let url: URL! = URL(string: infoFromList.image!)
-//            let imageData = try! Data(contentsOf: url)
-//            infoFromList.movieImageLarge = UIImage(data:imageData)
+            let url: URL! = URL(string: infoFromList.image!)
+            let imageData = try! Data(contentsOf: url)
+            infoFromList.movieImageLarge = UIImage(data:imageData)
         }catch {
             NSLog("Parse Error!!")
             networkAlert()
         }
 //        DispatchQueue.main.async(execute: {
-            self.getMovieImageLarge()
-            self.movieDetailTable.reloadData()
-            
+//            self.getMovieImageLarge()
+//            self.movieDetailTable.reloadData()
+        
 //        })
 
     }
