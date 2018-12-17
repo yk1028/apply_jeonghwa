@@ -17,31 +17,21 @@ class TableTabVC: UIViewController {
     }()
     
     let vc = TabAndCollection()
- 
     let tabTableView = UITableView()
-    let cellId = "cellId"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("TableTabVC : viewDidLoad")
         customNavigation()
         configureTableView()
         tabTableView.refreshControl = refresher
         }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("TableTabVC : viewWillAppear")
         vc.getMoviesRequestSample()
         self.tabTableView.reloadData()
+        navTitle()
     }
-    
-    @objc func requestData() {
-        print("requesting data")
-        vc.getMoviesRequestSample()
-        refresher.endRefreshing()
-        self.tabTableView.reloadData()
-    }
-    
+  
     func configureTableView() {
         view.addSubview(tabTableView)
         view.backgroundColor = .white
@@ -54,7 +44,14 @@ class TableTabVC: UIViewController {
         
         tabTableView.delegate = self
         tabTableView.dataSource = self
-        tabTableView.register(TableTabCell.self, forCellReuseIdentifier: cellId)
+        tabTableView.register(TableTabCell.self, forCellReuseIdentifier: "cellId")
+    }
+    
+    @objc func requestData() {
+        print("새로고침 새로고침")
+        vc.getMoviesRequestSample()
+        refresher.endRefreshing()
+        self.tabTableView.reloadData()
     }
     
     @objc override func btnSort() {
@@ -90,9 +87,8 @@ class TableTabVC: UIViewController {
         movieOrder.addAction(cancel)
         self.present(movieOrder, animated: false)
     }
-
-    
 }
+
 
 extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,7 +99,7 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
         
         let row = vc.list[indexPath.row]
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TableTabCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! TableTabCell
         
         let asyncImageView = AsyncImageView(frame: CGRect(x: 0, y: 0, width: 70, height: 95))
         asyncImageView.loadImage(urlString: "\(row.thumb!)")
@@ -115,13 +111,7 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
         cell.movieSubTitle.text = "평점 : \(row.user_rating!) 예매순위 : \(row.reservation_grade!) 예매율 : \(row.reservation_rate!)"
         cell.movieReleaseDate.text = "개봉일 : \(row.date!)"
         cell.movieImage.image = row.movieImage
-
         return cell
-        
-        
-        
-        
-        
     }
     
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -130,15 +120,10 @@ extension TableTabVC : UITableViewDelegate, UITableViewDataSource {
     }
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("선택된 행: \(indexPath.row)")
         self.navigationController?.pushViewController(MovieDetailVC(), animated: true)
-        
         let ad = UIApplication.shared.delegate as? AppDelegate
         ad?.movieId = vc.list[indexPath.row].id
     }
-    
-    
-    
 }
 
 

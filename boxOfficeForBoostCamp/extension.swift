@@ -80,6 +80,20 @@ extension Int {
 }
 
 extension UIViewController {
+    func navTitle() {
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        switch ad?.movieOrderType {
+        case Optional(0) :
+            self.navigationItem.title = "예매율순"
+        case Optional(1) :
+            self.navigationItem.title = "큐레이션순"
+        case Optional(2) :
+            self.navigationItem.title = "개봉일순"
+        default :
+            self.navigationItem.title = "영화목록"
+            
+        }
+    }
     
     func topMostController() -> UIViewController {
         var topController: UIViewController = UIApplication.shared.keyWindow!.rootViewController!

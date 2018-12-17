@@ -14,9 +14,7 @@ class TabAndCollection: UIViewController {
         return datalist
     }()
     
-    var orderType : Int = 0 
-    
-
+    var orderType : Int = 0
     
     func getMoviesRequestSample() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -54,7 +52,6 @@ class TabAndCollection: UIViewController {
             print("네트워크 에러")
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-
     }
 }
 

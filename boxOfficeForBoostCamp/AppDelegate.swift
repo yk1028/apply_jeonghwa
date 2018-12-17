@@ -11,8 +11,8 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var movieId : String?
-    var movieOrderType : Int?
+    var movieId: String?
+    var movieOrderType: Int?
 
   
     var window: UIWindow?

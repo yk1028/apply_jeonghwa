@@ -144,7 +144,7 @@ class MovieDetailCell: UITableViewCell {
         movieUserRatingStar.translatesAutoresizingMaskIntoConstraints = false
         movieUserRatingStar.topAnchor.constraint(equalTo: movieUserRating.bottomAnchor, constant: 2).isActive = true
         movieUserRatingStar.bottomAnchor.constraint(equalTo: InfoViewBottom2.bottomAnchor, constant: -6).isActive = true
-        movieUserRatingStar.centerXAnchor.constraint(equalTo: InfoViewBottom2.centerXAnchor, constant: -40).isActive = true //constant = starSize * 2.5
+        movieUserRatingStar.centerXAnchor.constraint(equalTo: InfoViewBottom2.centerXAnchor, constant: -32.5).isActive = true //constant = starSize * 2.5
         
         infoView.addSubview(InfoViewBottom3)
         InfoViewBottom3.leftAnchor.constraint(equalTo: InfoViewBottom2.rightAnchor).isActive = true

@@ -9,7 +9,6 @@
 import UIKit
 
 class MovieDetailVC: UIViewController {
-
     var urlId = ""
     var fullImageView = UIImageView()
     let movieDetailTable = UITableView()
@@ -29,18 +28,15 @@ class MovieDetailVC: UIViewController {
         customNavigation()
         self.navigationItem.setRightBarButton(nil, animated: true)
         self.configureMovieDetailTable()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("MovieDetailVC : viewWillAppear")
-        navigationItem.title = infoFromList.title
         getMovieIdFromAppDelegate()
             self.getMovieVORequest()
             self.getCommentsVORequest()
-
+        navigationItem.title = infoFromList.title
     }
-    
 
     func getMovieIdFromAppDelegate() {
         let ad = UIApplication.shared.delegate as? AppDelegate
@@ -96,7 +92,6 @@ class MovieDetailVC: UIViewController {
             infoFromList.date = r["date"] as? String
             infoFromList.id = r["id"] as? String
         }catch {
-            NSLog("Parse Error!!")
             networkAlert()
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -106,11 +101,8 @@ class MovieDetailVC: UIViewController {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/comments?movie_id=\(urlId)") else { return }
-        
         do {
             let apiData = try Data(contentsOf: url)
-
-            
             let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! NSDictionary
             let comments = apiDictionary["comments"] as! NSArray
             
@@ -125,35 +117,17 @@ class MovieDetailVC: UIViewController {
                 self.comments.append(cvo)
             }
         }catch {
-            NSLog("Parse Error!!")
             networkAlert()
         }
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-    
 }
 
-extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
-    
-    func getImage() -> UIImageView {
-        if fullImageView.image != nil {
-            fullImageView.frame = CGRect(x: 0, y: 0, width: 110, height: 155)
-
-            return fullImageView
-        } else {
-            let asyncImageView = AsyncImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 155))
-            asyncImageView.loadImage(urlString: "\(self.infoFromList.image!)")
-            fullImageView = asyncImageView
-            return fullImageView
-        }
-    }
-    
+extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
     
-
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0, 1, 2:
@@ -164,8 +138,6 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
-
-
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch (indexPath.section) {
@@ -191,7 +163,6 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "synopsisCellId", for: indexPath) as! MovieSynopsisCell
                 cell.selectionStyle = .none
                 cell.movieSynopsis.text = infoFromList.synopsis
-
                 return cell
 
             case 2:
@@ -199,7 +170,6 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.movieDirectorlist.text = infoFromList.director
                 cell.movieActorlist.text = infoFromList.actor
-
                 return cell
 
             case 3:
@@ -210,14 +180,12 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
                 cell.userRatingStar.addSubview(StarView(starSize: 13, userRating: row.rating!))
                 cell.commentTime.text = convertFromUnix(timeStamp: row.timestamp!)
                 cell.commentContents.text = row.contents
-
                 return cell
             
             default:
                     let cell = tableView.dequeueReusableCell(withIdentifier: "commentsCellId", for: indexPath) as! MovieCommentsCell
                     return cell
             }
-
         }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -238,9 +206,32 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource {
         return titleForHeader
     }
 
-
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+    
+//    섹션 헤더 고정하기
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let sectionHeaderHeight: CGFloat = 40
+        if scrollView.contentOffset.y <= sectionHeaderHeight &&
+            scrollView.contentOffset.y >= 0 {
+            scrollView.contentInset = UIEdgeInsets(top: -scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)
+        } else if scrollView.contentOffset.y >= sectionHeaderHeight {
+            scrollView.contentInset = UIEdgeInsets(top: -sectionHeaderHeight, left: 0, bottom: 0, right: 0)
+        }
+    }
+    
+    
+    func getImage() -> UIImageView {
+        if fullImageView.image != nil {
+            fullImageView.frame = CGRect(x: 0, y: 0, width: 110, height: 155)
+            return fullImageView
+        } else {
+            let asyncImageView = AsyncImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 155))
+            asyncImageView.loadImage(urlString: "\(self.infoFromList.image!)")
+            fullImageView = asyncImageView
+            return fullImageView
+        }
     }
     
     @objc func expandImage() {

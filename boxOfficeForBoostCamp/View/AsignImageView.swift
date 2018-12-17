@@ -38,7 +38,6 @@ class AsyncImageView: UIImageView {
                     
                 }else{
                     self.networkAlert()
-                    print("AsyncImageView:Error \(String(describing: err?.localizedDescription))")
                 }
         }).resume()
 }

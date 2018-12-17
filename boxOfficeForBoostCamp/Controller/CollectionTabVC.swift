@@ -16,15 +16,6 @@ class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UIC
         return refreshControl
     }()
     
-    
-    @objc func requestData() {
-        print("requesting data")
-        vc.getMoviesRequestSample()
-        refresher.endRefreshing()
-        self.tabCollectionView.reloadData()
-    }
-    
-    
     let vc = TabAndCollection()
 
     lazy var tabCollectionView: UICollectionView = {
@@ -39,25 +30,32 @@ class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("CollectionTabVC : viewDidLoad")
         customNavigation()
         configureTabCollectionView()
         tabCollectionView.refreshControl = refresher
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("CollectionTabVC : viewWillAppear")
         vc.getMoviesRequestSample()
         self.tabCollectionView.reloadData()
+        navTitle()
+        
     }
   
-    private func configureTabCollectionView() {
+    func configureTabCollectionView() {
         view.addSubview(tabCollectionView)
         tabCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tabCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tabCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tabCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tabCollectionView.register(TabCollectionCell.self, forCellWithReuseIdentifier: "cellID")
+    }
+    
+    @objc func requestData() {
+        print("새로고침 새로고침")
+        vc.getMoviesRequestSample()
+        refresher.endRefreshing()
+        self.tabCollectionView.reloadData()
     }
     
     @objc override func btnSort() {
@@ -95,7 +93,6 @@ class CollectionTabVC: UIViewController, UICollectionViewDelegateFlowLayout, UIC
         movieOrder.addAction(cancel)
         self.present(movieOrder, animated: false)
     }
-
 }
 
 
@@ -110,7 +107,6 @@ extension CollectionTabVC {
         let age = "age" + String(row.grade!)
         cell.movieGrade.image = UIImage(named: age)
         cell.movieSubTitle.text  = "\(row.reservation_grade!)위(\(row.user_rating!)) / \(row.reservation_rate!)%"
-//        cell.movieImage.image = row.movieImage
         cell.movieReleaseDate.text = "\(row.date!)"
         
         let asyncImageView = AsyncImageView(frame: CGRect(x: 0, y: 0, width: (orientation() - CGFloat(24)), height: (orientation() - CGFloat(32)) * CGFloat(2.squareRoot())))
@@ -130,23 +126,17 @@ extension CollectionTabVC {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        var sizeOne = UIScreen.main.bounds.width / 2 - 10
-        var sizeTwo = UIScreen.main.bounds.height / 2 - 10
+        let sizeOne = UIScreen.main.bounds.width / 2 - 10
+        let sizeTwo = UIScreen.main.bounds.height / 2 - 10
         if sizeTwo > sizeOne {
-            print(sizeOne, sizeTwo)
-//            return CGSize(width: sizeOne, height: sizeTwo)
             return CGSize(width: sizeOne, height: 350)
-
         } else {
             return CGSize(width: sizeTwo, height: 350)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         self.navigationController?.pushViewController(MovieDetailVC(), animated: true)
-        
         let ad = UIApplication.shared.delegate as? AppDelegate
         ad?.movieId = vc.list[indexPath.row].id
     }
