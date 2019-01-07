@@ -133,7 +133,7 @@ extension MovieDetailVC : UITableViewDelegate, UITableViewDataSource, UIScrollVi
         case 0, 1, 2:
             return 1
         case 3:
-            return 4
+            return comments.count
         default:
             return 0
         }
