@@ -72,54 +72,86 @@ class MovieDetailVC: UIViewController {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/movie?id=\(urlId)") else { return }
         
-        do {
-            let apiData = try Data(contentsOf: url)
-            let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! [String : Any]
+        let session: URLSession = URLSession(configuration: .default)
+        
+        let dataTask: URLSessionDataTask = session.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
             
-            let r = apiDictionary
-            infoFromList.audience = r["audience"] as? Int
-            infoFromList.actor = r["actor"] as? String
-            infoFromList.duration = r["duration"] as? Int
-            infoFromList.director = r["director"] as? String
-            infoFromList.synopsis = r["synopsis"] as? String
-            infoFromList.genre = r["genre"] as? String
-            infoFromList.grade = r["grade"] as? Int
-            infoFromList.image = r["image"] as? String
-            infoFromList.reservation_grade = r["reservation_grade"] as? Int
-            infoFromList.title = r["title"] as? String
-            infoFromList.reservation_rate = r["reservation_rate"] as? Double
-            infoFromList.user_rating = r["user_rating"] as? Double
-            infoFromList.date = r["date"] as? String
-            infoFromList.id = r["id"] as? String
-        }catch {
-            networkAlert()
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
+            if let error = error {
+                self.networkAlert()
+                return
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                let apiDictionary = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+                
+                let r = apiDictionary
+                self.infoFromList.audience = r["audience"] as? Int
+                self.infoFromList.actor = r["actor"] as? String
+                self.infoFromList.duration = r["duration"] as? Int
+                self.infoFromList.director = r["director"] as? String
+                self.infoFromList.synopsis = r["synopsis"] as? String
+                self.infoFromList.genre = r["genre"] as? String
+                self.infoFromList.grade = r["grade"] as? Int
+                self.infoFromList.image = r["image"] as? String
+                self.infoFromList.reservation_grade = r["reservation_grade"] as? Int
+                self.infoFromList.title = r["title"] as? String
+                self.infoFromList.reservation_rate = r["reservation_rate"] as? Double
+                self.infoFromList.user_rating = r["user_rating"] as? Double
+                self.infoFromList.date = r["date"] as? String
+                self.infoFromList.id = r["id"] as? String
+                
+            } catch {
+                self.networkAlert()
+            }
         }
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        
+        dataTask.resume()
+        
     }
 
     func getCommentsVORequest() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
         guard let url = URL(string: "http://connect-boxoffice.run.goorm.io/comments?movie_id=\(urlId)") else { return }
-        do {
-            let apiData = try Data(contentsOf: url)
-            let apiDictionary = try JSONSerialization.jsonObject(with: apiData, options: []) as! NSDictionary
-            let comments = apiDictionary["comments"] as! NSArray
+        
+        let session: URLSession = URLSession(configuration: .default)
+        
+        let dataTask: URLSessionDataTask = session.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
             
-            for row in comments {
-                let r = row as! NSDictionary
-                let cvo = CommentsVO()
-                cvo.rating = r["rating"] as? Double
-                cvo.timestamp = r["timestamp"] as? Double
-                cvo.writer = r["writer"] as? String
-                cvo.movie_id = r["movie_id"] as? String
-                cvo.contents = r["contents"] as? String
-                self.comments.append(cvo)
-            }
-        }catch {
-            networkAlert()
-        }
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
+            if let error = error {
+                self.networkAlert()
+                return
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                let apiDictionary = try JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
+                let comments = apiDictionary["comments"] as! NSArray
+                
+                for row in comments {
+                    let r = row as! NSDictionary
+                    let cvo = CommentsVO()
+                    cvo.rating = r["rating"] as? Double
+                    cvo.timestamp = r["timestamp"] as? Double
+                    cvo.writer = r["writer"] as? String
+                    cvo.movie_id = r["movie_id"] as? String
+                    cvo.contents = r["contents"] as? String
+                    self.comments.append(cvo)
+                }
+                
+            } catch {
+                self.networkAlert()
+            }
+        }
+        
+        dataTask.resume()
     }
 }
 
